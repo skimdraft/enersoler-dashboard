@@ -1,0 +1,60 @@
+name: Update Dashboard
+
+on:
+  schedule:
+    # Every 5 min, 16:00-03:55 UTC = 06:00-17:55 Tahiti (GMT-10)
+    # Solar production window only — no point checking at night
+    - cron: '*/5 16-23,0-3 * * *'
+  workflow_dispatch:  # Manual trigger for testing
+
+permissions:
+  contents: write
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Create .env from secrets
+        run: |
+          echo "ISOLAR_APP_KEY=${{ secrets.ISOLAR_APP_KEY }}" >> .env
+          echo "ISOLAR_APP_SECRET=${{ secrets.ISOLAR_APP_SECRET }}" >> .env
+
+      - name: Fetch iSolarCloud data
+        working-directory: dashboard
+        run: node extract.js
+        timeout-minutes: 3
+
+      - name: Build HTML pages
+        working-directory: dashboard
+        run: node build.js
+
+      - name: Copy HTML to docs/ (GitHub Pages)
+        run: |
+          cp dashboard/dashboard.html docs/
+          cp dashboard/paea.html docs/
+          cp dashboard/temana.html docs/
+          cp dashboard/index.html docs/
+
+      - name: Commit and push changes
+        run: |
+          git config user.name "Enersoler Bot"
+          git config user.email "bot@enersoler.com"
+          git add dashboard/isolar-data.json dashboard/isolar-tokens.json
+          git add dashboard/history.json dashboard/history-daily.json dashboard/history-monthly.json
+          git add dashboard/daily-baseline.json
+          git add dashboard/dashboard.html dashboard/paea.html dashboard/temana.html
+          git add docs/dashboard.html docs/paea.html docs/temana.html docs/index.html
+          git diff --staged --quiet || (
+            git commit -m "🔄 $(TZ='Pacific/Tahiti' date +'%d/%m %H:%M') — data refresh" &&
+            git push
+          )

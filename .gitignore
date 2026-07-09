@@ -20,6 +20,9 @@ secret.txt
 rsa_pub.pem
 rsa-test.js
 
+# Large persistent history (8MB+, rebuilt from API)
+dashboard/history-persistent.json
+
 # OS
 .DS_Store
 Thumbs.db
