@@ -13,6 +13,8 @@ const DATA_FILE = path.join(DASHBOARD_DIR, 'isolar-data.json');
 const INDEX_TEMPLATE = path.join(DASHBOARD_DIR, 'index.html');
 const PLANT_TEMPLATE = path.join(DASHBOARD_DIR, 'plant-template.html');
 const GLOBAL_OUTPUT = path.join(DASHBOARD_DIR, 'dashboard.html');
+const LANDING_TEMPLATE = path.join(DASHBOARD_DIR, 'landing.html');
+const LANDING_OUTPUT = path.join(DASHBOARD_DIR, 'index.html');
 const HISTORY_DAILY = path.join(DASHBOARD_DIR, 'history-daily.json');
 const HISTORY_MONTHLY = path.join(DASHBOARD_DIR, 'history-monthly.json');
 const PLANT_OUTPUTS = {
@@ -75,4 +77,10 @@ if (fs.existsSync(INDEX_TEMPLATE)) {
     console.log('[BUILD] Global → ' + path.basename(GLOBAL_OUTPUT));
 }
 
-console.log('[BUILD] Done — ' + ((data.plants||[]).length + 1) + ' pages');
+// ─── Copy landing page ─────────────────────────────────────
+if (fs.existsSync(LANDING_TEMPLATE)) {
+    fs.copyFileSync(LANDING_TEMPLATE, LANDING_OUTPUT);
+    console.log('[BUILD] Landing → ' + path.basename(LANDING_OUTPUT));
+}
+
+console.log('[BUILD] Done — ' + ((data.plants||[]).length + 2) + ' pages');
