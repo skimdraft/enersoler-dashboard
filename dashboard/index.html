@@ -3,53 +3,393 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Enersoler — Dashboard Solaire Tahiti</title>
+<title>Enersoler — Centrales Solaires Tahiti</title>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
 <style>
-  * { margin:0; padding:0; box-sizing:border-box; }
-  body { font-family: 'Outfit', system-ui, sans-serif; background: #0d0d12; color: #e8e8e0; display: flex; flex-direction: column; align-items: center; justify-content: center; min-height: 100vh; gap: 28px; padding: 20px; }
-  .logo { display: flex; align-items: center; gap: 12px; }
-  .logo-text { font-size: 1.8em; font-weight: 800; color: #c3cd22; letter-spacing: 0.04em; }
-  .subtitle { color: rgba(195,205,34,0.5); font-size: 0.95em; text-align: center; max-width: 500px; line-height: 1.5; }
-  h1 { font-size: 1.4em; font-weight: 600; margin-top: 12px; }
-  .links { display: flex; gap: 14px; flex-wrap: wrap; justify-content: center; }
-  .links a {
-    display: block; background: rgba(195,205,34,0.1); color: #c3cd22;
-    padding: 16px 32px; border-radius: 14px; text-decoration: none;
-    font-weight: 700; font-size: 1.05em; border: 1px solid rgba(195,205,34,0.2);
-    transition: all 0.2s; text-align: center; min-width: 160px;
+  @import url('https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;700;800;900&family=JetBrains+Mono:wght@400;600&display=swap');
+
+  :root {
+    --bg: #0d0d12;
+    --panel: rgba(14,14,22,0.94);
+    --border: rgba(195,205,34,0.08);
+    --gold: #c3cd22;
+    --muted: rgba(195,205,34,0.35);
+    --text: #e8e8e0;
+    --glow: 0 0 30px rgba(195,205,34,0.1);
   }
-  .links a:hover { background: rgba(195,205,34,0.2); border-color: rgba(195,205,34,0.4); transform: translateY(-1px); }
-  .links a.main { background: #c3cd22; color: #0d0d12; border: none; font-size: 1.1em; }
-  .links a.main:hover { opacity: 0.85; }
-  .label { font-size: 0.7em; opacity: 0.5; display: block; margin-top: 4px; }
+
+  * { margin:0; padding:0; box-sizing:border-box; }
+  body { font-family: 'Outfit', sans-serif; background: var(--bg); color: var(--text); min-height: 100vh; }
+
+  .container { max-width: 1200px; margin: 0 auto; padding: 20px 28px 0; }
+
+  /* ── Header ── */
+  header { display: flex; justify-content: space-between; align-items: center; padding: 14px 0 24px; }
+  .logo-wrap { display: flex; align-items: center; gap: 12px; }
+  .logo { height: 44px; }
   .eq-bars { display: flex; align-items: flex-end; gap: 3px; height: 34px; }
-  .eq-bars span { display: block; width: 4px; border-radius: 2px; background: #c3cd22; animation: eq 2.4s ease-in-out infinite; box-shadow: 0 0 8px rgba(195,205,34,0.5); }
+  .eq-bars span {
+    display: block; width: 4px; border-radius: 2px;
+    background: var(--gold);
+    animation: eq 2.4s ease-in-out infinite;
+    box-shadow: 0 0 8px rgba(195,205,34,0.5);
+  }
   .eq-bars span:nth-child(1){height:20px;animation-delay:0s}
   .eq-bars span:nth-child(2){height:34px;animation-delay:0.3s}
   .eq-bars span:nth-child(3){height:14px;animation-delay:0.6s}
   .eq-bars span:nth-child(4){height:28px;animation-delay:0.9s}
   .eq-bars span:nth-child(5){height:10px;animation-delay:1.2s}
-  @keyframes eq { 0%,100%{transform:scaleY(0.3);opacity:0.4} 50%{transform:scaleY(1);opacity:1} }
-  .live-dot { display: inline-block; width: 8px; height: 8px; background: #c3cd22; border-radius: 50%; margin-right: 6px; animation: pulse 2s infinite; box-shadow: 0 0 8px #c3cd22; }
-  @keyframes pulse { 0%,100%{opacity:1} 50%{opacity:.3} }
-  .footer { color: rgba(195,205,34,0.3); font-size: 0.7em; margin-top: 40px; text-align: center; line-height: 1.6; }
+  @keyframes eq {
+    0%,100%{transform:scaleY(0.3);opacity:0.4}
+    50%{transform:scaleY(1);opacity:1}
+  }
+
+  .header-right { display: flex; align-items: center; gap: 14px; }
+  .chip {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.6em; padding: 5px 16px; border-radius: 20px;
+    border: 1px solid; letter-spacing: 0.07em;
+  }
+  .chip.gold { color: var(--gold); border-color: rgba(195,205,34,0.35); background: rgba(195,205,34,0.06); }
+  .chip.teal { color: var(--gold); border-color: rgba(195,205,34,0.2); background: rgba(195,205,34,0.03); }
+  .live-dot {
+    display: inline-block; width: 7px; height: 7px;
+    background: var(--gold); border-radius: 50%; margin-right: 6px;
+    animation: pulse 2s infinite; box-shadow: 0 0 8px var(--gold);
+  }
+  @keyframes pulse { 0%,100%{opacity:1;box-shadow:0 0 8px var(--gold)} 50%{opacity:.3;box-shadow:0 0 16px var(--gold)} }
+  .updated { font-family: 'JetBrains Mono', monospace; font-size: 0.63em; color: var(--muted); }
+
+  /* ── Cards ── */
+  .card {
+    background: var(--panel); border: 1px solid var(--border);
+    border-radius: 22px; padding: 28px 32px;
+    backdrop-filter: blur(20px); position: relative; overflow: hidden;
+    box-shadow: var(--glow);
+  }
+  .card::before {
+    content: ''; position: absolute; top: -1px; left: 25%; right: 25%;
+    height: 2px; border-radius: 0 0 50% 50%;
+    background: linear-gradient(90deg, transparent, var(--gold), transparent);
+    opacity: 0.5;
+  }
+  .card .c-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.55em; color: #fff;
+    text-transform: uppercase; letter-spacing: 0.12em; margin-bottom: 8px;
+  }
+  .card .c-value {
+    font-size: 3.2em; font-weight: 900; line-height: 1;
+    letter-spacing: -0.03em; color: var(--gold);
+    text-shadow: 0 0 35px rgba(195,205,34,0.2);
+  }
+  .card .c-unit { font-size: 0.7em; color: #fff; margin-left: 2px; font-weight: 400; }
+  .chart-wrap { position: relative; height: 200px; margin-top: 16px; }
+  .chart-wrap.tall { height: 280px; }
+  .chart-wrap.short { height: 140px; }
+  canvas { width: 100% !important; height: 100% !important; }
+
+  /* ── Grid ── */
+  .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; margin-bottom: 18px; }
+  .grid-3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 18px; margin-bottom: 18px; }
+  .grid-2-1 { display: grid; grid-template-columns: 2fr 1fr; gap: 18px; margin-bottom: 18px; }
+  .full { grid-column: 1 / -1; }
+  @media (max-width: 800px) { .grid-2,.grid-3,.grid-2-1 { grid-template-columns: 1fr; } }
+
+  .stat-row { display: flex; justify-content: space-between; align-items: baseline; padding: 8px 0; border-bottom: 1px solid rgba(195,205,34,0.03); }
+  .stat-row:last-child { border-bottom: none; }
+  .stat-label { font-size: 0.75em; color: #fff; }
+  .stat-val { font-size: 1.2em; font-weight: 700; color: var(--gold); }
+
+  /* ── Live glow on kVA ── */
+  @keyframes glowPulse {
+    0%,100%{text-shadow:0 0 20px rgba(195,205,34,0.25)}
+    50%{text-shadow:0 0 70px rgba(195,205,34,0.7)}
+  }
+  .live-kva { animation: glowPulse 2.5s ease-in-out infinite; }
+  /* ── Temp icon ── */
+  .icon-thermo { display: inline-block; vertical-align: middle; margin-right: 2px; }
+  .icon-thermo svg { width: 28px; height: 28px; }
+  @keyframes thermoPulse {
+    0%,100%{filter:drop-shadow(0 0 2px rgba(220,140,40,0.4))}
+    50%{filter:drop-shadow(0 0 12px rgba(220,140,40,0.9))}
+  }
+  .icon-thermo { animation: thermoPulse 2.5s ease-in-out infinite; }
+  /* ── Gauge center icon (replaces CO2 clouds) ── */
+  .gauge-center { position: absolute; top: 50%; left: 50%; transform: translate(-50%,-50%); pointer-events: none; width: 52px; height: 52px; }
+  .gauge-ring { width: 100%; height: 100%; border-radius: 50%; border: 2px solid rgba(195,205,34,0.12); position: relative; }
+  .gauge-fill {
+    position: absolute; inset: 5px; border-radius: 50%;
+    background: conic-gradient(var(--gold) 0deg, transparent 0deg);
+    animation: gaugeGlow 2s ease-in-out infinite;
+  }
+  .gauge-inner {
+    position: absolute; inset: 11px; border-radius: 50%;
+    background: var(--panel);
+    display: flex; align-items: center; justify-content: center;
+  }
+  .gauge-inner span {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.7em; font-weight: 800; color: var(--gold);
+    text-shadow: 0 0 12px rgba(195,205,34,0.5);
+  }
+  @keyframes gaugeGlow {
+    0%,100%{box-shadow:inset 0 0 6px rgba(195,205,34,0.15)}
+    50%{box-shadow:inset 0 0 18px rgba(195,205,34,0.5)}
+  }
+
+  /* ── Power icon ── */
+  .icon-bolt { display: inline-block; vertical-align: middle; margin-right: 2px; }
+  .icon-bolt svg { width: 40px; height: 40px; }
+  @keyframes boltFlash {
+    0%,100%{opacity:0.15;filter:drop-shadow(0 0 2px rgba(195,205,34,0.15))}
+    25%{opacity:0.35;filter:drop-shadow(0 0 8px rgba(195,205,34,0.35))}
+    45%{opacity:1;filter:drop-shadow(0 0 22px rgba(195,205,34,1))}
+    55%{opacity:0.25;filter:drop-shadow(0 0 3px rgba(195,205,34,0.2))}
+    70%{opacity:0.6;filter:drop-shadow(0 0 14px rgba(195,205,34,0.6))}
+    85%{opacity:0.9;filter:drop-shadow(0 0 18px rgba(195,205,34,0.9))}
+  }
+  .icon-bolt { animation: boltFlash 2s ease-in-out infinite; }
+
+  .note { font-family: 'JetBrains Mono', monospace; font-size: 0.56em; color: var(--muted); text-align: center; padding: 8px 0 24px; letter-spacing: 0.04em; }
+  .note a { color: var(--gold); text-decoration: none; }
+
+  .loading { text-align: center; padding: 80px; color: var(--muted); }
+  .spinner { width: 36px; height: 36px; border: 2px solid rgba(195,205,34,0.12); border-top: 2px solid var(--gold); border-radius: 50%; animation: spin 0.7s linear infinite; margin: 0 auto 18px; box-shadow: 0 0 14px rgba(195,205,34,0.15); }
+  @keyframes spin { to { transform: rotate(360deg); } }
 </style>
 </head>
 <body>
-  <div class="logo">
-    <div class="eq-bars"><span></span><span></span><span></span><span></span><span></span></div>
-    <span class="logo-text">ENERSOLER</span>
-  </div>
-  <h1>Dashboard Solaire</h1>
-  <p class="subtitle"><span class="live-dot"></span>Données temps réel iSolarCloud · Mise à jour automatique toutes les 5 minutes · Tahiti 🇵🇫</p>
+<div class="container">
+  <header>
+    <div class="logo-wrap">
+      <img class="logo" src="https://enersoler.com/assets/images/logo-enersoler-2025-taille-infinie-5-360x83.png" alt="Enersoler">
+      <div class="eq-bars"><span></span><span></span><span></span><span></span><span></span></div>
+    </div>
+    <div class="header-right">
+      <span class="chip teal">🇵🇫 TAHITI</span>
+      <span class="updated" id="updateTime"><span class="live-dot"></span>Chargement...</span>
+    </div>
+  </header>
 
-  <div class="links">
-    <a href="dashboard.html" class="main">📊 Vue Globale<span class="label">Production totale</span></a>
-    <a href="paea.html">🏫 Collège de Paea<span class="label">50.5 kWp</span></a>
-    <a href="temana.html">🏢 Temana Import<span class="label">58 kWp</span></a>
-  </div>
+  <div id="content"><div class="loading"><div class="spinner"></div>CONNEXION AUX DONNÉES...</div></div>
 
-  <p class="footer">Enersoler · Vente &amp; installation photovoltaïque à Tahiti<br>
-  <a href="https://enersoler.com" style="color:inherit">enersoler.com</a></p>
+  <div class="note">◆ <a href="paea.html">COLLÈGE DE PAEA</a> · <a href="temana.html">TEMANA IMPORT</a> · Données temps réel iSolarCloud OAuth2.0 ◆</div>
+</div>
+
+<script>/* INLINE_DATA */</script>
+<script>
+const INLINE_DATA = INLINE_PLACEHOLDER;
+let _charts = [];
+
+function fmt(n,d){return(n||0).toFixed(d||1)}
+function fmti(n){return Math.round(n||0).toLocaleString('fr-FR')}
+
+const GOLD='rgba(195,205,34,';
+const GRID=GOLD+'0.04)';
+const TICK=GOLD+'0.22)';
+const FONT=f=>'JetBrains Mono';
+
+function destroyCharts(){
+  _charts.forEach(c=>{try{c.destroy()}catch(e){}});
+  _charts=[];
+}
+
+// Fill gaps > 60 min with zero-power points so curves drop to 0 at night
+function fillGaps(hist){
+  if(hist.length<2)return hist;
+  const out=[],now=Date.now();
+  for(let i=0;i<hist.length;i++){
+    out.push(hist[i]);
+    if(i<hist.length-1){
+      const t1=new Date(hist[i].time).getTime();
+      const t2=new Date(hist[i+1].time).getTime();
+      const gapMin=(t2-t1)/60000;
+      if(gapMin>60){
+        const steps=Math.floor(gapMin/30);
+        for(let s=1;s<steps;s++){
+          const mt=new Date(t1+(t2-t1)*s/steps);
+          out.push({time:mt.toISOString(),total_power:0,paea_power:0,temana_power:0,paea_temp:null,temana_temp:null});
+        }
+      }
+    }
+  }
+  const lastT=new Date(out[out.length-1].time).getTime();
+  if(now-lastT>30*60*1000){
+    out.push({time:new Date(now).toISOString(),total_power:0,paea_power:0,temana_power:0,paea_temp:null,temana_temp:null});
+  }
+  return out;
+}
+
+function render(data){
+  destroyCharts();
+  const now=new Date();
+  document.getElementById('updateTime').innerHTML='<span class="live-dot"></span>'+data.updateTime+' · '+String(now.getHours()).padStart(2,'0')+':'+String(now.getMinutes()).padStart(2,'0');
+
+  const hist=fillGaps(data.history||[]);
+  const todayDate=new Date().toLocaleDateString('fr-CA',{timeZone:'Pacific/Tahiti'});
+  const todayHist=hist.filter(p=>{if(!p.time.startsWith(todayDate))return false;const h=new Date(p.time).getHours();return h>=7&&h<19;});
+  const labels=todayHist.map(p=>{const t=new Date(p.time);return String(t.getHours()).padStart(2,'0')+':'+String(t.getMinutes()).padStart(2,'0')});
+  const paeaP=todayHist.map(p=>p.paea_power);
+  const temaP=todayHist.map(p=>p.temana_power);
+  const paeaT=todayHist.map(p=>p.paea_temp);
+  const temaT=todayHist.map(p=>p.temana_temp);
+
+  const dailyVal=data.dailyKWh!==null?fmt(data.dailyKWh,1):'--';
+  const dailySub=data.dailyPending?'minuit requis pour données précises':'kWh aujourd\'hui';
+
+  const p1=data.plants[0],p2=data.plants[1];
+  const totalYield=p1.total_mwh+p2.total_mwh;
+  const expectedDaily=data.totalKWp*4.5;
+  const yieldPct=data.dailyKWh?Math.min(100,Math.round(data.dailyKWh/expectedDaily*100)):0;
+  const yieldAngle=yieldPct*360/100;
+
+  const bolt='<span class="icon-bolt"><svg viewBox="0 0 24 24" fill="none"><path d="M13 2L3 14h6l-1 8 10-12h-6l1-8z" stroke="'+GOLD+'0.9)" stroke-width="2" fill="'+GOLD+'0.15)" stroke-linejoin="round"/></svg></span>';
+  const thermo='<span class="icon-thermo"><svg viewBox="0 0 24 24" fill="none"><path d="M10 4a3 3 0 00-3 3v7a5 5 0 107 0V7a3 3 0 00-3-3z" stroke="rgba(220,160,40,0.7)" stroke-width="2" fill="rgba(220,140,40,0.1)"/><circle cx="10" cy="14" r="2.5" stroke="rgba(220,160,40,0.8)" stroke-width="1.5" fill="rgba(220,140,40,0.2)"/><path d="M10 10V7" stroke="rgba(220,160,40,0.5)" stroke-width="2" stroke-linecap="round"/></svg></span>';
+
+  document.getElementById('content').innerHTML=`
+    <div class="card full" style="margin-bottom:18px">
+      <div class="c-label">⚡ Courbe de puissance — ${new Date().toLocaleDateString('fr-FR',{weekday:'long',timeZone:'Pacific/Tahiti'})}</div>
+      <div style="display:flex;align-items:baseline;gap:8px;flex-wrap:wrap">
+        ${bolt}<span class="c-value live-kva">${fmt(data.totalKVA,1)}</span>
+        <span class="c-unit">kVA live · ${data.activePlants} centrales</span>
+        <span style="font-size:0.65em;color:#fff;margin-left:auto">${p1.name}: ${fmt(p1.live_power_kva,1)} kVA &nbsp;|&nbsp; ${p2.name}: ${fmt(p2.live_power_kva,1)} kVA</span>
+      </div>
+      <div class="chart-wrap tall"><canvas id="chartPower"></canvas></div>
+    </div>
+
+    <div class="grid-3">
+      <div class="card">
+        <div class="c-label">☀️ Rendement</div>
+        <div style="display:flex;align-items:baseline;gap:6px;margin-bottom:4px">
+          <span class="c-value" style="font-size:2.4em">${dailyVal}</span>
+          <span class="c-unit">${dailySub}</span>
+        </div>
+        <div class="chart-wrap"><canvas id="chartYield"></canvas></div>
+        <div class="stat-row"><span class="stat-label">Total</span><span class="stat-val">${fmt(totalYield,1)} MWh</span></div>
+        <div class="stat-row"><span class="stat-label">Capacité installée</span><span class="stat-val">${fmt(data.totalKWp,1)} kWc</span></div>
+      </div>
+
+      <div class="card">
+        <div class="c-label">🌡️ Température onduleurs</div>
+        <div style="display:flex;align-items:baseline;gap:6px">
+          ${thermo}<span class="c-value" style="font-size:2.4em">${fmt(data.avgTemp,1)}</span><span class="c-unit">°C moy.</span>
+        </div>
+        <div class="chart-wrap"><canvas id="chartTemp"></canvas></div>
+        <div style="font-size:0.65em;color:#fff;margin-top:8px">${p1.name}: ${fmt(p1.temperature,1)}° &nbsp;|&nbsp; ${p2.name}: ${fmt(p2.temperature,1)}°</div>
+      </div>
+
+      <div class="card">
+        <div class="c-label">📊 Rendement journalier</div>
+        <div style="display:flex;align-items:center;gap:14px">
+          <div style="width:100px;height:100px;flex-shrink:0;position:relative"><div class="gauge-center" style="width:100px;height:100px"><div class="gauge-ring"><div class="gauge-fill" id="gaugeFill" style="background:conic-gradient(var(--gold) ${yieldAngle}deg, rgba(255,255,255,0.05) 0deg)"></div><div class="gauge-inner" style="inset:20px"><span style="font-size:0.9em">${yieldPct}%</span></div></div></div></div>
+          <div>
+            <div class="c-value" style="font-size:2em">${dailyVal}</div>
+            <div class="c-unit">sur ~${fmt(expectedDaily,0)} kWh</div>
+            <div style="font-size:0.7em;color:#fff;margin-top:4px">CO₂ évité : ${fmt(data.co2Tonnes,1)} t</div>
+          </div>
+        </div>
+        <div class="stat-row" style="margin-top:12px"><span class="stat-label">${yieldPct>=100?'Objectif atteint !':'Progression'}</span><span class="stat-val">${yieldPct}%</span></div>
+      </div>
+    </div>
+
+    <div class="grid-2">
+      ${data.plants.map(p=>`
+        <div class="card">
+          <div class="c-label">🏗️ <a href="${p.slug}.html" style="color:var(--gold);text-decoration:none">${p.name}</a></div>
+          <div style="display:flex;justify-content:space-between;align-items:flex-start;flex-wrap:wrap;gap:10px">
+            <div style="min-width:100px">
+              <div style="font-size:1.8em;font-weight:800;color:var(--gold)">${fmt(p.live_power_kva,1)} <span style="font-size:0.5em;color:#fff;font-weight:400">kVA</span></div>
+              <div style="font-size:0.65em;color:#fff;margin-top:2px">Charge ${(p.load_ratio*100).toFixed(0)}%</div>
+            </div>
+            <div class="chart-wrap short" style="width:160px;margin-top:0;flex-shrink:0"><canvas id="chartPlant${p.slug}"></canvas></div>
+          </div>
+          <div class="stat-row"><span class="stat-label">Aujourd'hui</span><span class="stat-val">${p.daily_kwh!==null?fmt(p.daily_kwh,1)+' kWh':'--'}</span></div>
+          <div class="stat-row"><span class="stat-label">Total</span><span class="stat-val">${fmt(p.total_mwh,1)} MWh</span></div>
+          <div class="stat-row"><span class="stat-label">Température</span><span class="stat-val">${fmt(p.temperature,1)}°C</span></div>
+          <div class="stat-row"><span class="stat-label">Capacité</span><span class="stat-val">${fmt(p.capacity_kwp,1)} kWc</span></div>
+        </div>
+      `).join('')}
+    </div>
+  `;
+
+  const baseOpts={
+    responsive:true,maintainAspectRatio:false,
+    plugins:{legend:{display:false}},
+    scales:{
+      x:{ticks:{color:TICK,font:{size:9,family:FONT()},maxTicksLimit:12,callback:(_,i)=>i%12===0?labels[i]:''},grid:{color:GRID}},
+      y:{ticks:{color:TICK,font:{size:9,family:FONT()}},grid:{color:GRID}}
+    }
+  };
+
+  if(todayHist.length>1){
+    const hasPaea=paeaP.some(v=>v!==null);
+    const hasTema=temaP.some(v=>v!==null);
+    const datasets=[];
+    if(hasPaea)datasets.push({label:'Paea',data:paeaP,borderColor:GOLD+'0.9)',backgroundColor:ctx=>{const g=ctx.chart.ctx.createLinearGradient(0,0,0,280);g.addColorStop(0,GOLD+'0.15)');g.addColorStop(1,'transparent');return g},fill:true,borderWidth:2.5,tension:0.35,pointRadius:0,pointHoverRadius:5,spanGaps:false});
+    if(hasTema)datasets.push({label:'Temana',data:temaP,borderColor:GOLD+'0.35)',backgroundColor:ctx=>{const g=ctx.chart.ctx.createLinearGradient(0,0,0,280);g.addColorStop(0,GOLD+'0.06)');g.addColorStop(1,'transparent');return g},fill:true,borderWidth:2,borderDash:[5,3],tension:0.35,pointRadius:0,pointHoverRadius:5,spanGaps:false});
+    new Chart(document.getElementById('chartPower'),{type:'line',data:{labels,datasets},options:baseOpts});
+    _charts.push(Chart.getChart('chartPower'));
+  }
+
+  new Chart(document.getElementById('chartYield'),{
+    type:'bar',
+    data:{
+      labels:['Total (MWh)'],
+      datasets:[
+        {label:p1.name,data:[p1.total_mwh],backgroundColor:GOLD+'0.7)',borderRadius:6,borderSkipped:false},
+        {label:p2.name,data:[p2.total_mwh],backgroundColor:GOLD+'0.25)',borderRadius:6,borderSkipped:false},
+      ]
+    },
+    options:{
+      indexAxis:'y',
+      responsive:true,maintainAspectRatio:false,
+      plugins:{legend:{display:true,position:'bottom',labels:{color:GOLD+'0.5)',font:{size:9,family:FONT()},padding:8,usePointStyle:true,pointStyleWidth:8}}},
+      scales:{
+        x:{stacked:true,ticks:{color:TICK,font:{size:9,family:FONT()}},grid:{color:GRID}},
+        y:{stacked:true,ticks:{color:TICK,font:{size:9,family:FONT()}},grid:{display:false}}
+      }
+    }
+  });
+  _charts.push(Chart.getChart('chartYield'));
+
+  if(todayHist.length>1){
+    const hasTemp=paeaT.some(v=>v!==null)||temaT.some(v=>v!==null);
+    if(hasTemp){
+      const tempDatasets=[];
+      if(paeaT.some(v=>v!==null))tempDatasets.push({label:'Paea',data:paeaT,borderColor:GOLD+'0.75)',backgroundColor:'transparent',borderWidth:2.5,tension:0.3,pointRadius:0,pointHoverRadius:4,spanGaps:true});
+      if(temaT.some(v=>v!==null))tempDatasets.push({label:'Temana',data:temaT,borderColor:'rgba(220,160,40,0.4)',backgroundColor:'transparent',borderWidth:2,borderDash:[4,3],tension:0.3,pointRadius:0,pointHoverRadius:4,spanGaps:true});
+      new Chart(document.getElementById('chartTemp'),{type:'line',data:{labels,datasets:tempDatasets},options:baseOpts});
+      _charts.push(Chart.getChart('chartTemp'));
+    }
+  }
+
+  data.plants.forEach(p=>{
+    const pow=todayHist.map(h=>h[p.slug+'_power']);
+    if(pow.some(v=>v!==null)){
+      new Chart(document.getElementById('chartPlant'+p.slug),{
+        type:'line',
+        data:{labels:pow.length>30?labels.filter((_,i)=>i%3===0):labels,datasets:[{data:pow.filter(v=>v!==null),borderColor:GOLD+'0.6)',backgroundColor:GOLD+'0.04)',fill:true,borderWidth:1.5,tension:0.4,pointRadius:0,spanGaps:false}]},
+        options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false}},scales:{x:{display:false},y:{display:false,min:0}}}
+      });
+      _charts.push(Chart.getChart('chartPlant'+p.slug));
+    }
+  });
+}
+
+try{render(INLINE_DATA)}catch(e){document.getElementById('content').innerHTML='<div class="card" style="text-align:center;padding:40px;color:var(--muted)">⚠ '+e.message+'</div>'}
+
+let _rt=null;
+async function refreshData(){
+  try{
+    const resp=await fetch('https://raw.githubusercontent.com/skimdraft/enersoler-dashboard/master/dashboard/isolar-data.json?'+Date.now(),{cache:'no-cache'});
+    if(!resp.ok)return;
+    const fresh=await resp.json();
+    if(fresh&&fresh.plants)render(fresh);
+  }catch(e){}
+  _rt=setTimeout(refreshData,60000);
+}
+_rt=setTimeout(refreshData,60000);
+</script>
 </body>
 </html>
