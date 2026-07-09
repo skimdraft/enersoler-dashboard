@@ -2,10 +2,9 @@ name: Update Dashboard
 
 on:
   schedule:
-    # Every 5 min, 16:00-03:55 UTC = 06:00-17:55 Tahiti (GMT-10)
-    # Solar production window only — no point checking at night
-    - cron: '*/5 16-23,0-3 * * *'
-  workflow_dispatch:  # Manual trigger for testing
+    # Every 5 minutes — extract.js auto-skips nighttime (06:00-18:00 Tahiti only)
+    - cron: '*/5 * * * *'
+  workflow_dispatch:
 
 permissions:
   contents: write
@@ -38,12 +37,11 @@ jobs:
         working-directory: dashboard
         run: node build.js
 
-      - name: Copy HTML to docs/ (GitHub Pages)
+      - name: Copy HTML to docs/
         run: |
           cp dashboard/dashboard.html docs/
           cp dashboard/paea.html docs/
           cp dashboard/temana.html docs/
-          cp dashboard/index.html docs/
 
       - name: Commit and push changes
         run: |
@@ -52,7 +50,7 @@ jobs:
           git add dashboard/isolar-data.json dashboard/isolar-tokens.json
           git add dashboard/history.json dashboard/history-daily.json dashboard/history-monthly.json
           git add dashboard/daily-baseline.json
-          git add dashboard/dashboard.html dashboard/paea.html dashboard/temana.html dashboard/index.html
+          git add dashboard/dashboard.html dashboard/paea.html dashboard/temana.html
           git add docs/dashboard.html docs/paea.html docs/temana.html docs/index.html
           git diff --staged --quiet || (
             git commit -m "🔄 $(TZ='Pacific/Tahiti' date +'%d/%m %H:%M') — data refresh" &&
