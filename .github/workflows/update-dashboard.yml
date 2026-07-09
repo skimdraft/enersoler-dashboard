@@ -2,8 +2,8 @@ name: Update Dashboard
 
 on:
   schedule:
-    # Every 1 min, 7h-18h Tahiti (UTC-10) = 17h-04h UTC — ~660 runs/jour
-    - cron: '* 17-23,0-4 * * *'
+    # Every 5 min, 7h-18h Tahiti (UTC-10) = 17h-04h UTC — GitHub min interval
+    - cron: '*/5 17-23,0-4 * * *'
   workflow_dispatch:
 
 concurrency:
