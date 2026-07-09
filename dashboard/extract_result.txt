@@ -1,0 +1,4 @@
+﻿OK: C:\Users\User\.openclaw\workspace\netrun\dashboard\isolar-data.json
+   Power: : 2,14 MWh | RT: 352,18 kW | Total: 356,48 MWh
+   Revenue: 4.829.305,21 XPF total | CO2: 144,02 t
+   Stations: 8 OK | 1 Offline

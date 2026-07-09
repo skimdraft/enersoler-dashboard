@@ -1,0 +1,25 @@
+# Secrets — NEVER commit
+.env
+.env.*
+*.secret
+secrets/
+
+# OpenClaw runtime
+.openclaw/
+
+# Node
+node_modules/
+dist/
+build/
+
+# Logs
+*.log
+
+# Generated secrets/keys (local testing)
+secret.txt
+rsa_pub.pem
+rsa-test.js
+
+# OS
+.DS_Store
+Thumbs.db
