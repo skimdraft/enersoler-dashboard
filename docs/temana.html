@@ -201,7 +201,7 @@ let _charts = [];
 const fmt = (n, d) => ((n || 0).toFixed(d || 1));
 const todayDate = new Date().toLocaleDateString('fr-CA', { timeZone: 'Pacific/Tahiti' });
 const TAHITI = 'Pacific/Tahiti';
-function destroy() { _charts.forEach(c => { try { c.destroy() } catch (e) {} }); _charts = []; }
+function destroy() { for(let i=0;i<_charts.length;i++){try{_charts[i].destroy()}catch(e){}} _charts=[]; }
 
 // -- Weather --
 async function loadWeather() {
