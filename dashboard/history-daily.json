@@ -636,5 +636,10 @@
     "date": "2026-07-08",
     "paea_kwh": 2.5,
     "temana_kwh": 3.7
+  },
+  {
+    "date": "2026-07-09",
+    "paea_kwh": 1.6,
+    "temana_kwh": 0.4
   }
 ]
