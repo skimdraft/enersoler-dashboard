@@ -231,13 +231,15 @@ async function fetchAndSaveHistory(token, liveData) {
         const start = getTahitiDateStr(startOffset);
         const end = getTahitiDateStr(endOffset);
 
-        // Check if we already have this batch (all dates with BOTH plants' data)
+        // Always refetch last 2 days (data may be incomplete if fetched early)
+        // Older days: skip if already cached
         let needsFetch = false;
         for (let d = endOffset; d <= startOffset; d++) {
+            // Last 2 days: always refetch
+            if (d <= 2) { needsFetch = true; break; }
             const iso = getTahitiISO(d);
             const existing = dailyHistory.find(e => e.date === iso);
             if (!existing) { needsFetch = true; break; }
-            // Check both plants have data (not just date entry from live data)
             for (const slug of ['paea','temana']) {
                 if (existing[slug + '_kwh'] === undefined) { needsFetch = true; break; }
             }
