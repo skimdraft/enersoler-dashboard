@@ -541,7 +541,13 @@ async function main() {
     console.log('  📊 ' + realCount + '/' + totalSlots + ' data points today\n');
 
     // ─── Fetch historical daily data ──
-    await fetchAndSaveHistory(token, output);
+    // Only when --history flag is passed (hourly / daily job)
+    const args = process.argv.slice(2);
+    if (args.includes('--history')) {
+        await fetchAndSaveHistory(token, output);
+    } else {
+        console.log('[HIST] Skipped (use --history for full run)');
+    }
 }
 
 main().catch(e => { console.error('FATAL:', e); process.exit(1); });
