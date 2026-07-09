@@ -326,8 +326,8 @@ function render(data){
     const hasPaea=paeaP.some(v=>v!==null);
     const hasTema=temaP.some(v=>v!==null);
     const datasets=[];
-    if(hasPaea)datasets.push({label:'Paea',data:paeaP,borderColor:GOLD+'0.9)',backgroundColor:ctx=>{const g=ctx.chart.ctx.createLinearGradient(0,0,0,280);g.addColorStop(0,GOLD+'0.15)');g.addColorStop(1,'transparent');return g},fill:true,borderWidth:2.5,tension:0.35,pointRadius:0,pointHoverRadius:5,spanGaps:false});
-    if(hasTema)datasets.push({label:'Temana',data:temaP,borderColor:GOLD+'0.35)',backgroundColor:ctx=>{const g=ctx.chart.ctx.createLinearGradient(0,0,0,280);g.addColorStop(0,GOLD+'0.06)');g.addColorStop(1,'transparent');return g},fill:true,borderWidth:2,borderDash:[5,3],tension:0.35,pointRadius:0,pointHoverRadius:5,spanGaps:false});
+    if(hasPaea)datasets.push({label:'Paea',data:paeaP,borderColor:GOLD+'0.9)',backgroundColor:ctx=>{const g=ctx.chart.ctx.createLinearGradient(0,0,0,280);g.addColorStop(0,GOLD+'0.15)');g.addColorStop(1,'transparent');return g},fill:true,borderWidth:2.5,tension:0.35,pointRadius:0,pointHoverRadius:5,spanGaps:true});
+    if(hasTema)datasets.push({label:'Temana',data:temaP,borderColor:GOLD+'0.35)',backgroundColor:ctx=>{const g=ctx.chart.ctx.createLinearGradient(0,0,0,280);g.addColorStop(0,GOLD+'0.06)');g.addColorStop(1,'transparent');return g},fill:true,borderWidth:2,borderDash:[5,3],tension:0.35,pointRadius:0,pointHoverRadius:5,spanGaps:true});
     new Chart(document.getElementById('chartPower'),{type:'line',data:{labels,datasets},options:baseOpts});
     _charts.push(Chart.getChart('chartPower'));
   }
@@ -369,7 +369,7 @@ function render(data){
     if(pow.some(v=>v!==null)){
       new Chart(document.getElementById('chartPlant'+p.slug),{
         type:'line',
-        data:{labels:pow.length>30?labels.filter((_,i)=>i%3===0):labels,datasets:[{data:pow.filter(v=>v!==null),borderColor:GOLD+'0.6)',backgroundColor:GOLD+'0.04)',fill:true,borderWidth:1.5,tension:0.4,pointRadius:0,spanGaps:false}]},
+        data:{labels,datasets:[{data:pow,borderColor:GOLD+'0.6)',backgroundColor:GOLD+'0.04)',fill:true,borderWidth:1.5,tension:0.4,pointRadius:0,spanGaps:true}]},
         options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false}},scales:{x:{display:false},y:{display:false,min:0}}}
       });
       _charts.push(Chart.getChart('chartPlant'+p.slug));
