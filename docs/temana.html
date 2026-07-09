@@ -201,9 +201,9 @@ let _charts = [];
 const fmt = (n, d) => ((n || 0).toFixed(d || 1));
 const todayDate = new Date().toLocaleDateString('fr-CA', { timeZone: 'Pacific/Tahiti' });
 const TAHITI = 'Pacific/Tahiti';
-function destroy() { for(let i=0;i<_charts.length;i++){try{_charts[i].destroy()}catch(e){}} _charts=[]; }
+function destroy() { _charts.forEach(c => { try { c.destroy() } catch (e) {} }); _charts = []; }
 
-// -- Weather --
+// ── Weather ──
 async function loadWeather() {
   try {
     const r = await fetch('https://api.open-meteo.com/v1/forecast?latitude=-17.65&longitude=-149.43&current=temperature_2m,relative_humidity_2m,apparent_temperature,weather_code,wind_speed_10m&daily=temperature_2m_max,temperature_2m_min,weather_code&timezone=Pacific%2FTahiti&forecast_days=2');
@@ -223,7 +223,7 @@ async function loadWeather() {
   } catch(e){ document.getElementById('wxContent').innerHTML='<div style="color:rgba(255,255,255,0.3);font-size:0.5em;text-align:center;padding-top:4vh">—</div>'; }
 }
 
-// -- Bar chart --
+// ── Bar chart (sommets arrondis) ──
 function barChart(id, data, maxV, opts) {
   const canvas = document.getElementById(id); if(!canvas) return;
   const o = opts || {};
@@ -244,7 +244,7 @@ function barChart(id, data, maxV, opts) {
   _charts.push(chart);
 }
 
-// -- Daily lookup --
+// ── Daily lookup (history_daily format: [{date, kwh, paea_kwh?, temana_kwh?}]) ──
 function dailyLookup(history, slug) {
   const map = {};
   for (const e of history || []) {
@@ -270,7 +270,7 @@ function getLast12Months() {
   for(let i=11;i>=0;i--){ const d=new Date(now.getFullYear(),now.getMonth()-i,1); months.push({key:d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0'),l:mNames[d.getMonth()],v:0}); }
   return months;
 }
-// -- Monthly from daily --
+// ── Monthly from daily ──
 function monthlyFromDaily(history, slug) {
   const mo = {};
   for (const e of history || []) {
@@ -283,7 +283,7 @@ function monthlyFromDaily(history, slug) {
   return mo;
 }
 
-// -- RENDER --
+// ── RENDER ──
 function render(data) {
   destroy();
   const plant = (data.plants||[]).find(p=>String(p.id)===PLANT_ID);
@@ -311,7 +311,7 @@ function render(data) {
 
   const raw = dailyLookup(data.history_daily || [], plant.slug);
 
-  // Power chart (5-min data)
+  // Power chart (5-min data) — interpolate gaps
   const todayHist=histLive.filter(p=>{if(!p.time||!p.time.startsWith(todayDate))return false;const h=new Date(p.time).getHours();return h>=7&&h<19;});
   const labels=todayHist.map(p=>{const t=new Date(p.time);return String(t.getHours()).padStart(2,'0')+':'+String(t.getMinutes()).padStart(2,'0');});
   let power=todayHist.map(p=>p[plant.slug+'_power']);
@@ -363,9 +363,7 @@ function render(data) {
 
 try {
   render(INLINE_DATA);
-  window._hist=INLINE_DATA.history||[];
-  window._kwh=INLINE_DATA.dailyKWh||0;
-  setInterval(async()=>{try{const r=await fetch('https://skimdraft.github.io/enersoler-dashboard/isolar-data.json?_='+Date.now(),{cache:'no-cache'});if(r.ok){const d=await r.json();if(d&&d.plants){d.history_daily=INLINE_DATA.history_daily;d.history_monthly=INLINE_DATA.history_monthly;if(d.history)for(let i=0;i<d.history.length;i++){if(!d.history[i].total_power&&window._hist[i]&&window._hist[i].total_power)d.history[i]=window._hist[i];}const nf=d.history.filter(p=>p.total_power!=null).length;const of=window._hist.filter(p=>p.total_power!=null).length;if(d.dailyKWh!=null&&d.dailyKWh<window._kwh)d.dailyKWh=window._kwh;if(nf>=of){window._hist=d.history;window._kwh=d.dailyKWh||window._kwh;render(d);}}}catch(e){}},60000);
+  setInterval(async()=>{try{const r=await fetch('https://skimdraft.github.io/enersoler-dashboard/isolar-data.json?_='+Date.now(),{cache:'no-cache'});if(r.ok){const d=await r.json();if(d&&d.plants){d.history_daily=INLINE_DATA.history_daily;d.history_monthly=INLINE_DATA.history_monthly;render(d);}}}catch(e){}},60000);
 }catch(e){document.querySelector('.grid').innerHTML+='<div style="padding:30px;color:rgba(255,255,255,0.3);text-align:center">⚠ '+e.message+'</div>';}
 </script>
 </body>
