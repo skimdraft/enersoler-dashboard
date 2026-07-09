@@ -363,7 +363,7 @@ function render(data) {
 
 try {
   render(INLINE_DATA);
-  setInterval(async()=>{try{const r=await fetch('isolar-data.json?_='+Date.now(),{cache:'no-cache'});if(r.ok){const d=await r.json();if(d&&d.plants){d.history_daily=INLINE_DATA.history_daily;d.history_monthly=INLINE_DATA.history_monthly;render(d);}}}catch(e){}},60000);
+  setInterval(async()=>{try{const r=await fetch('https://raw.githubusercontent.com/skimdraft/enersoler-dashboard/master/dashboard/isolar-data.json?_='+Date.now(),{cache:'no-cache'});if(r.ok){const d=await r.json();if(d&&d.plants){d.history_daily=INLINE_DATA.history_daily;d.history_monthly=INLINE_DATA.history_monthly;render(d);}}}catch(e){}},60000);
 }catch(e){document.querySelector('.grid').innerHTML+='<div style="padding:30px;color:rgba(255,255,255,0.3);text-align:center">⚠ '+e.message+'</div>';}
 </script>
 </body>

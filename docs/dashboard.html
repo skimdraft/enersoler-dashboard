@@ -382,7 +382,7 @@ try{render(INLINE_DATA)}catch(e){document.getElementById('content').innerHTML='<
 let _rt=null;
 async function refreshData(){
   try{
-    const resp=await fetch('isolar-data.json?'+Date.now(),{cache:'no-cache'});
+    const resp=await fetch('https://raw.githubusercontent.com/skimdraft/enersoler-dashboard/master/dashboard/isolar-data.json?'+Date.now(),{cache:'no-cache'});
     if(!resp.ok)return;
     const fresh=await resp.json();
     if(fresh&&fresh.plants)render(fresh);
