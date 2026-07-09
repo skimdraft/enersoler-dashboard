@@ -377,7 +377,7 @@ function render(data){
   });
 }
 
-try{render(INLINE_DATA)}catch(e){document.getElementById('content').innerHTML='<div class="card" style="text-align:center;padding:40px;color:var(--muted)">⚠ '+e.message+'</div>'}
+try{render(INLINE_DATA);window._hist=INLINE_DATA.history||[];}catch(e){document.getElementById('content').innerHTML='<div class="card" style="text-align:center;padding:40px;color:var(--muted)">⚠ '+e.message+'</div>'}
 
 let _rt=null;
 async function refreshData(){
@@ -385,7 +385,11 @@ async function refreshData(){
     const resp=await fetch('https://skimdraft.github.io/enersoler-dashboard/isolar-data.json?'+Date.now(),{cache:'no-cache'});
     if(!resp.ok)return;
     const fresh=await resp.json();
-    if(fresh&&fresh.plants)render(fresh);
+    if(fresh&&fresh.plants){
+      if(fresh.history&&window._hist)for(let i=0;i<fresh.history.length;i++){if(!fresh.history[i].total_power&&window._hist[i]&&window._hist[i].total_power)fresh.history[i]=window._hist[i];}
+      window._hist=fresh.history||[];
+      render(fresh);
+    }
   }catch(e){}
   _rt=setTimeout(refreshData,60000);
 }
