@@ -377,7 +377,7 @@ function render(data){
   });
 }
 
-try{render(INLINE_DATA);window._hist=INLINE_DATA.history||[];}catch(e){document.getElementById('content').innerHTML='<div class="card" style="text-align:center;padding:40px;color:var(--muted)">⚠ '+e.message+'</div>'}
+try{render(INLINE_DATA);window._hist=INLINE_DATA.history||[];window._kwh=INLINE_DATA.dailyKWh||0;}catch(e){document.getElementById('content').innerHTML='<div class="card" style="text-align:center;padding:40px;color:var(--muted)">⚠ '+e.message+'</div>'}
 
 let _rt=null;
 async function refreshData(){
@@ -387,8 +387,10 @@ async function refreshData(){
     const fresh=await resp.json();
     if(fresh&&fresh.plants){
       if(fresh.history&&window._hist)for(let i=0;i<fresh.history.length;i++){if(!fresh.history[i].total_power&&window._hist[i]&&window._hist[i].total_power)fresh.history[i]=window._hist[i];}
-      window._hist=fresh.history||[];
-      render(fresh);
+      const nf=fresh.history?fresh.history.filter(p=>p.total_power!=null).length:0;
+      const of=window._hist?window._hist.filter(p=>p.total_power!=null).length:0;
+      if(fresh.dailyKWh!=null&&fresh.dailyKWh<window._kwh)fresh.dailyKWh=window._kwh;
+      if(nf>=of){window._hist=fresh.history||[];window._kwh=fresh.dailyKWh||window._kwh;render(fresh);}
     }
   }catch(e){}
   _rt=setTimeout(refreshData,60000);

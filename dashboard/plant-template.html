@@ -364,7 +364,8 @@ function render(data) {
 try {
   render(INLINE_DATA);
   window._hist=INLINE_DATA.history||[];
-  setInterval(async()=>{try{const r=await fetch('https://skimdraft.github.io/enersoler-dashboard/isolar-data.json?_='+Date.now(),{cache:'no-cache'});if(r.ok){const d=await r.json();if(d&&d.plants){d.history_daily=INLINE_DATA.history_daily;d.history_monthly=INLINE_DATA.history_monthly;if(d.history)for(let i=0;i<d.history.length;i++){if(!d.history[i].total_power&&window._hist[i]&&window._hist[i].total_power)d.history[i]=window._hist[i];}window._hist=d.history;render(d);}}}catch(e){}},60000);
+  window._kwh=INLINE_DATA.dailyKWh||0;
+  setInterval(async()=>{try{const r=await fetch('https://skimdraft.github.io/enersoler-dashboard/isolar-data.json?_='+Date.now(),{cache:'no-cache'});if(r.ok){const d=await r.json();if(d&&d.plants){d.history_daily=INLINE_DATA.history_daily;d.history_monthly=INLINE_DATA.history_monthly;if(d.history)for(let i=0;i<d.history.length;i++){if(!d.history[i].total_power&&window._hist[i]&&window._hist[i].total_power)d.history[i]=window._hist[i];}const nf=d.history.filter(p=>p.total_power!=null).length;const of=window._hist.filter(p=>p.total_power!=null).length;if(d.dailyKWh!=null&&d.dailyKWh<window._kwh)d.dailyKWh=window._kwh;if(nf>=of){window._hist=d.history;window._kwh=d.dailyKWh||window._kwh;render(d);}}}catch(e){}},60000);
 }catch(e){document.querySelector('.grid').innerHTML+='<div style="padding:30px;color:rgba(255,255,255,0.3);text-align:center">⚠ '+e.message+'</div>';}
 </script>
 </body>

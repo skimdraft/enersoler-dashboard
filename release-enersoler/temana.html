@@ -1,0 +1,371 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Temana import — Enersoler Tahiti</title>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;700;800;900&family=JetBrains+Mono:wght@400;600;700&display=swap');
+  :root { --bg:#111118;--panel:rgba(18,18,28,0.94);--border:rgba(195,205,34,0.08);--gold:#c3cd22;--muted:rgba(195,205,34,0.35);--text:#e8e8e0; }
+  * { margin:0;padding:0;box-sizing:border-box; }
+  html,body { width:100vw;height:100vh;overflow:hidden;font-family:'Outfit',sans-serif;background:var(--bg);color:var(--text);display:flex;flex-direction:column; }
+  .grid { display:grid;grid-template-columns:repeat(6,1fr);grid-template-rows:minmax(80px,9vh) minmax(200px,27vh) minmax(145px,21vh) minmax(105px,15vh);gap:1.5vh;padding:1.2vh 2vw 0;width:100vw;flex:1;min-height:0; }
+
+  /* HEADER */
+  .hdr { display:flex;align-items:center;justify-content:space-between;padding:0 0.8vw;overflow:hidden; }
+  .full { grid-column:1/7; }
+  .hdr-l { display:flex;align-items:center;gap:0.8vw;flex-shrink:0; }
+  .logo { height:min(70px,9.5vh); }
+  .eq-bars { display:flex;align-items:flex-end;gap:0.35vw;height:min(60px,8.5vh); }
+  .eq-bars span { display:block;width:min(10px,0.85vw);border-radius:3px;background:var(--gold);animation:eq 2.4s ease-in-out infinite;box-shadow:0 0 12px rgba(195,205,34,0.5); }
+  .eq-bars span:nth-child(1){height:60%;animation-delay:0s}
+  .eq-bars span:nth-child(2){height:100%;animation-delay:0.3s}
+  .eq-bars span:nth-child(3){height:40%;animation-delay:0.6s}
+  .eq-bars span:nth-child(4){height:75%;animation-delay:0.9s}
+  .eq-bars span:nth-child(5){height:25%;animation-delay:1.2s}
+  @keyframes eq { 0%,100%{transform:scaleY(0.3);opacity:0.4} 50%{transform:scaleY(1);opacity:1} }
+  .hdr-m { display:flex;align-items:center;gap:0.8vw; }
+  .chip { font-family:'JetBrains Mono',monospace;font-size:clamp(0.42em,0.75vw,0.65em);padding:0.3vh 1vw;border-radius:3vh;border:1px solid rgba(195,205,34,0.3);color:var(--gold);background:rgba(195,205,34,0.04);letter-spacing:0.05em;text-transform:uppercase; }
+  .live { font-family:'JetBrains Mono',monospace;font-size:clamp(0.42em,0.75vw,0.65em);color:var(--muted);display:flex;align-items:center;gap:0.3vw; }
+  .hdr-right { display:flex;align-items:stretch;gap:0.8vw; }
+  .hdr-info { font-family:'JetBrains Mono',monospace;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;background:linear-gradient(135deg,rgba(195,205,34,0.08),rgba(195,205,34,0.02));border:1px solid rgba(195,205,34,0.14);border-radius:0.6vh;padding:0.5vh 1.1vw; }
+  .info-line { font-size:clamp(0.7em,1vw,0.9em);color:var(--gold);font-weight:700;line-height:1.2;overflow:hidden;text-overflow:ellipsis; }
+  .info-sub { font-size:clamp(0.45em,0.6vw,0.55em);color:rgba(195,205,34,0.5);text-transform:uppercase;letter-spacing:0.05em;line-height:1.2;margin-bottom:0.1vh; }
+  .hdr-right .hdr-info:nth-child(2) .info-line,
+  .hdr-right .hdr-info:nth-child(3) .info-line { color:#fff;font-weight:800; }
+  .dot { width:min(6px,0.5vw);height:min(6px,0.5vw);background:var(--gold);border-radius:50%;box-shadow:0 0 6px var(--gold);animation:dotPulse 1.5s infinite; }
+  @keyframes dotPulse { 0%,100%{opacity:1} 50%{opacity:.2} }
+
+  /* CARDS */
+  .card { position:relative;overflow:hidden;border-radius:clamp(10px,1.3vw,18px);background:var(--panel);border:1px solid var(--border);box-shadow:0 0 3vh rgba(195,205,34,0.08); }
+  .card::before { content:'';position:absolute;top:0;left:25%;right:25%;height:1px;border-radius:0 0 50% 50%;background:linear-gradient(90deg,transparent,var(--gold),transparent);opacity:0.35;z-index:1; }
+  .card-inner { position:relative;z-index:0;padding:clamp(5px,0.8vh,12px) clamp(8px,1.2vw,16px);height:100%;display:flex;flex-direction:column; }
+  .card.glow { border-color:rgba(195,205,34,0.15);box-shadow:0 0 4vh rgba(195,205,34,0.08),inset 0 0 8vh rgba(195,205,34,0.03);animation:neonPulse 2.5s ease-in-out infinite; }
+  @keyframes neonPulse { 0%,100%{border-color:rgba(195,205,34,0.1);box-shadow:0 0 3vh rgba(195,205,34,0.05),inset 0 0 6vh rgba(195,205,34,0.02)} 50%{border-color:rgba(195,205,34,0.3);box-shadow:0 0 8vh rgba(195,205,34,0.2),inset 0 0 12vh rgba(195,205,34,0.06)} }
+  .card.green { background:rgba(25,30,5,0.85);border-color:rgba(195,205,34,0.15); }
+  .card.green::after { content:'';position:absolute;left:3%;width:94%;height:1px;background:linear-gradient(90deg,transparent,rgba(195,205,34,0.5),transparent);animation:pwrScan 3.5s linear infinite;z-index:2;pointer-events:none; }
+  @keyframes pwrScan { 0%{top:92%;opacity:0} 8%{opacity:1} 92%{opacity:1} 100%{top:8%;opacity:0} }
+  .card.warm { border-color:rgba(220,160,40,0.1); }
+
+  .clabel { font-family:'JetBrains Mono',monospace;font-size:clamp(0.45em,0.72vw,0.6em);color:#fff;text-transform:uppercase;letter-spacing:0.08em;margin-bottom:0.4vh;flex-shrink:0; }
+
+  /* ICONS */
+  .icon-bolt { display:inline-block;vertical-align:middle;margin-right:0.2vw; }
+  .icon-bolt svg { width:clamp(30px,min(7.5vw,14vh),90px);height:clamp(30px,min(7.5vw,14vh),90px); }
+  @keyframes boltFlash { 0%,100%{opacity:0.15;filter:drop-shadow(0 0 2px rgba(195,205,34,0.15))} 25%{opacity:0.35} 45%{opacity:1;filter:drop-shadow(0 0 20px rgba(195,205,34,1))} 55%{opacity:0.25} 70%{opacity:0.6} 85%{opacity:0.9} }
+  .icon-bolt { animation:boltFlash 2s ease-in-out infinite; }
+  .icon-thermo { display:inline-block;vertical-align:middle;font-size:inherit; }
+  .icon-thermo svg { width:clamp(20px,min(3.5vw,8vh),45px);height:clamp(20px,min(3.5vw,8vh),45px); }
+  @keyframes thermoPulse { 0%,100%{filter:drop-shadow(0 0 2px rgba(220,140,40,0.4))} 50%{filter:drop-shadow(0 0 10px rgba(220,140,40,0.9))} }
+  .icon-thermo { animation:thermoPulse 2.5s ease-in-out infinite; }
+  @keyframes glowPulse { 0%,100%{text-shadow:0 0 15px rgba(195,205,34,0.2)} 50%{text-shadow:0 0 60px rgba(195,205,34,0.6)} }
+  .live-glow { animation:glowPulse 2.5s ease-in-out infinite; }
+
+  .chart-wrap { position:relative;flex:1;min-height:0; }
+  canvas { width:100%!important;height:100%!important; }
+
+  /* WEATHER */
+  .wx { display:flex;flex-direction:column;align-items:center;justify-content:center;flex:1;gap:0.3vh;position:relative;overflow:hidden; }
+  .wx::after { content:'';position:absolute;left:0;right:0;height:3px;background:linear-gradient(90deg,transparent,rgba(195,205,34,0.15),rgba(195,205,34,0.35),rgba(195,205,34,0.15),transparent);animation:wxScan 2.5s linear infinite;pointer-events:none;z-index:1; }
+  @keyframes wxScan { 0%{top:-5px;opacity:0} 8%{opacity:1} 15%{opacity:1} 25%{opacity:0.3} 50%{top:calc(100% - 2px);opacity:0} 51%{top:-5px;opacity:0} 58%{opacity:1} 65%{opacity:1} 75%{opacity:0.3} 100%{top:calc(100% - 2px);opacity:0} }
+  .wx-icon { font-size:clamp(3.5em,5.5vw,6em);line-height:1;filter:drop-shadow(0 0 2vh rgba(195,205,34,0.4)); }
+  .wx-big-temp { font-size:clamp(2em,3.5vw,3em);color:var(--gold);font-weight:800;line-height:1; }
+
+  /* MINI CARDS */
+  .mini-card { display:flex;flex-direction:column;align-items:center;justify-content:center;height:100%;gap:0.3vh;overflow:hidden; }
+  .mini-val { font-size:clamp(0.9em,min(3.2vw,7vh),3em);font-weight:900;color:var(--gold);line-height:1; }
+  .mini-lbl { font-size:clamp(0.3em,min(0.85vw,2.5vh),0.75em);color:#fff;opacity:0.75;text-align:center;text-transform:uppercase;letter-spacing:0.04em;line-height:1.3; }
+  .mini-icon { font-size:clamp(1em,min(3.5vw,7vh),3.5em);line-height:1; }
+
+  /* INFO BAR (fond vert) */
+  .btm { display:flex;align-items:center;justify-content:space-around;width:100%;height:100%; }
+  .btm-row { text-align:center;position:relative;padding:0.6vh 1vw; }
+  .btm-row::before { content:'';position:absolute;inset:0;border:1px solid rgba(195,205,34,0.25);border-radius:clamp(8px,1vw,14px);clip-path:polygon(0 10px,10px 0,calc(100% - 10px) 0,100% 10px,100% calc(100% - 10px),calc(100% - 10px) 100%,10px 100%,0 calc(100% - 10px));animation:framePulse 2s ease-in-out infinite; }
+  @keyframes framePulse { 0%,100%{border-color:rgba(195,205,34,0.15);box-shadow:inset 0 0 8px rgba(195,205,34,0.03)} 50%{border-color:rgba(195,205,34,0.4);box-shadow:inset 0 0 20px rgba(195,205,34,0.1),0 0 15px rgba(195,205,34,0.08)} }
+  .btm-val { font-size:clamp(1.2em,min(4.5vw,8vh),4em);font-weight:900;color:#fff;line-height:1;position:relative;z-index:1;text-shadow:0 0 30px rgba(255,255,255,0.15);animation:valGlow 2s ease-in-out infinite; }
+  @keyframes valGlow { 0%,100%{text-shadow:0 0 20px rgba(255,255,255,0.1)} 50%{text-shadow:0 0 40px rgba(255,255,255,0.25),0 0 80px rgba(255,255,255,0.08)} }
+  .btm-lbl { font-size:clamp(0.35em,min(1.1vw,3vh),1em);color:var(--gold);opacity:0.9;margin-top:0.3vh;text-transform:uppercase;letter-spacing:0.06em;position:relative;z-index:1; }
+  .btm-unit { font-size:clamp(0.55em,0.85vw,0.75em);color:#fff;opacity:0.5; }
+
+  /* GAUGE */
+  @keyframes gaugeGlow { 0%,100%{box-shadow:inset 0 0 5px rgba(195,205,34,0.12)} 50%{box-shadow:inset 0 0 16px rgba(195,205,34,0.4)} }
+  .gauge-center { width:clamp(40px,min(7vw,16vh),90px);height:clamp(40px,min(7vw,16vh),90px);flex-shrink:0;position:relative; }
+  .gauge-ring { width:100%;height:100%;border-radius:50%;border:3px solid rgba(195,205,34,0.15); }
+  .gauge-fill { position:absolute;inset:5px;border-radius:50%;background:conic-gradient(var(--gold) 0deg, rgba(255,255,255,0.05) 0deg);animation:gaugeGlow 2s ease-in-out infinite; }
+  .gauge-inner { position:absolute;inset:12px;border-radius:50%;background:var(--panel);display:flex;align-items:center;justify-content:center; }
+  .gauge-inner span { font-family:'JetBrains Mono',monospace;font-size:clamp(0.4em,min(1.3vw,3vh),1.2em);font-weight:800;color:var(--gold); }
+
+</style>
+</head>
+<body>
+<div class="grid">
+  <!-- HEADER -->
+  <div class="hdr full">
+    <div class="hdr-l"><img class="logo" src="https://enersoler.com/assets/images/logo-enersoler-2025-taille-infinie-5-360x83.png" alt="Enersoler"><div class="eq-bars"><span></span><span></span><span></span><span></span><span></span></div></div>
+    <div class="hdr-m"><span class="chip">Temana import</span><span class="live" id="updateTime"><span class="dot"></span></span></div>
+    <div class="hdr-right">
+      <div class="hdr-info"><div class="info-sub">Mise en service</div><div class="info-line" id="installDate">--</div></div>
+      <div class="hdr-info"><div class="info-sub">Contact</div><div class="info-line">contact@enersoler.com</div></div>
+      <div class="hdr-info"><div class="info-sub">Téléphone</div><div class="info-line">+689 40 42 58 54</div></div>
+    </div>
+  </div>
+
+  <!-- ⚡ POWER (7/10) + WEATHER (3/10) -->
+  <div style="grid-column:1/7;display:flex;gap:1.5vh">
+    <div class="card glow" style="flex:7;min-width:0">
+      <div class="card-inner">
+        <div class="clabel">⚡ Puissance live — aujourd'hui 7h-19h</div>
+        <div style="display:flex;flex-direction:column;align-items:center;gap:0.2vh;position:absolute;top:clamp(4px,0.8vh,12px);right:clamp(10px,1.3vw,18px);z-index:5">
+          <span class="icon-bolt"><svg viewBox="0 0 24 24" fill="none"><path d="M13 2L3 14h6l-1 8 10-12h-6l1-8z" stroke="rgba(195,205,34,0.9)" stroke-width="2" fill="rgba(195,205,34,0.12)" stroke-linejoin="round"/></svg></span>
+          <span style="font-size:clamp(1em,min(4.5vw,8vh),3.5em);font-weight:900;color:var(--gold);line-height:1;" class="live-glow" id="liveKva">--</span>
+          <span style="font-size:clamp(0.5em,0.9vw,0.7em);color:#fff;opacity:0.7;">kVA</span>
+        </div>
+        <div class="chart-wrap"><canvas id="chPwr"></canvas></div>
+      </div>
+    </div>
+
+    <!-- 🌤️ WEATHER -->
+    <div class="card warm" style="flex:3;min-width:0">
+      <div class="card-inner">
+        <div class="clabel">🌤️ Météo</div>
+        <div class="wx" id="wxContent"><div style="color:rgba(195,205,34,0.3);font-size:0.5em">...</div></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 📊 DIAGRAMS ROW: flex 1:3:2 -->
+  <div style="grid-column:1/7;display:flex;gap:1.5vh">
+    <div class="card" style="flex:1;min-width:0">
+      <div class="card-inner"><div class="clabel">📊 7 jours</div><div class="chart-wrap"><canvas id="chWeek"></canvas></div></div>
+    </div>
+    <div class="card" style="flex:4;min-width:0">
+      <div class="card-inner"><div class="clabel">📊 30 jours</div><div class="chart-wrap"><canvas id="chMonth"></canvas></div></div>
+    </div>
+    <div class="card" style="flex:1;min-width:0">
+      <div class="card-inner"><div class="clabel">📊 12 mois</div><div class="chart-wrap"><canvas id="chYear"></canvas></div></div>
+    </div>
+  </div>
+
+  <!-- 📋 INFOS (55%) + TEMP (15%) + CO₂ (15%) + GAUGE (15%) -->
+  <div style="grid-column:1/7;display:flex;gap:1.5vh">
+    <div class="card green" style="flex:55;min-width:0">
+    <div class="card-inner">
+      <div class="btm">
+        <div class="btm-row"><div class="btm-val live-glow" id="dailyKwh">--</div><div class="btm-lbl">kWh aujourd'hui</div></div>
+        <div class="btm-row"><div class="btm-val" id="totalMwh">--</div><div class="btm-lbl">MWh total</div></div>
+        <div class="btm-row"><div class="btm-val" id="capacity">--</div><div class="btm-lbl">kWc installés</div></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 🌡️ TEMP (15%) -->
+    <div class="card" style="flex:15;min-width:0">
+    <div class="card-inner">
+      <div class="mini-card">
+        <span class="icon-thermo"><svg viewBox="0 0 24 24" fill="none"><path d="M10 4a3 3 0 00-3 3v7a5 5 0 107 0V7a3 3 0 00-3-3z" stroke="rgba(220,160,40,0.7)" stroke-width="2" fill="rgba(220,140,40,0.1)"/><circle cx="10" cy="14" r="2.5" stroke="rgba(220,160,40,0.8)" stroke-width="1.5" fill="rgba(220,140,40,0.2)"/><path d="M10 10V7" stroke="rgba(220,160,40,0.5)" stroke-width="2" stroke-linecap="round"/></svg></span>
+        <div class="mini-val" id="temperature">--</div>
+        <div class="mini-lbl">°C onduleur</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 🌱 CO₂ (15%) -->
+    <div class="card" style="flex:15;min-width:0">
+    <div class="card-inner">
+      <div class="mini-card">
+        <div class="mini-icon">🌱</div>
+        <div class="mini-val" id="co2">--</div>
+        <div class="mini-lbl">t CO₂ évitées</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 🎯 GAUGE (15%) -->
+    <div class="card" style="flex:15;min-width:0">
+    <div class="card-inner">
+      <div class="mini-card">
+        <div class="gauge-center"><div class="gauge-ring"><div class="gauge-fill" id="gaugeFill"></div><div class="gauge-inner"><span id="gaugePct">0%</span></div></div></div>
+        <div class="mini-lbl">Objectif<br>journalier</div>
+      </div>
+    </div>
+  </div>
+  </div>
+</div>
+
+<script>/* INLINE_DATA */</script>
+<script>
+const INLINE_DATA = {"updateTime":"09/07/2026 10:48:15","timestamp":"2026-07-09T20:48:18.502Z","activePlants":2,"totalPlants":2,"totalKVA":65,"totalKWp":108.5,"totalMWh":200.88,"dailyKWh":15.5,"dailyPending":false,"avgTemp":50.6,"co2Tonnes":140.6,"authWarning":null,"history":[{"time":"2026-07-09T07:00:00-10:00","paea_power":null,"temana_power":null,"paea_temp":null,"temana_temp":null,"total_power":null,"total_temp":null,"total_daily_kwh":null},{"time":"2026-07-09T07:05:00-10:00","paea_power":null,"temana_power":null,"paea_temp":null,"temana_temp":null,"total_power":null,"total_temp":null,"total_daily_kwh":null},{"time":"2026-07-09T07:10:00-10:00","paea_power":null,"temana_power":null,"paea_temp":null,"temana_temp":null,"total_power":null,"total_temp":null,"total_daily_kwh":null},{"time":"2026-07-09T07:15:00-10:00","paea_power":null,"temana_power":null,"paea_temp":null,"temana_temp":null,"total_power":null,"total_temp":null,"total_daily_kwh":null},{"time":"2026-07-09T07:20:00-10:00","paea_power":null,"temana_power":null,"paea_temp":null,"temana_temp":null,"total_power":null,"total_temp":null,"total_daily_kwh":null},{"time":"2026-07-09T07:25:00-10:00","paea_power":null,"temana_power":null,"paea_temp":null,"temana_temp":null,"total_power":null,"total_temp":null,"total_daily_kwh":null},{"time":"2026-07-09T07:30:00-10:00","paea_power":null,"temana_power":null,"paea_temp":null,"temana_temp":null,"total_power":null,"total_temp":null,"total_daily_kwh":null},{"time":"2026-07-09T07:35:00-10:00","paea_power":null,"temana_power":null,"paea_temp":null,"temana_temp":null,"total_power":null,"total_temp":null,"total_daily_kwh":null},{"time":"2026-07-09T07:40:00-10:00","paea_power":null,"temana_power":null,"paea_temp":null,"temana_temp":null,"total_power":null,"total_temp":null,"total_daily_kwh":null},{"time":"2026-07-09T07:45:00-10:00","paea_power":null,"temana_power":null,"paea_temp":null,"temana_temp":null,"total_power":null,"total_temp":null,"total_daily_kwh":null},{"time":"2026-07-09T07:50:00-10:00","paea_power":null,"temana_power":null,"paea_temp":null,"temana_temp":null,"total_power":null,"total_temp":null,"total_daily_kwh":null},{"time":"2026-07-09T07:55:00-10:00","paea_power":null,"temana_power":null,"paea_temp":null,"temana_temp":null,"total_power":null,"total_temp":null,"total_daily_kwh":null},{"time":"2026-07-09T08:00:00-10:00","paea_power":null,"temana_power":null,"paea_temp":null,"temana_temp":null,"total_power":null,"total_temp":null,"total_daily_kwh":null},{"time":"2026-07-09T08:05:00-10:00","paea_power":null,"temana_power":null,"paea_temp":null,"temana_temp":null,"total_power":null,"total_temp":null,"total_daily_kwh":null},{"time":"2026-07-09T08:10:00-10:00","paea_power":null,"temana_power":null,"paea_temp":null,"temana_temp":null,"total_power":null,"total_temp":null,"total_daily_kwh":null},{"time":"2026-07-09T08:15:00-10:00","paea_power":null,"temana_power":null,"paea_temp":null,"temana_temp":null,"total_power":null,"total_temp":null,"total_daily_kwh":null},{"time":"2026-07-09T08:20:00-10:00","paea_power":null,"temana_power":null,"paea_temp":null,"temana_temp":null,"total_power":null,"total_temp":null,"total_daily_kwh":null},{"time":"2026-07-09T08:25:00-10:00","paea_power":null,"temana_power":null,"paea_temp":null,"temana_temp":null,"total_power":null,"total_temp":null,"total_daily_kwh":null},{"time":"2026-07-09T08:30:00-10:00","paea_power":null,"temana_power":null,"paea_temp":null,"temana_temp":null,"total_power":null,"total_temp":null,"total_daily_kwh":null},{"time":"2026-07-09T08:35:00-10:00","paea_power":null,"temana_power":null,"paea_temp":null,"temana_temp":null,"total_power":null,"total_temp":null,"total_daily_kwh":null},{"time":"2026-07-09T08:40:00-10:00","paea_power":null,"temana_power":null,"paea_temp":null,"temana_temp":null,"total_power":null,"total_temp":null,"total_daily_kwh":null},{"time":"2026-07-09T08:45:00-10:00","paea_power":null,"temana_power":null,"paea_temp":null,"temana_temp":null,"total_power":null,"total_temp":null,"total_daily_kwh":null},{"time":"2026-07-09T08:50:00-10:00","paea_power":null,"temana_power":null,"paea_temp":null,"temana_temp":null,"total_power":null,"total_temp":null,"total_daily_kwh":null},{"time":"2026-07-09T08:55:00-10:00","paea_power":null,"temana_power":null,"paea_temp":null,"temana_temp":null,"total_power":null,"total_temp":null,"total_daily_kwh":null},{"time":"2026-07-09T09:00:00-10:00","paea_power":null,"temana_power":null,"paea_temp":null,"temana_temp":null,"total_power":null,"total_temp":null,"total_daily_kwh":null},{"time":"2026-07-09T09:05:00-10:00","paea_power":null,"temana_power":null,"paea_temp":null,"temana_temp":null,"total_power":null,"total_temp":null,"total_daily_kwh":null},{"time":"2026-07-09T09:10:00-10:00","paea_power":null,"temana_power":null,"paea_temp":null,"temana_temp":null,"total_power":null,"total_temp":null,"total_daily_kwh":null},{"time":"2026-07-09T09:15:00-10:00","paea_power":null,"temana_power":null,"paea_temp":null,"temana_temp":null,"total_power":null,"total_temp":null,"total_daily_kwh":null},{"time":"2026-07-09T09:20:00-10:00","paea_power":null,"temana_power":null,"paea_temp":null,"temana_temp":null,"total_power":null,"total_temp":null,"total_daily_kwh":null},{"time":"2026-07-09T09:25:00-10:00","paea_power":null,"temana_power":null,"paea_temp":null,"temana_temp":null,"total_power":null,"total_temp":null,"total_daily_kwh":null},{"time":"2026-07-09T09:30:00-10:00","paea_power":null,"temana_power":null,"paea_temp":null,"temana_temp":null,"total_power":null,"total_temp":null,"total_daily_kwh":null},{"time":"2026-07-09T09:35:00-10:00","paea_power":null,"temana_power":null,"paea_temp":null,"temana_temp":null,"total_power":null,"total_temp":null,"total_daily_kwh":null},{"time":"2026-07-09T09:40:00-10:00","paea_power":null,"temana_power":null,"paea_temp":null,"temana_temp":null,"total_power":null,"total_temp":null,"total_daily_kwh":null},{"time":"2026-07-09T09:45:00-10:00","paea_power":null,"temana_power":null,"paea_temp":null,"temana_temp":null,"total_power":null,"total_temp":null,"total_daily_kwh":null},{"time":"2026-07-09T09:50:00-10:00","paea_power":null,"temana_power":null,"paea_temp":null,"temana_temp":null,"total_power":null,"total_temp":null,"total_daily_kwh":null},{"time":"2026-07-09T09:55:00-10:00","paea_power":null,"temana_power":null,"paea_temp":null,"temana_temp":null,"total_power":null,"total_temp":null,"total_daily_kwh":null},{"time":"2026-07-09T10:00:00-10:00","paea_power":25.9,"paea_temp":47.6,"temana_power":31.4,"temana_temp":44.1,"total_power":57.4,"total_temp":45.9,"total_daily_kwh":null},{"time":"2026-07-09T10:05:00-10:00","paea_power":null,"temana_power":null,"paea_temp":null,"temana_temp":null,"total_power":null,"total_temp":null,"total_daily_kwh":null},{"time":"2026-07-09T10:10:00-10:00","paea_power":null,"temana_power":null,"paea_temp":null,"temana_temp":null,"total_power":null,"total_temp":null,"total_daily_kwh":null},{"time":"2026-07-09T10:15:00-10:00","paea_power":null,"temana_power":null,"paea_temp":null,"temana_temp":null,"total_power":null,"total_temp":null,"total_daily_kwh":null},{"time":"2026-07-09T10:20:00-10:00","paea_power":null,"temana_power":null,"paea_temp":null,"temana_temp":null,"total_power":null,"total_temp":null,"total_daily_kwh":null},{"time":"2026-07-09T10:25:00-10:00","paea_power":null,"temana_power":null,"paea_temp":null,"temana_temp":null,"total_power":null,"total_temp":null,"total_daily_kwh":null},{"time":"2026-07-09T10:30:00-10:00","paea_power":null,"temana_power":null,"paea_temp":null,"temana_temp":null,"total_power":null,"total_temp":null,"total_daily_kwh":null},{"time":"2026-07-09T10:35:00-10:00","paea_power":28.8,"paea_temp":50,"temana_power":34.9,"temana_temp":50.2,"total_power":63.7,"total_temp":50.1,"total_daily_kwh":null},{"time":"2026-07-09T10:40:00-10:00","paea_power":null,"temana_power":null,"paea_temp":null,"temana_temp":null,"total_power":null,"total_temp":null,"total_daily_kwh":null},{"time":"2026-07-09T10:45:00-10:00","paea_power":29.4,"paea_temp":50.2,"temana_power":35.6,"temana_temp":51,"total_power":65,"total_temp":50.6,"total_daily_kwh":null},{"time":"2026-07-09T10:50:00-10:00","paea_power":null,"temana_power":null,"paea_temp":null,"temana_temp":null,"total_power":null,"total_temp":null,"total_daily_kwh":null},{"time":"2026-07-09T10:55:00-10:00","paea_power":null,"temana_power":null,"paea_temp":null,"temana_temp":null,"total_power":null,"total_temp":null,"total_daily_kwh":null},{"time":"2026-07-09T11:00:00-10:00","paea_power":null,"temana_power":null,"paea_temp":null,"temana_temp":null,"total_power":null,"total_temp":null,"total_daily_kwh":null},{"time":"2026-07-09T11:05:00-10:00","paea_power":null,"temana_power":null,"paea_temp":null,"temana_temp":null,"total_power":null,"total_temp":null,"total_daily_kwh":null},{"time":"2026-07-09T11:10:00-10:00","paea_power":null,"temana_power":null,"paea_temp":null,"temana_temp":null,"total_power":null,"total_temp":null,"total_daily_kwh":null},{"time":"2026-07-09T11:15:00-10:00","paea_power":null,"temana_power":null,"paea_temp":null,"temana_temp":null,"total_power":null,"total_temp":null,"total_daily_kwh":null},{"time":"2026-07-09T11:20:00-10:00","paea_power":null,"temana_power":null,"paea_temp":null,"temana_temp":null,"total_power":null,"total_temp":null,"total_daily_kwh":null},{"time":"2026-07-09T11:25:00-10:00","paea_power":null,"temana_power":null,"paea_temp":null,"temana_temp":null,"total_power":null,"total_temp":null,"total_daily_kwh":null},{"time":"2026-07-09T11:30:00-10:00","paea_power":null,"temana_power":null,"paea_temp":null,"temana_temp":null,"total_power":null,"total_temp":null,"total_daily_kwh":null},{"time":"2026-07-09T11:35:00-10:00","paea_power":null,"temana_power":null,"paea_temp":null,"temana_temp":null,"total_power":null,"total_temp":null,"total_daily_kwh":null},{"time":"2026-07-09T11:40:00-10:00","paea_power":null,"temana_power":null,"paea_temp":null,"temana_temp":null,"total_power":null,"total_temp":null,"total_daily_kwh":null},{"time":"2026-07-09T11:45:00-10:00","paea_power":null,"temana_power":null,"paea_temp":null,"temana_temp":null,"total_power":null,"total_temp":null,"total_daily_kwh":null},{"time":"2026-07-09T11:50:00-10:00","paea_power":null,"temana_power":null,"paea_temp":null,"temana_temp":null,"total_power":null,"total_temp":null,"total_daily_kwh":null},{"time":"2026-07-09T11:55:00-10:00","paea_power":null,"temana_power":null,"paea_temp":null,"temana_temp":null,"total_power":null,"total_temp":null,"total_daily_kwh":null},{"time":"2026-07-09T12:00:00-10:00","paea_power":null,"temana_power":null,"paea_temp":null,"temana_temp":null,"total_power":null,"total_temp":null,"total_daily_kwh":null},{"time":"2026-07-09T12:05:00-10:00","paea_power":null,"temana_power":null,"paea_temp":null,"temana_temp":null,"total_power":null,"total_temp":null,"total_daily_kwh":null},{"time":"2026-07-09T12:10:00-10:00","paea_power":null,"temana_power":null,"paea_temp":null,"temana_temp":null,"total_power":null,"total_temp":null,"total_daily_kwh":null},{"time":"2026-07-09T12:15:00-10:00","paea_power":null,"temana_power":null,"paea_temp":null,"temana_temp":null,"total_power":null,"total_temp":null,"total_daily_kwh":null},{"time":"2026-07-09T12:20:00-10:00","paea_power":null,"temana_power":null,"paea_temp":null,"temana_temp":null,"total_power":null,"total_temp":null,"total_daily_kwh":null},{"time":"2026-07-09T12:25:00-10:00","paea_power":null,"temana_power":null,"paea_temp":null,"temana_temp":null,"total_power":null,"total_temp":null,"total_daily_kwh":null},{"time":"2026-07-09T12:30:00-10:00","paea_power":null,"temana_power":null,"paea_temp":null,"temana_temp":null,"total_power":null,"total_temp":null,"total_daily_kwh":null},{"time":"2026-07-09T12:35:00-10:00","paea_power":null,"temana_power":null,"paea_temp":null,"temana_temp":null,"total_power":null,"total_temp":null,"total_daily_kwh":null},{"time":"2026-07-09T12:40:00-10:00","paea_power":null,"temana_power":null,"paea_temp":null,"temana_temp":null,"total_power":null,"total_temp":null,"total_daily_kwh":null},{"time":"2026-07-09T12:45:00-10:00","paea_power":null,"temana_power":null,"paea_temp":null,"temana_temp":null,"total_power":null,"total_temp":null,"total_daily_kwh":null},{"time":"2026-07-09T12:50:00-10:00","paea_power":null,"temana_power":null,"paea_temp":null,"temana_temp":null,"total_power":null,"total_temp":null,"total_daily_kwh":null},{"time":"2026-07-09T12:55:00-10:00","paea_power":null,"temana_power":null,"paea_temp":null,"temana_temp":null,"total_power":null,"total_temp":null,"total_daily_kwh":null},{"time":"2026-07-09T13:00:00-10:00","paea_power":null,"temana_power":null,"paea_temp":null,"temana_temp":null,"total_power":null,"total_temp":null,"total_daily_kwh":null},{"time":"2026-07-09T13:05:00-10:00","paea_power":null,"temana_power":null,"paea_temp":null,"temana_temp":null,"total_power":null,"total_temp":null,"total_daily_kwh":null},{"time":"2026-07-09T13:10:00-10:00","paea_power":null,"temana_power":null,"paea_temp":null,"temana_temp":null,"total_power":null,"total_temp":null,"total_daily_kwh":null},{"time":"2026-07-09T13:15:00-10:00","paea_power":null,"temana_power":null,"paea_temp":null,"temana_temp":null,"total_power":null,"total_temp":null,"total_daily_kwh":null},{"time":"2026-07-09T13:20:00-10:00","paea_power":null,"temana_power":null,"paea_temp":null,"temana_temp":null,"total_power":null,"total_temp":null,"total_daily_kwh":null},{"time":"2026-07-09T13:25:00-10:00","paea_power":null,"temana_power":null,"paea_temp":null,"temana_temp":null,"total_power":null,"total_temp":null,"total_daily_kwh":null},{"time":"2026-07-09T13:30:00-10:00","paea_power":null,"temana_power":null,"paea_temp":null,"temana_temp":null,"total_power":null,"total_temp":null,"total_daily_kwh":null},{"time":"2026-07-09T13:35:00-10:00","paea_power":null,"temana_power":null,"paea_temp":null,"temana_temp":null,"total_power":null,"total_temp":null,"total_daily_kwh":null},{"time":"2026-07-09T13:40:00-10:00","paea_power":null,"temana_power":null,"paea_temp":null,"temana_temp":null,"total_power":null,"total_temp":null,"total_daily_kwh":null},{"time":"2026-07-09T13:45:00-10:00","paea_power":null,"temana_power":null,"paea_temp":null,"temana_temp":null,"total_power":null,"total_temp":null,"total_daily_kwh":null},{"time":"2026-07-09T13:50:00-10:00","paea_power":null,"temana_power":null,"paea_temp":null,"temana_temp":null,"total_power":null,"total_temp":null,"total_daily_kwh":null},{"time":"2026-07-09T13:55:00-10:00","paea_power":null,"temana_power":null,"paea_temp":null,"temana_temp":null,"total_power":null,"total_temp":null,"total_daily_kwh":null},{"time":"2026-07-09T14:00:00-10:00","paea_power":null,"temana_power":null,"paea_temp":null,"temana_temp":null,"total_power":null,"total_temp":null,"total_daily_kwh":null},{"time":"2026-07-09T14:05:00-10:00","paea_power":null,"temana_power":null,"paea_temp":null,"temana_temp":null,"total_power":null,"total_temp":null,"total_daily_kwh":null},{"time":"2026-07-09T14:10:00-10:00","paea_power":null,"temana_power":null,"paea_temp":null,"temana_temp":null,"total_power":null,"total_temp":null,"total_daily_kwh":null},{"time":"2026-07-09T14:15:00-10:00","paea_power":null,"temana_power":null,"paea_temp":null,"temana_temp":null,"total_power":null,"total_temp":null,"total_daily_kwh":null},{"time":"2026-07-09T14:20:00-10:00","paea_power":null,"temana_power":null,"paea_temp":null,"temana_temp":null,"total_power":null,"total_temp":null,"total_daily_kwh":null},{"time":"2026-07-09T14:25:00-10:00","paea_power":null,"temana_power":null,"paea_temp":null,"temana_temp":null,"total_power":null,"total_temp":null,"total_daily_kwh":null},{"time":"2026-07-09T14:30:00-10:00","paea_power":null,"temana_power":null,"paea_temp":null,"temana_temp":null,"total_power":null,"total_temp":null,"total_daily_kwh":null},{"time":"2026-07-09T14:35:00-10:00","paea_power":null,"temana_power":null,"paea_temp":null,"temana_temp":null,"total_power":null,"total_temp":null,"total_daily_kwh":null},{"time":"2026-07-09T14:40:00-10:00","paea_power":null,"temana_power":null,"paea_temp":null,"temana_temp":null,"total_power":null,"total_temp":null,"total_daily_kwh":null},{"time":"2026-07-09T14:45:00-10:00","paea_power":null,"temana_power":null,"paea_temp":null,"temana_temp":null,"total_power":null,"total_temp":null,"total_daily_kwh":null},{"time":"2026-07-09T14:50:00-10:00","paea_power":null,"temana_power":null,"paea_temp":null,"temana_temp":null,"total_power":null,"total_temp":null,"total_daily_kwh":null},{"time":"2026-07-09T14:55:00-10:00","paea_power":null,"temana_power":null,"paea_temp":null,"temana_temp":null,"total_power":null,"total_temp":null,"total_daily_kwh":null},{"time":"2026-07-09T15:00:00-10:00","paea_power":null,"temana_power":null,"paea_temp":null,"temana_temp":null,"total_power":null,"total_temp":null,"total_daily_kwh":null},{"time":"2026-07-09T15:05:00-10:00","paea_power":null,"temana_power":null,"paea_temp":null,"temana_temp":null,"total_power":null,"total_temp":null,"total_daily_kwh":null},{"time":"2026-07-09T15:10:00-10:00","paea_power":null,"temana_power":null,"paea_temp":null,"temana_temp":null,"total_power":null,"total_temp":null,"total_daily_kwh":null},{"time":"2026-07-09T15:15:00-10:00","paea_power":null,"temana_power":null,"paea_temp":null,"temana_temp":null,"total_power":null,"total_temp":null,"total_daily_kwh":null},{"time":"2026-07-09T15:20:00-10:00","paea_power":null,"temana_power":null,"paea_temp":null,"temana_temp":null,"total_power":null,"total_temp":null,"total_daily_kwh":null},{"time":"2026-07-09T15:25:00-10:00","paea_power":null,"temana_power":null,"paea_temp":null,"temana_temp":null,"total_power":null,"total_temp":null,"total_daily_kwh":null},{"time":"2026-07-09T15:30:00-10:00","paea_power":null,"temana_power":null,"paea_temp":null,"temana_temp":null,"total_power":null,"total_temp":null,"total_daily_kwh":null},{"time":"2026-07-09T15:35:00-10:00","paea_power":null,"temana_power":null,"paea_temp":null,"temana_temp":null,"total_power":null,"total_temp":null,"total_daily_kwh":null},{"time":"2026-07-09T15:40:00-10:00","paea_power":null,"temana_power":null,"paea_temp":null,"temana_temp":null,"total_power":null,"total_temp":null,"total_daily_kwh":null},{"time":"2026-07-09T15:45:00-10:00","paea_power":null,"temana_power":null,"paea_temp":null,"temana_temp":null,"total_power":null,"total_temp":null,"total_daily_kwh":null},{"time":"2026-07-09T15:50:00-10:00","paea_power":null,"temana_power":null,"paea_temp":null,"temana_temp":null,"total_power":null,"total_temp":null,"total_daily_kwh":null},{"time":"2026-07-09T15:55:00-10:00","paea_power":null,"temana_power":null,"paea_temp":null,"temana_temp":null,"total_power":null,"total_temp":null,"total_daily_kwh":null},{"time":"2026-07-09T16:00:00-10:00","paea_power":null,"temana_power":null,"paea_temp":null,"temana_temp":null,"total_power":null,"total_temp":null,"total_daily_kwh":null},{"time":"2026-07-09T16:05:00-10:00","paea_power":null,"temana_power":null,"paea_temp":null,"temana_temp":null,"total_power":null,"total_temp":null,"total_daily_kwh":null},{"time":"2026-07-09T16:10:00-10:00","paea_power":null,"temana_power":null,"paea_temp":null,"temana_temp":null,"total_power":null,"total_temp":null,"total_daily_kwh":null},{"time":"2026-07-09T16:15:00-10:00","paea_power":null,"temana_power":null,"paea_temp":null,"temana_temp":null,"total_power":null,"total_temp":null,"total_daily_kwh":null},{"time":"2026-07-09T16:20:00-10:00","paea_power":null,"temana_power":null,"paea_temp":null,"temana_temp":null,"total_power":null,"total_temp":null,"total_daily_kwh":null},{"time":"2026-07-09T16:25:00-10:00","paea_power":null,"temana_power":null,"paea_temp":null,"temana_temp":null,"total_power":null,"total_temp":null,"total_daily_kwh":null},{"time":"2026-07-09T16:30:00-10:00","paea_power":null,"temana_power":null,"paea_temp":null,"temana_temp":null,"total_power":null,"total_temp":null,"total_daily_kwh":null},{"time":"2026-07-09T16:35:00-10:00","paea_power":null,"temana_power":null,"paea_temp":null,"temana_temp":null,"total_power":null,"total_temp":null,"total_daily_kwh":null},{"time":"2026-07-09T16:40:00-10:00","paea_power":null,"temana_power":null,"paea_temp":null,"temana_temp":null,"total_power":null,"total_temp":null,"total_daily_kwh":null},{"time":"2026-07-09T16:45:00-10:00","paea_power":null,"temana_power":null,"paea_temp":null,"temana_temp":null,"total_power":null,"total_temp":null,"total_daily_kwh":null},{"time":"2026-07-09T16:50:00-10:00","paea_power":null,"temana_power":null,"paea_temp":null,"temana_temp":null,"total_power":null,"total_temp":null,"total_daily_kwh":null},{"time":"2026-07-09T16:55:00-10:00","paea_power":null,"temana_power":null,"paea_temp":null,"temana_temp":null,"total_power":null,"total_temp":null,"total_daily_kwh":null},{"time":"2026-07-09T17:00:00-10:00","paea_power":null,"temana_power":null,"paea_temp":null,"temana_temp":null,"total_power":null,"total_temp":null,"total_daily_kwh":null},{"time":"2026-07-09T17:05:00-10:00","paea_power":null,"temana_power":null,"paea_temp":null,"temana_temp":null,"total_power":null,"total_temp":null,"total_daily_kwh":null},{"time":"2026-07-09T17:10:00-10:00","paea_power":null,"temana_power":null,"paea_temp":null,"temana_temp":null,"total_power":null,"total_temp":null,"total_daily_kwh":null},{"time":"2026-07-09T17:15:00-10:00","paea_power":null,"temana_power":null,"paea_temp":null,"temana_temp":null,"total_power":null,"total_temp":null,"total_daily_kwh":null},{"time":"2026-07-09T17:20:00-10:00","paea_power":null,"temana_power":null,"paea_temp":null,"temana_temp":null,"total_power":null,"total_temp":null,"total_daily_kwh":null},{"time":"2026-07-09T17:25:00-10:00","paea_power":null,"temana_power":null,"paea_temp":null,"temana_temp":null,"total_power":null,"total_temp":null,"total_daily_kwh":null},{"time":"2026-07-09T17:30:00-10:00","paea_power":null,"temana_power":null,"paea_temp":null,"temana_temp":null,"total_power":null,"total_temp":null,"total_daily_kwh":null},{"time":"2026-07-09T17:35:00-10:00","paea_power":null,"temana_power":null,"paea_temp":null,"temana_temp":null,"total_power":null,"total_temp":null,"total_daily_kwh":null},{"time":"2026-07-09T17:40:00-10:00","paea_power":null,"temana_power":null,"paea_temp":null,"temana_temp":null,"total_power":null,"total_temp":null,"total_daily_kwh":null},{"time":"2026-07-09T17:45:00-10:00","paea_power":null,"temana_power":null,"paea_temp":null,"temana_temp":null,"total_power":null,"total_temp":null,"total_daily_kwh":null},{"time":"2026-07-09T17:50:00-10:00","paea_power":null,"temana_power":null,"paea_temp":null,"temana_temp":null,"total_power":null,"total_temp":null,"total_daily_kwh":null},{"time":"2026-07-09T17:55:00-10:00","paea_power":null,"temana_power":null,"paea_temp":null,"temana_temp":null,"total_power":null,"total_temp":null,"total_daily_kwh":null},{"time":"2026-07-09T18:00:00-10:00","paea_power":null,"temana_power":null,"paea_temp":null,"temana_temp":null,"total_power":null,"total_temp":null,"total_daily_kwh":null},{"time":"2026-07-09T18:05:00-10:00","paea_power":null,"temana_power":null,"paea_temp":null,"temana_temp":null,"total_power":null,"total_temp":null,"total_daily_kwh":null},{"time":"2026-07-09T18:10:00-10:00","paea_power":null,"temana_power":null,"paea_temp":null,"temana_temp":null,"total_power":null,"total_temp":null,"total_daily_kwh":null},{"time":"2026-07-09T18:15:00-10:00","paea_power":null,"temana_power":null,"paea_temp":null,"temana_temp":null,"total_power":null,"total_temp":null,"total_daily_kwh":null},{"time":"2026-07-09T18:20:00-10:00","paea_power":null,"temana_power":null,"paea_temp":null,"temana_temp":null,"total_power":null,"total_temp":null,"total_daily_kwh":null},{"time":"2026-07-09T18:25:00-10:00","paea_power":null,"temana_power":null,"paea_temp":null,"temana_temp":null,"total_power":null,"total_temp":null,"total_daily_kwh":null},{"time":"2026-07-09T18:30:00-10:00","paea_power":null,"temana_power":null,"paea_temp":null,"temana_temp":null,"total_power":null,"total_temp":null,"total_daily_kwh":null},{"time":"2026-07-09T18:35:00-10:00","paea_power":null,"temana_power":null,"paea_temp":null,"temana_temp":null,"total_power":null,"total_temp":null,"total_daily_kwh":null},{"time":"2026-07-09T18:40:00-10:00","paea_power":null,"temana_power":null,"paea_temp":null,"temana_temp":null,"total_power":null,"total_temp":null,"total_daily_kwh":null},{"time":"2026-07-09T18:45:00-10:00","paea_power":null,"temana_power":null,"paea_temp":null,"temana_temp":null,"total_power":null,"total_temp":null,"total_daily_kwh":null},{"time":"2026-07-09T18:50:00-10:00","paea_power":null,"temana_power":null,"paea_temp":null,"temana_temp":null,"total_power":null,"total_temp":null,"total_daily_kwh":null},{"time":"2026-07-09T18:55:00-10:00","paea_power":null,"temana_power":null,"paea_temp":null,"temana_temp":null,"total_power":null,"total_temp":null,"total_daily_kwh":null}],"plants":[{"id":"1437035","slug":"paea","name":"Collège de Paea","capacity_kwp":50.5,"daily_kwh":7,"daily_pending":false,"live_power_kva":29.4,"temperature":50.2,"total_mwh":59.84,"load_ratio":0.588,"model":"SG50CX-P2","install_date":"2024-09-26 11:15:46"},{"id":"1425869","slug":"temana","name":"Temana import","capacity_kwp":58,"daily_kwh":8.5,"daily_pending":false,"live_power_kva":35.6,"temperature":51,"total_mwh":141.04,"load_ratio":0.712,"model":"SG50CX-P2","install_date":"2024-09-09 14:48:39"}],"history_daily":[{"date":"2026-04-08","paea_kwh":185.9,"paea_peak_kw":46.57,"temana_kwh":175.2,"temana_peak_kw":55.15},{"date":"2026-04-09","paea_kwh":96.4,"paea_peak_kw":22.89,"temana_kwh":75.3,"temana_peak_kw":21.3},{"date":"2026-04-10","paea_kwh":195.4,"paea_peak_kw":50.89,"temana_kwh":156.5,"temana_peak_kw":53.16},{"date":"2026-04-11","paea_kwh":130.4,"paea_peak_kw":40.35,"temana_kwh":0},{"date":"2026-04-12","paea_kwh":204,"paea_peak_kw":48.61,"temana_kwh":0},{"date":"2026-04-13","paea_kwh":202.1,"paea_peak_kw":43.99,"temana_kwh":226.3,"temana_peak_kw":47.64},{"date":"2026-04-14","paea_kwh":65.5,"paea_peak_kw":17.09,"temana_kwh":81.2,"temana_peak_kw":37.47},{"date":"2026-04-15","paea_kwh":196.6,"paea_peak_kw":37.94,"temana_kwh":209.2,"temana_peak_kw":46.56},{"date":"2026-04-16","paea_kwh":218.9,"paea_peak_kw":46.66,"temana_kwh":227.5,"temana_peak_kw":51.58},{"date":"2026-04-17","paea_kwh":240.2,"paea_peak_kw":44.77,"temana_kwh":150.3,"temana_peak_kw":55.45},{"date":"2026-04-18","paea_kwh":236.8,"paea_peak_kw":46.05,"temana_kwh":252,"temana_peak_kw":48.57},{"date":"2026-04-19","paea_kwh":213.5,"paea_peak_kw":40.41,"temana_kwh":214.6,"temana_peak_kw":51.71},{"date":"2026-04-20","paea_kwh":162.7,"paea_peak_kw":46.05,"temana_kwh":162.1,"temana_peak_kw":50.56},{"date":"2026-04-21","paea_kwh":243.6,"paea_peak_kw":42.68,"temana_kwh":250,"temana_peak_kw":50.85},{"date":"2026-04-22","paea_kwh":244.9,"paea_peak_kw":39.27,"temana_kwh":243.2,"temana_peak_kw":51.76},{"date":"2026-04-23","paea_kwh":201.6,"paea_peak_kw":48.07,"temana_kwh":161.9,"temana_peak_kw":54.67},{"date":"2026-04-24","paea_kwh":124.3,"paea_peak_kw":33.77,"temana_kwh":115.8,"temana_peak_kw":49.43},{"date":"2026-04-25","paea_kwh":173.4,"paea_peak_kw":48.14,"temana_kwh":157.1,"temana_peak_kw":54.81},{"date":"2026-04-26","paea_kwh":229.5,"paea_peak_kw":39.05,"temana_kwh":250.5,"temana_peak_kw":42.51},{"date":"2026-04-27","paea_kwh":184.7,"paea_peak_kw":45.22,"temana_kwh":238.5,"temana_peak_kw":50.86},{"date":"2026-04-28","paea_kwh":210.7,"paea_peak_kw":42.73,"temana_kwh":226,"temana_peak_kw":52.87},{"date":"2026-04-29","paea_kwh":189.1,"paea_peak_kw":39.43,"temana_kwh":242.8,"temana_peak_kw":51.46},{"date":"2026-04-30","paea_kwh":204.8,"paea_peak_kw":42.48,"temana_kwh":250.9,"temana_peak_kw":43.89},{"date":"2026-05-01","paea_kwh":162.7,"paea_peak_kw":44.1,"temana_kwh":195.2,"temana_peak_kw":48.19},{"date":"2026-05-02","paea_kwh":147.7,"paea_peak_kw":43.71,"temana_kwh":224.8,"temana_peak_kw":52.88},{"date":"2026-05-03","paea_kwh":195.3,"paea_peak_kw":42.29,"temana_kwh":203.9,"temana_peak_kw":45.29},{"date":"2026-05-04","paea_kwh":176.7,"paea_peak_kw":39.53,"temana_kwh":186,"temana_peak_kw":49.33},{"date":"2026-05-05","paea_kwh":204.7,"paea_peak_kw":38.67,"temana_kwh":259.8,"temana_peak_kw":48.3},{"date":"2026-05-06","paea_kwh":135.1,"paea_peak_kw":44.89,"temana_kwh":145.2,"temana_peak_kw":46.08},{"date":"2026-05-07","paea_kwh":117.4,"paea_peak_kw":35.38,"temana_kwh":157.8,"temana_peak_kw":54.53},{"date":"2026-05-08","paea_kwh":171,"paea_peak_kw":40.07,"temana_kwh":165.7,"temana_peak_kw":52.07},{"date":"2026-05-09","paea_kwh":70.1,"paea_peak_kw":37.32,"temana_kwh":74.2,"temana_peak_kw":38.06},{"date":"2026-05-10","paea_kwh":23.1,"paea_peak_kw":7.72,"temana_kwh":26.1,"temana_peak_kw":7.31},{"date":"2026-05-11","paea_kwh":92.8,"paea_peak_kw":42.57,"temana_kwh":89,"temana_peak_kw":38.71},{"date":"2026-05-12","paea_kwh":103.5,"paea_peak_kw":35.37,"temana_kwh":132.6,"temana_peak_kw":46.84},{"date":"2026-05-13","paea_kwh":159.7,"paea_peak_kw":44.29,"temana_kwh":153.1,"temana_peak_kw":45.58},{"date":"2026-05-14","paea_kwh":172.2,"paea_peak_kw":43.82,"temana_kwh":183.8,"temana_peak_kw":52.02},{"date":"2026-05-15","paea_kwh":204.9,"paea_peak_kw":43.53,"temana_kwh":231,"temana_peak_kw":40.78},{"date":"2026-05-16","paea_kwh":165.1,"paea_peak_kw":40.39,"temana_kwh":210.2,"temana_peak_kw":50.28},{"date":"2026-05-17","paea_kwh":171.3,"paea_peak_kw":47.36,"temana_kwh":108.5,"temana_peak_kw":32.16},{"date":"2026-05-18","paea_kwh":138.9,"paea_peak_kw":42.3,"temana_kwh":145.1,"temana_peak_kw":43.52},{"date":"2026-05-19","paea_kwh":160.7,"paea_peak_kw":36.7,"temana_kwh":179.1,"temana_peak_kw":47.61},{"date":"2026-05-20","paea_kwh":212,"paea_peak_kw":33.55,"temana_kwh":195.1,"temana_peak_kw":46.47},{"date":"2026-05-21","paea_kwh":176.6,"paea_peak_kw":41.66,"temana_kwh":194.4,"temana_peak_kw":51.97},{"date":"2026-05-22","paea_kwh":196.3,"paea_peak_kw":35.62,"temana_kwh":225.1,"temana_peak_kw":42.18},{"date":"2026-05-23","paea_kwh":205.9,"paea_peak_kw":37.61,"temana_kwh":223.1,"temana_peak_kw":45.19},{"date":"2026-05-24","paea_kwh":117.9,"paea_peak_kw":36.33,"temana_kwh":170.1,"temana_peak_kw":53.35},{"date":"2026-05-25","paea_kwh":172.5,"paea_peak_kw":44.13,"temana_kwh":131.7,"temana_peak_kw":45.76},{"date":"2026-05-26","paea_kwh":154.7,"paea_peak_kw":40.02,"temana_kwh":154.4,"temana_peak_kw":52.61},{"date":"2026-05-27","paea_kwh":208.2,"paea_peak_kw":33.89,"temana_kwh":237,"temana_peak_kw":40.19},{"date":"2026-05-28","paea_kwh":179.6,"paea_peak_kw":38.41,"temana_kwh":207.4,"temana_peak_kw":49.29},{"date":"2026-05-29","paea_kwh":139.7,"paea_peak_kw":38.76,"temana_kwh":138.1,"temana_peak_kw":41.52},{"date":"2026-05-30","paea_kwh":194.6,"paea_peak_kw":31.84,"temana_kwh":232.4,"temana_peak_kw":40.34},{"date":"2026-05-31","paea_kwh":186.5,"paea_peak_kw":34.75,"temana_kwh":220.5,"temana_peak_kw":40.07},{"date":"2026-06-01","paea_kwh":145.8,"paea_peak_kw":33.06,"temana_kwh":176.9,"temana_peak_kw":51.54},{"date":"2026-06-02","paea_kwh":89.3,"paea_peak_kw":21.72,"temana_kwh":103.5,"temana_peak_kw":28.69},{"date":"2026-06-03","paea_kwh":177.7,"paea_peak_kw":46.1,"temana_kwh":236.4,"temana_peak_kw":42.12},{"date":"2026-06-04","paea_kwh":200.1,"paea_peak_kw":42.83,"temana_kwh":167.5,"temana_peak_kw":51.33},{"date":"2026-06-05","paea_kwh":155.5,"paea_peak_kw":41.67,"temana_kwh":220.5,"temana_peak_kw":48.22},{"date":"2026-06-06","paea_kwh":210.9,"paea_peak_kw":33.65,"temana_kwh":208.5,"temana_peak_kw":45.79},{"date":"2026-06-07","paea_kwh":174.9,"paea_peak_kw":41.89,"temana_kwh":146,"temana_peak_kw":51.02},{"date":"2026-06-08","paea_kwh":133.3,"paea_peak_kw":40.5,"temana_kwh":223.8,"temana_peak_kw":44.75},{"date":"2026-06-09","paea_kwh":156.3,"paea_peak_kw":46.56,"temana_kwh":212.9,"temana_peak_kw":46.23},{"date":"2026-06-10","paea_kwh":203.7,"paea_peak_kw":32.62,"temana_kwh":226.8,"temana_peak_kw":38.75},{"date":"2026-06-11","paea_kwh":129.7,"paea_peak_kw":33.5,"temana_kwh":98.4,"temana_peak_kw":41.73},{"date":"2026-06-12","paea_kwh":91.2,"paea_peak_kw":22.66,"temana_kwh":87.3,"temana_peak_kw":31.71},{"date":"2026-06-13","paea_kwh":161.3,"paea_peak_kw":38.99,"temana_kwh":149.2,"temana_peak_kw":49.53},{"date":"2026-06-14","paea_kwh":107.3,"paea_peak_kw":24.65,"temana_kwh":113.5,"temana_peak_kw":44.8},{"date":"2026-06-15","paea_kwh":204.2,"paea_peak_kw":34.64,"temana_kwh":230.8,"temana_peak_kw":47.71},{"date":"2026-06-16","paea_kwh":196.6,"paea_peak_kw":31.75,"temana_kwh":220.1,"temana_peak_kw":38.33},{"date":"2026-06-17","paea_kwh":202.1,"paea_peak_kw":33.48,"temana_kwh":213.7,"temana_peak_kw":37.68},{"date":"2026-06-18","paea_kwh":176.5,"paea_peak_kw":33.3,"temana_kwh":210.3,"temana_peak_kw":43.27},{"date":"2026-06-19","paea_kwh":165.3,"paea_peak_kw":38,"temana_kwh":196.3,"temana_peak_kw":46.95},{"date":"2026-06-20","paea_kwh":135.8,"paea_peak_kw":47.46,"temana_kwh":155.9,"temana_peak_kw":49.33},{"date":"2026-06-21","paea_kwh":185.7,"paea_peak_kw":30.91,"temana_kwh":214.3,"temana_peak_kw":37.92},{"date":"2026-06-22","paea_kwh":188,"paea_peak_kw":30.96,"temana_kwh":214.3,"temana_peak_kw":43.9},{"date":"2026-06-23","paea_kwh":172,"paea_peak_kw":38.86,"temana_kwh":211.2,"temana_peak_kw":42.75},{"date":"2026-06-24","paea_kwh":158.5,"paea_peak_kw":38.34,"temana_kwh":194.4,"temana_peak_kw":48.63},{"date":"2026-06-25","paea_kwh":159,"paea_peak_kw":38.76,"temana_kwh":113.8,"temana_peak_kw":47.16},{"date":"2026-06-26","paea_kwh":162.6,"paea_peak_kw":38.58,"temana_kwh":191.7,"temana_peak_kw":49.81},{"date":"2026-06-27","paea_kwh":166.4,"paea_peak_kw":38.94,"temana_kwh":194.1,"temana_peak_kw":47.6},{"date":"2026-06-28","paea_kwh":198.3,"paea_peak_kw":32.01,"temana_kwh":223.3,"temana_peak_kw":37.99},{"date":"2026-06-29","paea_kwh":167.9,"paea_peak_kw":43.96,"temana_kwh":153,"temana_peak_kw":49.54},{"date":"2026-06-30","paea_kwh":197.6,"paea_peak_kw":31.51,"temana_kwh":227.4,"temana_peak_kw":38.97},{"date":"2026-07-01","paea_kwh":199.6,"paea_peak_kw":32.05,"temana_kwh":225.3,"temana_peak_kw":39.14},{"date":"2026-07-02","paea_kwh":195.5,"paea_peak_kw":31.82,"temana_kwh":222.4,"temana_peak_kw":37.99},{"date":"2026-07-03","paea_kwh":131.4,"paea_peak_kw":34.97,"temana_kwh":161.8,"temana_peak_kw":48.05},{"date":"2026-07-04","paea_kwh":106.6,"paea_peak_kw":41.01,"temana_kwh":51.3,"temana_peak_kw":18.3},{"date":"2026-07-05","paea_kwh":90.8,"paea_peak_kw":34.93,"temana_kwh":111.2,"temana_peak_kw":47.78},{"date":"2026-07-06","paea_kwh":147.3,"paea_peak_kw":39.33,"temana_kwh":174.6,"temana_peak_kw":48.72},{"date":"2026-07-07","paea_kwh":174.4,"temana_kwh":137.2,"paea_peak_kw":46.67,"temana_peak_kw":49.82},{"date":"2026-07-08","paea_kwh":187.5,"temana_kwh":235.2,"paea_peak_kw":36.5,"temana_peak_kw":51.5},{"date":"2026-07-09","paea_kwh":7,"temana_kwh":8.5}],"history_monthly":[{"month":"2025-08","paea_kwh":0,"temana_kwh":6496.7},{"month":"2025-09","paea_kwh":2810.4,"temana_kwh":6794.2},{"month":"2025-10","paea_kwh":6979.9,"temana_kwh":6620.2},{"month":"2025-11","paea_kwh":6352.7,"temana_kwh":5590.6},{"month":"2025-12","paea_kwh":6949.7,"temana_kwh":6544.4},{"month":"2026-01","paea_kwh":6282.3,"temana_kwh":6363.4},{"month":"2026-02","paea_kwh":6836.6,"temana_kwh":7161.7},{"month":"2026-03","paea_kwh":6496.5,"temana_kwh":6611.2},{"month":"2026-04","paea_kwh":5922.6,"temana_kwh":5740.4},{"month":"2026-05","paea_kwh":4917.4,"temana_kwh":5400.4},{"month":"2026-06","paea_kwh":4973.5,"temana_kwh":5535.8},{"month":"2026-07","paea_kwh":871.2,"temana_kwh":946.6}]};
+const PLANT_ID = "1425869";
+let _charts = [];
+const fmt = (n, d) => ((n || 0).toFixed(d || 1));
+const todayDate = new Date().toLocaleDateString('fr-CA', { timeZone: 'Pacific/Tahiti' });
+const TAHITI = 'Pacific/Tahiti';
+function destroy() { _charts.forEach(c => { try { c.destroy() } catch (e) {} }); _charts = []; }
+
+// ── Weather ──
+async function loadWeather() {
+  try {
+    const r = await fetch('https://api.open-meteo.com/v1/forecast?latitude=-17.65&longitude=-149.43&current=temperature_2m,relative_humidity_2m,apparent_temperature,weather_code,wind_speed_10m&daily=temperature_2m_max,temperature_2m_min,weather_code&timezone=Pacific%2FTahiti&forecast_days=2');
+    const d = await r.json(), c = d.current, daily = d.daily;
+    const ic = { 0:'☀️',1:'🌤️',2:'⛅',3:'☁️',45:'🌫️',48:'🌫️',51:'🌦️',53:'🌦️',55:'🌦️',61:'🌧️',63:'🌧️',65:'🌧️',71:'🌨️',80:'🌦️',81:'🌧️',95:'⛈️',96:'⛈️',99:'⛈️' };
+    const todayIcon = ic[c.weather_code]||'🌤️', tmrIcon = daily ? (ic[daily.weather_code[1]]||'🌤️') : '🌤️';
+    document.getElementById('wxContent').innerHTML =
+      '<div style="display:flex;gap:1vw;align-items:center;justify-content:center">'+
+        '<div style="text-align:center"><div class="wx-icon">'+todayIcon+'</div><div class="wx-big-temp">'+fmt(c.temperature_2m,1)+'°</div><div style="font-size:clamp(0.55em,0.8vw,0.7em);color:#fff;opacity:0.4;margin-top:0.2vh">Ressenti '+fmt(c.apparent_temperature,1)+'°</div></div>'+
+        '<div style="width:1px;height:6vh;background:rgba(195,205,34,0.1)"></div>'+
+        '<div style="text-align:center"><div style="font-size:clamp(3em,4.5vw,5em);line-height:1.2">'+tmrIcon+'</div><div style="font-size:clamp(0.8em,1.2vw,1em);color:var(--gold);font-weight:700">Demain</div><div style="font-size:clamp(0.65em,0.9vw,0.8em);color:#fff;opacity:0.6">'+fmt(daily?daily.temperature_2m_min[1]:0,1)+'° / '+fmt(daily?daily.temperature_2m_max[1]:0,1)+'°</div></div>'+
+      '</div>'+
+      '<div style="display:grid;grid-template-columns:1fr 1fr;gap:0.6vh 1.5vw;font-family:\'JetBrains Mono\',monospace;font-size:clamp(0.7em,1vw,0.9em);color:#fff;opacity:0.7;width:100%;padding:0 0.6vw">'+
+        '<span>Humidité</span><span style="color:var(--gold);text-align:right;font-weight:600">'+c.relative_humidity_2m+'%</span>'+
+        '<span>Vent</span><span style="color:var(--gold);text-align:right;font-weight:600">'+fmt(c.wind_speed_10m,1)+' km/h</span>'+
+      '</div>';
+  } catch(e){ document.getElementById('wxContent').innerHTML='<div style="color:rgba(255,255,255,0.3);font-size:0.5em;text-align:center;padding-top:4vh">—</div>'; }
+}
+
+// ── Bar chart (sommets arrondis) ──
+function barChart(id, data, maxV, opts) {
+  const canvas = document.getElementById(id); if(!canvas) return;
+  const o = opts || {};
+  const unit = o.unit || 'kWh';
+  const chart = new Chart(canvas, {
+    type:'bar', data:{ labels:data.map(d=>d.l), datasets:[{ data:data.map(d=>d.v),
+      backgroundColor: ctx2 => { const g = ctx2.chart.ctx.createLinearGradient(0,0,0,ctx2.chart.height||100); g.addColorStop(0,'rgba(210,220,50,0.9)'); g.addColorStop(0.5,'rgba(195,205,34,0.7)'); g.addColorStop(1,'rgba(195,205,34,0.3)'); return g; },
+      borderColor:'rgba(195,205,34,0.5)', borderWidth:1,
+      borderRadius:{topLeft:o.r||6,topRight:o.r||6,bottomLeft:0,bottomRight:0},
+      borderSkipped:false, barPercentage:o.bp||0.85, categoryPercentage:o.cp||0.9
+    }]},
+    options:{ responsive:true, maintainAspectRatio:false, animation:{duration:400},
+      layout:{ padding:{ bottom:14, top:2 } },
+      plugins:{ legend:{display:false}, tooltip:{ backgroundColor:'rgba(6,6,12,0.96)', titleColor:'#c3cd22', bodyColor:'#fff', borderColor:'rgba(195,205,34,0.2)', borderWidth:1, titleFont:{family:'JetBrains Mono',size:10}, bodyFont:{family:'JetBrains Mono',size:9}, callbacks:{label:c=>' '+fmt(c.raw,1)+' '+unit} } },
+      scales:{ x:{ ticks:{ color:'rgba(255,255,255,0.25)', font:{size:o.fs||8,family:'JetBrains Mono'}, maxRotation:o.mr||0, autoSkip:o.as!==false, maxTicksLimit:o.mt||10 }, grid:{ color:'rgba(195,205,34,0.03)', drawTicks:false } }, y:{ ticks:{ color:'rgba(255,255,255,0.2)', font:{size:7,family:'JetBrains Mono'}, callback:v=>v+' '+unit, maxTicksLimit:4, padding:4 }, grid:{ color:'rgba(195,205,34,0.03)' }, beginAtZero:true, max:maxV||undefined } }
+    }
+  });
+  _charts.push(chart);
+}
+
+// ── Daily lookup (history_daily format: [{date, kwh, paea_kwh?, temana_kwh?}]) ──
+function dailyLookup(history, slug) {
+  const map = {};
+  for (const e of history || []) {
+    if (!e.date) continue;
+    const val = e[slug + '_kwh'] || e.kwh || 0;
+    map[e.date] = { kwh: val };
+  }
+  return map;
+}
+function getLast7Days() {
+  const now=new Date(), days=[];
+  for(let i=6;i>=0;i--){ const d=new Date(now);d.setDate(now.getDate()-i); days.push({iso:d.toLocaleDateString('fr-CA',{timeZone:TAHITI}),l:i===0?'Auj.':d.toLocaleDateString('fr-FR',{weekday:'short',timeZone:TAHITI}),v:0}); }
+  return days;
+}
+function getLast30Days() {
+  const now=new Date(), days=[];
+  for(let i=29;i>=0;i--){ const d=new Date(now);d.setDate(now.getDate()-i); days.push({iso:d.toLocaleDateString('fr-CA',{timeZone:TAHITI}),l:i===0?'Auj.':String(d.getDate()),v:0}); }
+  return days;
+}
+function getLast12Months() {
+  const now=new Date(), months=[];
+  const mNames=['J','F','M','A','M','J','J','A','S','O','N','D'];
+  for(let i=11;i>=0;i--){ const d=new Date(now.getFullYear(),now.getMonth()-i,1); months.push({key:d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0'),l:mNames[d.getMonth()],v:0}); }
+  return months;
+}
+// ── Monthly from daily ──
+function monthlyFromDaily(history, slug) {
+  const mo = {};
+  for (const e of history || []) {
+    if (!e.date) continue;
+    const m = e.date.substring(0, 7);
+    if (!mo[m]) mo[m] = { kwh: 0 };
+    const val = e[slug + '_kwh'] || e.kwh || 0;
+    mo[m].kwh += val;
+  }
+  return mo;
+}
+
+// ── RENDER ──
+function render(data) {
+  destroy();
+  const plant = (data.plants||[]).find(p=>String(p.id)===PLANT_ID);
+  if(!plant) return;
+
+  document.getElementById('updateTime').innerHTML='<span class="dot"></span>'+(data.updateTime||'')+(data.authWarning?' <span style="color:#f97316;font-size:0.8em">⚠ '+data.authWarning+'</span>':'');
+  document.getElementById('liveKva').textContent=fmt(plant.live_power_kva,1);
+  document.getElementById('installDate').textContent=plant.install_date ? new Date(plant.install_date).toLocaleDateString('fr-FR',{timeZone:TAHITI}) : '--';
+
+  const expected = Math.round(plant.capacity_kwp * 3.84);
+  const histLive = data.history || []; // 5-min points (today only)
+  // Today kWh from 5-min live data
+  const histDaily = (histLive||[]).filter(p=>p.time&&p.time.startsWith(todayDate)).reduce((s,p)=>{const pw=p[plant.slug+'_power'];return s+(pw>0?pw*(5/60):0);},0);
+  const effectiveDaily = plant.daily_kwh!==null?plant.daily_kwh:(histDaily>0?Math.round(histDaily*10)/10:null);
+  const pct = plant.capacity_kwp>0&&effectiveDaily?Math.min(100,Math.round(effectiveDaily/expected*100)):0;
+
+  document.getElementById('dailyKwh').textContent=effectiveDaily!==null?fmt(effectiveDaily,1):'--';
+  document.getElementById('totalMwh').textContent=fmt(plant.total_mwh,1);
+  document.getElementById('capacity').textContent=fmt(plant.capacity_kwp,1);
+  document.getElementById('temperature').textContent=fmt(plant.temperature,1);
+  document.getElementById('co2').textContent=fmt(plant.total_mwh*0.7,1);
+  document.getElementById('gaugePct').textContent=pct+'%';
+  var objKwhEl = document.getElementById('objKwh'); if (objKwhEl) objKwhEl.textContent=fmt(expected,0);
+  document.getElementById('gaugeFill').style.background='conic-gradient(var(--gold) '+(pct*3.6)+'deg, rgba(255,255,255,0.05) 0deg)';
+
+  const raw = dailyLookup(data.history_daily || [], plant.slug);
+
+  // Power chart (5-min data) — interpolate gaps
+  const todayHist=histLive.filter(p=>{if(!p.time||!p.time.startsWith(todayDate))return false;const h=new Date(p.time).getHours();return h>=7&&h<19;});
+  const labels=todayHist.map(p=>{const t=new Date(p.time);return String(t.getHours()).padStart(2,'0')+':'+String(t.getMinutes()).padStart(2,'0');});
+  let power=todayHist.map(p=>p[plant.slug+'_power']);
+  // Linear interpolation for gaps (only between real values, future slots → 0)
+  for (let i=0;i<power.length;i++) {
+    if (power[i]!==null&&power[i]!==undefined) continue;
+    let left=null,right=null;
+    for (let j=i-1;j>=0;j--) { if (power[j]!=null) { left={val:power[j],idx:j}; break; } }
+    for (let j=i+1;j<power.length;j++) { if (power[j]!=null) { right={val:power[j],idx:j}; break; } }
+    if (left&&right) {
+      const t=(i-left.idx)/(right.idx-left.idx);
+      power[i]=+(left.val+(right.val-left.val)*t).toFixed(1);
+    } else if (!right) {
+      // No future data = slot hasn't happened yet, set to 0
+      power[i]=0;
+    }
+  }
+  if(todayHist.length>1){
+    const maxP=Math.max(...power.filter(v=>v!==null&&v>0),1);
+    new Chart(document.getElementById('chPwr'),{
+      type:'line',data:{labels,datasets:[{data:power,borderColor:'rgba(195,205,34,0.9)',backgroundColor:ctx=>{const g=ctx.chart.ctx.createLinearGradient(0,0,0,200);g.addColorStop(0,'rgba(195,205,34,0.12)');g.addColorStop(1,'transparent');return g;},fill:true,borderWidth:2.5,tension:0.3,pointRadius:0,pointHoverRadius:4,spanGaps:true}]},
+      options:{responsive:true,maintainAspectRatio:false,animation:{duration:300},layout:{padding:{bottom:14}},plugins:{legend:{display:false},tooltip:{backgroundColor:'rgba(6,6,12,0.96)',titleColor:'#c3cd22',bodyColor:'#fff',borderColor:'rgba(195,205,34,0.2)',borderWidth:1,callbacks:{label:c=>' '+fmt(c.raw,1)+' kVA'}}},scales:{x:{ticks:{color:'rgba(255,255,255,0.2)',font:{size:8,family:'JetBrains Mono'},maxTicksLimit:14,autoSkip:false,callback:(_,i)=>(labels[i]||'').endsWith(':00')?labels[i]:''},grid:{color:'rgba(195,205,34,0.04)'}},y:{ticks:{color:'rgba(255,255,255,0.2)',font:{size:8,family:'JetBrains Mono'},callback:v=>v+' kW',padding:4},grid:{color:'rgba(195,205,34,0.04)'},min:0,suggestedMax:Math.ceil(maxP*1.15)}}}
+    });
+    _charts.push(Chart.getChart('chPwr'));
+  }
+
+  // Weekly
+  const wDays=getLast7Days();let wMax=1;wDays.forEach(d=>{if(raw[d.iso]){d.v=Math.round(raw[d.iso].kwh*10)/10;if(d.v>wMax)wMax=d.v;}});
+  barChart('chWeek',wDays,Math.min(Math.ceil(wMax*1.2),400),{r:8,bp:0.65,cp:0.85,fs:9,mt:7,as:true});
+
+  // Monthly (affiche uniquement le numéro du jour)
+  const mDays=getLast30Days();let mMax=1;mDays.forEach(d=>{if(raw[d.iso]){d.v=Math.round(raw[d.iso].kwh*10)/10;if(d.v>mMax)mMax=d.v;}});
+  barChart('chMonth',mDays,Math.min(Math.ceil(mMax*1.2),400),{r:5,bp:0.92,cp:0.96,fs:7,mr:70,as:false,mt:10});
+
+  // Annual (prefer API monthly data, fall back to daily aggregation)
+  const mAgg = {};
+  if (data.history_monthly) {
+    for (const e of data.history_monthly) {
+      mAgg[e.month] = { kwh: e[plant.slug + '_kwh'] || 0 };
+    }
+  } else {
+    Object.assign(mAgg, monthlyFromDaily(data.history_daily || [], plant.slug));
+  }
+  const yearMonths=getLast12Months();let yMax=1;yearMonths.forEach(m=>{if(mAgg[m.key]){m.v=Math.round(mAgg[m.key].kwh/100)/10;if(m.v>yMax)yMax=m.v;}});
+  barChart('chYear',yearMonths,yMax>0?Math.ceil(yMax*1.2):10,{r:8,bp:0.65,cp:0.85,fs:10,mt:12,as:false,unit:'MWh'});
+
+  loadWeather();
+}
+
+try {
+  render(INLINE_DATA);
+  window._hist=INLINE_DATA.history||[];
+  setInterval(async()=>{try{const r=await fetch('https://skimdraft.github.io/enersoler-dashboard/isolar-data.json?_='+Date.now(),{cache:'no-cache'});if(r.ok){const d=await r.json();if(d&&d.plants){d.history_daily=INLINE_DATA.history_daily;d.history_monthly=INLINE_DATA.history_monthly;if(d.history)for(let i=0;i<d.history.length;i++){if(!d.history[i].total_power&&window._hist[i]&&window._hist[i].total_power)d.history[i]=window._hist[i];}window._hist=d.history;render(d);}}}catch(e){}},60000);
+}catch(e){document.querySelector('.grid').innerHTML+='<div style="padding:30px;color:rgba(255,255,255,0.3);text-align:center">⚠ '+e.message+'</div>';}
+</script>
+</body>
+</html>
