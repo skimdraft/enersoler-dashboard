@@ -132,15 +132,17 @@ function mergeTimeline(timeline, realPoints, todayISO) {
 
     return timeline.map(slot => {
         const t = new Date(slot.time);
-        const key = `${String(t.getHours()).padStart(2,'0')}:${String(t.getMinutes()).padStart(2,'0')}`;
+        // Use UTC-based Tahiti hour (works on any server timezone)
+        let slotH = t.getUTCHours() - 10;
+        if (slotH < 0) slotH += 24;
+        const slotM = t.getUTCMinutes();
+        const key = `${String(slotH).padStart(2,'0')}:${String(slotM).padStart(2,'0')}`;
         if (map[key]) {
             // Real data exists for this slot
             return { ...map[key], time: slot.time };
         }
         // Only leave null for PAST times (before data collection started)
         // For FUTURE times, leave null (will fill in)
-        const slotH = t.getHours();
-        const slotM = t.getMinutes();
         if (slotH < tahitiHour || (slotH === tahitiHour && slotM <= tahitiMin)) {
             // Past or current slot with no data — leave null
             return slot;
