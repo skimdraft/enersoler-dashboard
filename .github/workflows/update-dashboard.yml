@@ -60,7 +60,7 @@ jobs:
           git add dashboard/history.json dashboard/history-daily.json dashboard/history-monthly.json
           git add dashboard/daily-baseline.json
           git add dashboard/dashboard.html dashboard/paea.html dashboard/temana.html
-          git add docs/dashboard.html docs/paea.html docs/temana.html docs/index.html
+          git add docs/dashboard.html docs/paea.html docs/temana.html docs/index.html docs/isolar-data.json
           git diff --staged --quiet || (
             git commit -m "data: $(TZ='Pacific/Tahiti' date +'%d/%m %H:%M') -- refresh" &&
             git push
