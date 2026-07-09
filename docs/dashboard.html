@@ -369,7 +369,7 @@ function render(data){
     if(pow.some(v=>v!==null)){
       new Chart(document.getElementById('chartPlant'+p.slug),{
         type:'line',
-        data:{labels,pow.length>30?labels.filter((_,i)=>i%3===0):labels,datasets:[{data:pow.filter(v=>v!==null),borderColor:GOLD+'0.6)',backgroundColor:GOLD+'0.04)',fill:true,borderWidth:1.5,tension:0.4,pointRadius:0,spanGaps:false}]},
+        data:{labels:pow.length>30?labels.filter((_,i)=>i%3===0):labels,datasets:[{data:pow.filter(v=>v!==null),borderColor:GOLD+'0.6)',backgroundColor:GOLD+'0.04)',fill:true,borderWidth:1.5,tension:0.4,pointRadius:0,spanGaps:false}]},
         options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false}},scales:{x:{display:false},y:{display:false,min:0}}}
       });
       _charts.push(Chart.getChart('chartPlant'+p.slug));
