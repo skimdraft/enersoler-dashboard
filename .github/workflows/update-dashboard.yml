@@ -2,8 +2,8 @@ name: Update Dashboard
 
 on:
   schedule:
-    # Every 5 minutes — extract.js auto-skips nighttime (06:00-18:00 Tahiti only)
-    - cron: '*/5 * * * *'
+    # Every 5 min, 7h-18h Tahiti (UTC-10) = 17h-04h UTC — ~132 runs/jour
+    - cron: '*/5 17-23,0-4 * * *'
   workflow_dispatch:
 
 permissions:
