@@ -10,7 +10,7 @@
   :root { --bg:#111118;--panel:rgba(18,18,28,0.94);--border:rgba(195,205,34,0.08);--gold:#c3cd22;--muted:rgba(195,205,34,0.35);--text:#e8e8e0; }
   * { margin:0;padding:0;box-sizing:border-box; }
   html,body { width:100vw;height:100vh;overflow:hidden;font-family:'Outfit',sans-serif;background:var(--bg);color:var(--text);display:flex;flex-direction:column; }
-  .grid { display:grid;grid-template-columns:repeat(6,1fr);grid-template-rows:auto 3fr 2.2fr 1.5fr;gap:1vh;padding:0.8vh 2vw 0.8vh;width:100vw;flex:1;min-height:0; }
+  .grid { display:grid;grid-template-columns:repeat(6,1fr);grid-template-rows:minmax(60px,9vh) minmax(180px,29vh) minmax(130px,23vh) minmax(100px,18vh);gap:1.5vh;padding:1vh 2vw 0.8vh;width:100vw;flex:1;min-height:0; }
 
   /* HEADER */
   .hdr { display:flex;align-items:center;justify-content:space-between;padding:0 0.8vw;overflow:hidden; }
@@ -112,7 +112,7 @@
   </div>
 
   <!-- ⚡ POWER + WEATHER -->
-  <div style="grid-column:1/7;display:flex;gap:1vh">
+  <div style="grid-column:1/7;display:flex;gap:1.5vh">
     <div class="card glow" style="flex:7;min-width:0">
       <div class="card-inner">
         <div class="clabel">⚡ Puissance live — aujourd'hui 7h-19h</div>
@@ -135,7 +135,7 @@
   </div>
 
   <!-- 📊 DIAGRAMS ROW -->
-  <div style="grid-column:1/7;display:flex;gap:1vh">
+  <div style="grid-column:1/7;display:flex;gap:1.5vh">
     <div class="card" style="flex:1;min-width:0">
       <div class="card-inner"><div class="clabel">📊 7 jours</div><div class="chart-wrap"><canvas id="chWeek"></canvas></div></div>
     </div>
@@ -148,7 +148,7 @@
   </div>
 
   <!-- 📋 INFOS ROW -->
-  <div style="grid-column:1/7;display:flex;gap:1vh">
+  <div style="grid-column:1/7;display:flex;gap:1.5vh">
     <div class="card green" style="flex:55;min-width:0">
     <div class="card-inner">
       <div class="btm">
