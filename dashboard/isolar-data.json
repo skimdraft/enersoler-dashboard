@@ -1,19 +1,19 @@
 {
-  "updateTime": "08/07/2026 17:50:01",
-  "timestamp": "2026-07-09T03:50:05.528Z",
+  "updateTime": "09/07/2026 02:21:16",
+  "timestamp": "2026-07-09T12:21:20.306Z",
   "activePlants": 2,
   "totalPlants": 2,
-  "totalKVA": 0.1,
+  "totalKVA": 0,
   "totalKWp": 108.5,
   "totalMWh": 200.77,
-  "dailyKWh": 6.2,
-  "dailyPending": false,
-  "avgTemp": 37.6,
+  "dailyKWh": null,
+  "dailyPending": true,
+  "avgTemp": 0,
   "co2Tonnes": 140.5,
   "authWarning": null,
   "history": [
     {
-      "time": "2026-07-08T07:00:00-10:00",
+      "time": "2026-07-09T07:00:00-10:00",
       "paea_power": null,
       "temana_power": null,
       "paea_temp": null,
@@ -23,7 +23,7 @@
       "total_daily_kwh": null
     },
     {
-      "time": "2026-07-08T07:05:00-10:00",
+      "time": "2026-07-09T07:05:00-10:00",
       "paea_power": null,
       "temana_power": null,
       "paea_temp": null,
@@ -33,7 +33,7 @@
       "total_daily_kwh": null
     },
     {
-      "time": "2026-07-08T07:10:00-10:00",
+      "time": "2026-07-09T07:10:00-10:00",
       "paea_power": null,
       "temana_power": null,
       "paea_temp": null,
@@ -43,7 +43,7 @@
       "total_daily_kwh": null
     },
     {
-      "time": "2026-07-08T07:15:00-10:00",
+      "time": "2026-07-09T07:15:00-10:00",
       "paea_power": null,
       "temana_power": null,
       "paea_temp": null,
@@ -53,7 +53,7 @@
       "total_daily_kwh": null
     },
     {
-      "time": "2026-07-08T07:20:00-10:00",
+      "time": "2026-07-09T07:20:00-10:00",
       "paea_power": null,
       "temana_power": null,
       "paea_temp": null,
@@ -63,7 +63,7 @@
       "total_daily_kwh": null
     },
     {
-      "time": "2026-07-08T07:25:00-10:00",
+      "time": "2026-07-09T07:25:00-10:00",
       "paea_power": null,
       "temana_power": null,
       "paea_temp": null,
@@ -73,7 +73,7 @@
       "total_daily_kwh": null
     },
     {
-      "time": "2026-07-08T07:30:00-10:00",
+      "time": "2026-07-09T07:30:00-10:00",
       "paea_power": null,
       "temana_power": null,
       "paea_temp": null,
@@ -83,7 +83,7 @@
       "total_daily_kwh": null
     },
     {
-      "time": "2026-07-08T07:35:00-10:00",
+      "time": "2026-07-09T07:35:00-10:00",
       "paea_power": null,
       "temana_power": null,
       "paea_temp": null,
@@ -93,7 +93,7 @@
       "total_daily_kwh": null
     },
     {
-      "time": "2026-07-08T07:40:00-10:00",
+      "time": "2026-07-09T07:40:00-10:00",
       "paea_power": null,
       "temana_power": null,
       "paea_temp": null,
@@ -103,7 +103,7 @@
       "total_daily_kwh": null
     },
     {
-      "time": "2026-07-08T07:45:00-10:00",
+      "time": "2026-07-09T07:45:00-10:00",
       "paea_power": null,
       "temana_power": null,
       "paea_temp": null,
@@ -113,7 +113,7 @@
       "total_daily_kwh": null
     },
     {
-      "time": "2026-07-08T07:50:00-10:00",
+      "time": "2026-07-09T07:50:00-10:00",
       "paea_power": null,
       "temana_power": null,
       "paea_temp": null,
@@ -123,7 +123,7 @@
       "total_daily_kwh": null
     },
     {
-      "time": "2026-07-08T07:55:00-10:00",
+      "time": "2026-07-09T07:55:00-10:00",
       "paea_power": null,
       "temana_power": null,
       "paea_temp": null,
@@ -133,7 +133,7 @@
       "total_daily_kwh": null
     },
     {
-      "time": "2026-07-08T08:00:00-10:00",
+      "time": "2026-07-09T08:00:00-10:00",
       "paea_power": null,
       "temana_power": null,
       "paea_temp": null,
@@ -143,7 +143,7 @@
       "total_daily_kwh": null
     },
     {
-      "time": "2026-07-08T08:05:00-10:00",
+      "time": "2026-07-09T08:05:00-10:00",
       "paea_power": null,
       "temana_power": null,
       "paea_temp": null,
@@ -153,7 +153,7 @@
       "total_daily_kwh": null
     },
     {
-      "time": "2026-07-08T08:10:00-10:00",
+      "time": "2026-07-09T08:10:00-10:00",
       "paea_power": null,
       "temana_power": null,
       "paea_temp": null,
@@ -163,7 +163,7 @@
       "total_daily_kwh": null
     },
     {
-      "time": "2026-07-08T08:15:00-10:00",
+      "time": "2026-07-09T08:15:00-10:00",
       "paea_power": null,
       "temana_power": null,
       "paea_temp": null,
@@ -173,7 +173,7 @@
       "total_daily_kwh": null
     },
     {
-      "time": "2026-07-08T08:20:00-10:00",
+      "time": "2026-07-09T08:20:00-10:00",
       "paea_power": null,
       "temana_power": null,
       "paea_temp": null,
@@ -183,7 +183,7 @@
       "total_daily_kwh": null
     },
     {
-      "time": "2026-07-08T08:25:00-10:00",
+      "time": "2026-07-09T08:25:00-10:00",
       "paea_power": null,
       "temana_power": null,
       "paea_temp": null,
@@ -193,7 +193,7 @@
       "total_daily_kwh": null
     },
     {
-      "time": "2026-07-08T08:30:00-10:00",
+      "time": "2026-07-09T08:30:00-10:00",
       "paea_power": null,
       "temana_power": null,
       "paea_temp": null,
@@ -203,7 +203,7 @@
       "total_daily_kwh": null
     },
     {
-      "time": "2026-07-08T08:35:00-10:00",
+      "time": "2026-07-09T08:35:00-10:00",
       "paea_power": null,
       "temana_power": null,
       "paea_temp": null,
@@ -213,7 +213,7 @@
       "total_daily_kwh": null
     },
     {
-      "time": "2026-07-08T08:40:00-10:00",
+      "time": "2026-07-09T08:40:00-10:00",
       "paea_power": null,
       "temana_power": null,
       "paea_temp": null,
@@ -223,7 +223,7 @@
       "total_daily_kwh": null
     },
     {
-      "time": "2026-07-08T08:45:00-10:00",
+      "time": "2026-07-09T08:45:00-10:00",
       "paea_power": null,
       "temana_power": null,
       "paea_temp": null,
@@ -233,7 +233,7 @@
       "total_daily_kwh": null
     },
     {
-      "time": "2026-07-08T08:50:00-10:00",
+      "time": "2026-07-09T08:50:00-10:00",
       "paea_power": null,
       "temana_power": null,
       "paea_temp": null,
@@ -243,7 +243,7 @@
       "total_daily_kwh": null
     },
     {
-      "time": "2026-07-08T08:55:00-10:00",
+      "time": "2026-07-09T08:55:00-10:00",
       "paea_power": null,
       "temana_power": null,
       "paea_temp": null,
@@ -253,7 +253,7 @@
       "total_daily_kwh": null
     },
     {
-      "time": "2026-07-08T09:00:00-10:00",
+      "time": "2026-07-09T09:00:00-10:00",
       "paea_power": null,
       "temana_power": null,
       "paea_temp": null,
@@ -263,7 +263,7 @@
       "total_daily_kwh": null
     },
     {
-      "time": "2026-07-08T09:05:00-10:00",
+      "time": "2026-07-09T09:05:00-10:00",
       "paea_power": null,
       "temana_power": null,
       "paea_temp": null,
@@ -273,7 +273,7 @@
       "total_daily_kwh": null
     },
     {
-      "time": "2026-07-08T09:10:00-10:00",
+      "time": "2026-07-09T09:10:00-10:00",
       "paea_power": null,
       "temana_power": null,
       "paea_temp": null,
@@ -283,7 +283,7 @@
       "total_daily_kwh": null
     },
     {
-      "time": "2026-07-08T09:15:00-10:00",
+      "time": "2026-07-09T09:15:00-10:00",
       "paea_power": null,
       "temana_power": null,
       "paea_temp": null,
@@ -293,7 +293,7 @@
       "total_daily_kwh": null
     },
     {
-      "time": "2026-07-08T09:20:00-10:00",
+      "time": "2026-07-09T09:20:00-10:00",
       "paea_power": null,
       "temana_power": null,
       "paea_temp": null,
@@ -303,7 +303,7 @@
       "total_daily_kwh": null
     },
     {
-      "time": "2026-07-08T09:25:00-10:00",
+      "time": "2026-07-09T09:25:00-10:00",
       "paea_power": null,
       "temana_power": null,
       "paea_temp": null,
@@ -313,7 +313,7 @@
       "total_daily_kwh": null
     },
     {
-      "time": "2026-07-08T09:30:00-10:00",
+      "time": "2026-07-09T09:30:00-10:00",
       "paea_power": null,
       "temana_power": null,
       "paea_temp": null,
@@ -323,7 +323,7 @@
       "total_daily_kwh": null
     },
     {
-      "time": "2026-07-08T09:35:00-10:00",
+      "time": "2026-07-09T09:35:00-10:00",
       "paea_power": null,
       "temana_power": null,
       "paea_temp": null,
@@ -333,7 +333,7 @@
       "total_daily_kwh": null
     },
     {
-      "time": "2026-07-08T09:40:00-10:00",
+      "time": "2026-07-09T09:40:00-10:00",
       "paea_power": null,
       "temana_power": null,
       "paea_temp": null,
@@ -343,7 +343,7 @@
       "total_daily_kwh": null
     },
     {
-      "time": "2026-07-08T09:45:00-10:00",
+      "time": "2026-07-09T09:45:00-10:00",
       "paea_power": null,
       "temana_power": null,
       "paea_temp": null,
@@ -353,7 +353,7 @@
       "total_daily_kwh": null
     },
     {
-      "time": "2026-07-08T09:50:00-10:00",
+      "time": "2026-07-09T09:50:00-10:00",
       "paea_power": null,
       "temana_power": null,
       "paea_temp": null,
@@ -363,7 +363,7 @@
       "total_daily_kwh": null
     },
     {
-      "time": "2026-07-08T09:55:00-10:00",
+      "time": "2026-07-09T09:55:00-10:00",
       "paea_power": null,
       "temana_power": null,
       "paea_temp": null,
@@ -373,7 +373,7 @@
       "total_daily_kwh": null
     },
     {
-      "time": "2026-07-08T10:00:00-10:00",
+      "time": "2026-07-09T10:00:00-10:00",
       "paea_power": null,
       "temana_power": null,
       "paea_temp": null,
@@ -383,7 +383,7 @@
       "total_daily_kwh": null
     },
     {
-      "time": "2026-07-08T10:05:00-10:00",
+      "time": "2026-07-09T10:05:00-10:00",
       "paea_power": null,
       "temana_power": null,
       "paea_temp": null,
@@ -393,7 +393,7 @@
       "total_daily_kwh": null
     },
     {
-      "time": "2026-07-08T10:10:00-10:00",
+      "time": "2026-07-09T10:10:00-10:00",
       "paea_power": null,
       "temana_power": null,
       "paea_temp": null,
@@ -403,7 +403,7 @@
       "total_daily_kwh": null
     },
     {
-      "time": "2026-07-08T10:15:00-10:00",
+      "time": "2026-07-09T10:15:00-10:00",
       "paea_power": null,
       "temana_power": null,
       "paea_temp": null,
@@ -413,7 +413,7 @@
       "total_daily_kwh": null
     },
     {
-      "time": "2026-07-08T10:20:00-10:00",
+      "time": "2026-07-09T10:20:00-10:00",
       "paea_power": null,
       "temana_power": null,
       "paea_temp": null,
@@ -423,7 +423,7 @@
       "total_daily_kwh": null
     },
     {
-      "time": "2026-07-08T10:25:00-10:00",
+      "time": "2026-07-09T10:25:00-10:00",
       "paea_power": null,
       "temana_power": null,
       "paea_temp": null,
@@ -433,7 +433,7 @@
       "total_daily_kwh": null
     },
     {
-      "time": "2026-07-08T10:30:00-10:00",
+      "time": "2026-07-09T10:30:00-10:00",
       "paea_power": null,
       "temana_power": null,
       "paea_temp": null,
@@ -443,7 +443,7 @@
       "total_daily_kwh": null
     },
     {
-      "time": "2026-07-08T10:35:00-10:00",
+      "time": "2026-07-09T10:35:00-10:00",
       "paea_power": null,
       "temana_power": null,
       "paea_temp": null,
@@ -453,7 +453,7 @@
       "total_daily_kwh": null
     },
     {
-      "time": "2026-07-08T10:40:00-10:00",
+      "time": "2026-07-09T10:40:00-10:00",
       "paea_power": null,
       "temana_power": null,
       "paea_temp": null,
@@ -463,7 +463,7 @@
       "total_daily_kwh": null
     },
     {
-      "time": "2026-07-08T10:45:00-10:00",
+      "time": "2026-07-09T10:45:00-10:00",
       "paea_power": null,
       "temana_power": null,
       "paea_temp": null,
@@ -473,7 +473,7 @@
       "total_daily_kwh": null
     },
     {
-      "time": "2026-07-08T10:50:00-10:00",
+      "time": "2026-07-09T10:50:00-10:00",
       "paea_power": null,
       "temana_power": null,
       "paea_temp": null,
@@ -483,7 +483,7 @@
       "total_daily_kwh": null
     },
     {
-      "time": "2026-07-08T10:55:00-10:00",
+      "time": "2026-07-09T10:55:00-10:00",
       "paea_power": null,
       "temana_power": null,
       "paea_temp": null,
@@ -493,7 +493,7 @@
       "total_daily_kwh": null
     },
     {
-      "time": "2026-07-08T11:00:00-10:00",
+      "time": "2026-07-09T11:00:00-10:00",
       "paea_power": null,
       "temana_power": null,
       "paea_temp": null,
@@ -503,7 +503,7 @@
       "total_daily_kwh": null
     },
     {
-      "time": "2026-07-08T11:05:00-10:00",
+      "time": "2026-07-09T11:05:00-10:00",
       "paea_power": null,
       "temana_power": null,
       "paea_temp": null,
@@ -513,7 +513,7 @@
       "total_daily_kwh": null
     },
     {
-      "time": "2026-07-08T11:10:00-10:00",
+      "time": "2026-07-09T11:10:00-10:00",
       "paea_power": null,
       "temana_power": null,
       "paea_temp": null,
@@ -523,7 +523,7 @@
       "total_daily_kwh": null
     },
     {
-      "time": "2026-07-08T11:15:00-10:00",
+      "time": "2026-07-09T11:15:00-10:00",
       "paea_power": null,
       "temana_power": null,
       "paea_temp": null,
@@ -533,7 +533,7 @@
       "total_daily_kwh": null
     },
     {
-      "time": "2026-07-08T11:20:00-10:00",
+      "time": "2026-07-09T11:20:00-10:00",
       "paea_power": null,
       "temana_power": null,
       "paea_temp": null,
@@ -543,7 +543,7 @@
       "total_daily_kwh": null
     },
     {
-      "time": "2026-07-08T11:25:00-10:00",
+      "time": "2026-07-09T11:25:00-10:00",
       "paea_power": null,
       "temana_power": null,
       "paea_temp": null,
@@ -553,7 +553,7 @@
       "total_daily_kwh": null
     },
     {
-      "time": "2026-07-08T11:30:00-10:00",
+      "time": "2026-07-09T11:30:00-10:00",
       "paea_power": null,
       "temana_power": null,
       "paea_temp": null,
@@ -563,7 +563,7 @@
       "total_daily_kwh": null
     },
     {
-      "time": "2026-07-08T11:35:00-10:00",
+      "time": "2026-07-09T11:35:00-10:00",
       "paea_power": null,
       "temana_power": null,
       "paea_temp": null,
@@ -573,7 +573,7 @@
       "total_daily_kwh": null
     },
     {
-      "time": "2026-07-08T11:40:00-10:00",
+      "time": "2026-07-09T11:40:00-10:00",
       "paea_power": null,
       "temana_power": null,
       "paea_temp": null,
@@ -583,7 +583,7 @@
       "total_daily_kwh": null
     },
     {
-      "time": "2026-07-08T11:45:00-10:00",
+      "time": "2026-07-09T11:45:00-10:00",
       "paea_power": null,
       "temana_power": null,
       "paea_temp": null,
@@ -593,7 +593,7 @@
       "total_daily_kwh": null
     },
     {
-      "time": "2026-07-08T11:50:00-10:00",
+      "time": "2026-07-09T11:50:00-10:00",
       "paea_power": null,
       "temana_power": null,
       "paea_temp": null,
@@ -603,7 +603,7 @@
       "total_daily_kwh": null
     },
     {
-      "time": "2026-07-08T11:55:00-10:00",
+      "time": "2026-07-09T11:55:00-10:00",
       "paea_power": null,
       "temana_power": null,
       "paea_temp": null,
@@ -613,7 +613,7 @@
       "total_daily_kwh": null
     },
     {
-      "time": "2026-07-08T12:00:00-10:00",
+      "time": "2026-07-09T12:00:00-10:00",
       "paea_power": null,
       "temana_power": null,
       "paea_temp": null,
@@ -623,7 +623,7 @@
       "total_daily_kwh": null
     },
     {
-      "time": "2026-07-08T12:05:00-10:00",
+      "time": "2026-07-09T12:05:00-10:00",
       "paea_power": null,
       "temana_power": null,
       "paea_temp": null,
@@ -633,7 +633,7 @@
       "total_daily_kwh": null
     },
     {
-      "time": "2026-07-08T12:10:00-10:00",
+      "time": "2026-07-09T12:10:00-10:00",
       "paea_power": null,
       "temana_power": null,
       "paea_temp": null,
@@ -643,7 +643,7 @@
       "total_daily_kwh": null
     },
     {
-      "time": "2026-07-08T12:15:00-10:00",
+      "time": "2026-07-09T12:15:00-10:00",
       "paea_power": null,
       "temana_power": null,
       "paea_temp": null,
@@ -653,7 +653,7 @@
       "total_daily_kwh": null
     },
     {
-      "time": "2026-07-08T12:20:00-10:00",
+      "time": "2026-07-09T12:20:00-10:00",
       "paea_power": null,
       "temana_power": null,
       "paea_temp": null,
@@ -663,7 +663,7 @@
       "total_daily_kwh": null
     },
     {
-      "time": "2026-07-08T12:25:00-10:00",
+      "time": "2026-07-09T12:25:00-10:00",
       "paea_power": null,
       "temana_power": null,
       "paea_temp": null,
@@ -673,7 +673,7 @@
       "total_daily_kwh": null
     },
     {
-      "time": "2026-07-08T12:30:00-10:00",
+      "time": "2026-07-09T12:30:00-10:00",
       "paea_power": null,
       "temana_power": null,
       "paea_temp": null,
@@ -683,7 +683,7 @@
       "total_daily_kwh": null
     },
     {
-      "time": "2026-07-08T12:35:00-10:00",
+      "time": "2026-07-09T12:35:00-10:00",
       "paea_power": null,
       "temana_power": null,
       "paea_temp": null,
@@ -693,7 +693,7 @@
       "total_daily_kwh": null
     },
     {
-      "time": "2026-07-08T12:40:00-10:00",
+      "time": "2026-07-09T12:40:00-10:00",
       "paea_power": null,
       "temana_power": null,
       "paea_temp": null,
@@ -703,7 +703,7 @@
       "total_daily_kwh": null
     },
     {
-      "time": "2026-07-08T12:45:00-10:00",
+      "time": "2026-07-09T12:45:00-10:00",
       "paea_power": null,
       "temana_power": null,
       "paea_temp": null,
@@ -713,7 +713,7 @@
       "total_daily_kwh": null
     },
     {
-      "time": "2026-07-08T12:50:00-10:00",
+      "time": "2026-07-09T12:50:00-10:00",
       "paea_power": null,
       "temana_power": null,
       "paea_temp": null,
@@ -723,7 +723,7 @@
       "total_daily_kwh": null
     },
     {
-      "time": "2026-07-08T12:55:00-10:00",
+      "time": "2026-07-09T12:55:00-10:00",
       "paea_power": null,
       "temana_power": null,
       "paea_temp": null,
@@ -733,7 +733,7 @@
       "total_daily_kwh": null
     },
     {
-      "time": "2026-07-08T13:00:00-10:00",
+      "time": "2026-07-09T13:00:00-10:00",
       "paea_power": null,
       "temana_power": null,
       "paea_temp": null,
@@ -743,7 +743,7 @@
       "total_daily_kwh": null
     },
     {
-      "time": "2026-07-08T13:05:00-10:00",
+      "time": "2026-07-09T13:05:00-10:00",
       "paea_power": null,
       "temana_power": null,
       "paea_temp": null,
@@ -753,7 +753,7 @@
       "total_daily_kwh": null
     },
     {
-      "time": "2026-07-08T13:10:00-10:00",
+      "time": "2026-07-09T13:10:00-10:00",
       "paea_power": null,
       "temana_power": null,
       "paea_temp": null,
@@ -763,7 +763,7 @@
       "total_daily_kwh": null
     },
     {
-      "time": "2026-07-08T13:15:00-10:00",
+      "time": "2026-07-09T13:15:00-10:00",
       "paea_power": null,
       "temana_power": null,
       "paea_temp": null,
@@ -773,7 +773,7 @@
       "total_daily_kwh": null
     },
     {
-      "time": "2026-07-08T13:20:00-10:00",
+      "time": "2026-07-09T13:20:00-10:00",
       "paea_power": null,
       "temana_power": null,
       "paea_temp": null,
@@ -783,7 +783,7 @@
       "total_daily_kwh": null
     },
     {
-      "time": "2026-07-08T13:25:00-10:00",
+      "time": "2026-07-09T13:25:00-10:00",
       "paea_power": null,
       "temana_power": null,
       "paea_temp": null,
@@ -793,7 +793,7 @@
       "total_daily_kwh": null
     },
     {
-      "time": "2026-07-08T13:30:00-10:00",
+      "time": "2026-07-09T13:30:00-10:00",
       "paea_power": null,
       "temana_power": null,
       "paea_temp": null,
@@ -803,7 +803,7 @@
       "total_daily_kwh": null
     },
     {
-      "time": "2026-07-08T13:35:00-10:00",
+      "time": "2026-07-09T13:35:00-10:00",
       "paea_power": null,
       "temana_power": null,
       "paea_temp": null,
@@ -813,7 +813,7 @@
       "total_daily_kwh": null
     },
     {
-      "time": "2026-07-08T13:40:00-10:00",
+      "time": "2026-07-09T13:40:00-10:00",
       "paea_power": null,
       "temana_power": null,
       "paea_temp": null,
@@ -823,7 +823,7 @@
       "total_daily_kwh": null
     },
     {
-      "time": "2026-07-08T13:45:00-10:00",
+      "time": "2026-07-09T13:45:00-10:00",
       "paea_power": null,
       "temana_power": null,
       "paea_temp": null,
@@ -833,7 +833,7 @@
       "total_daily_kwh": null
     },
     {
-      "time": "2026-07-08T13:50:00-10:00",
+      "time": "2026-07-09T13:50:00-10:00",
       "paea_power": null,
       "temana_power": null,
       "paea_temp": null,
@@ -843,7 +843,7 @@
       "total_daily_kwh": null
     },
     {
-      "time": "2026-07-08T13:55:00-10:00",
+      "time": "2026-07-09T13:55:00-10:00",
       "paea_power": null,
       "temana_power": null,
       "paea_temp": null,
@@ -853,7 +853,7 @@
       "total_daily_kwh": null
     },
     {
-      "time": "2026-07-08T14:00:00-10:00",
+      "time": "2026-07-09T14:00:00-10:00",
       "paea_power": null,
       "temana_power": null,
       "paea_temp": null,
@@ -863,7 +863,7 @@
       "total_daily_kwh": null
     },
     {
-      "time": "2026-07-08T14:05:00-10:00",
+      "time": "2026-07-09T14:05:00-10:00",
       "paea_power": null,
       "temana_power": null,
       "paea_temp": null,
@@ -873,7 +873,7 @@
       "total_daily_kwh": null
     },
     {
-      "time": "2026-07-08T14:10:00-10:00",
+      "time": "2026-07-09T14:10:00-10:00",
       "paea_power": null,
       "temana_power": null,
       "paea_temp": null,
@@ -883,7 +883,7 @@
       "total_daily_kwh": null
     },
     {
-      "time": "2026-07-08T14:15:00-10:00",
+      "time": "2026-07-09T14:15:00-10:00",
       "paea_power": null,
       "temana_power": null,
       "paea_temp": null,
@@ -893,7 +893,7 @@
       "total_daily_kwh": null
     },
     {
-      "time": "2026-07-08T14:20:00-10:00",
+      "time": "2026-07-09T14:20:00-10:00",
       "paea_power": null,
       "temana_power": null,
       "paea_temp": null,
@@ -903,7 +903,7 @@
       "total_daily_kwh": null
     },
     {
-      "time": "2026-07-08T14:25:00-10:00",
+      "time": "2026-07-09T14:25:00-10:00",
       "paea_power": null,
       "temana_power": null,
       "paea_temp": null,
@@ -913,7 +913,7 @@
       "total_daily_kwh": null
     },
     {
-      "time": "2026-07-08T14:30:00-10:00",
+      "time": "2026-07-09T14:30:00-10:00",
       "paea_power": null,
       "temana_power": null,
       "paea_temp": null,
@@ -923,7 +923,7 @@
       "total_daily_kwh": null
     },
     {
-      "time": "2026-07-08T14:35:00-10:00",
+      "time": "2026-07-09T14:35:00-10:00",
       "paea_power": null,
       "temana_power": null,
       "paea_temp": null,
@@ -933,7 +933,7 @@
       "total_daily_kwh": null
     },
     {
-      "time": "2026-07-08T14:40:00-10:00",
+      "time": "2026-07-09T14:40:00-10:00",
       "paea_power": null,
       "temana_power": null,
       "paea_temp": null,
@@ -943,7 +943,7 @@
       "total_daily_kwh": null
     },
     {
-      "time": "2026-07-08T14:45:00-10:00",
+      "time": "2026-07-09T14:45:00-10:00",
       "paea_power": null,
       "temana_power": null,
       "paea_temp": null,
@@ -953,7 +953,7 @@
       "total_daily_kwh": null
     },
     {
-      "time": "2026-07-08T14:50:00-10:00",
+      "time": "2026-07-09T14:50:00-10:00",
       "paea_power": null,
       "temana_power": null,
       "paea_temp": null,
@@ -963,7 +963,7 @@
       "total_daily_kwh": null
     },
     {
-      "time": "2026-07-08T14:55:00-10:00",
+      "time": "2026-07-09T14:55:00-10:00",
       "paea_power": null,
       "temana_power": null,
       "paea_temp": null,
@@ -973,7 +973,7 @@
       "total_daily_kwh": null
     },
     {
-      "time": "2026-07-08T15:00:00-10:00",
+      "time": "2026-07-09T15:00:00-10:00",
       "paea_power": null,
       "temana_power": null,
       "paea_temp": null,
@@ -983,7 +983,7 @@
       "total_daily_kwh": null
     },
     {
-      "time": "2026-07-08T15:05:00-10:00",
+      "time": "2026-07-09T15:05:00-10:00",
       "paea_power": null,
       "temana_power": null,
       "paea_temp": null,
@@ -993,7 +993,7 @@
       "total_daily_kwh": null
     },
     {
-      "time": "2026-07-08T15:10:00-10:00",
+      "time": "2026-07-09T15:10:00-10:00",
       "paea_power": null,
       "temana_power": null,
       "paea_temp": null,
@@ -1003,7 +1003,7 @@
       "total_daily_kwh": null
     },
     {
-      "time": "2026-07-08T15:15:00-10:00",
+      "time": "2026-07-09T15:15:00-10:00",
       "paea_power": null,
       "temana_power": null,
       "paea_temp": null,
@@ -1013,7 +1013,7 @@
       "total_daily_kwh": null
     },
     {
-      "time": "2026-07-08T15:20:00-10:00",
+      "time": "2026-07-09T15:20:00-10:00",
       "paea_power": null,
       "temana_power": null,
       "paea_temp": null,
@@ -1023,7 +1023,7 @@
       "total_daily_kwh": null
     },
     {
-      "time": "2026-07-08T15:25:00-10:00",
+      "time": "2026-07-09T15:25:00-10:00",
       "paea_power": null,
       "temana_power": null,
       "paea_temp": null,
@@ -1033,157 +1033,7 @@
       "total_daily_kwh": null
     },
     {
-      "time": "2026-07-08T15:30:00-10:00",
-      "paea_power": 21.5,
-      "paea_temp": 45.8,
-      "temana_power": 25,
-      "temana_temp": 52,
-      "total_power": 46.6,
-      "total_temp": 48.9,
-      "total_daily_kwh": null
-    },
-    {
-      "time": "2026-07-08T15:35:00-10:00",
-      "paea_power": null,
-      "temana_power": null,
-      "paea_temp": null,
-      "temana_temp": null,
-      "total_power": null,
-      "total_temp": null,
-      "total_daily_kwh": null
-    },
-    {
-      "time": "2026-07-08T15:40:00-10:00",
-      "paea_power": null,
-      "temana_power": null,
-      "paea_temp": null,
-      "temana_temp": null,
-      "total_power": null,
-      "total_temp": null,
-      "total_daily_kwh": null
-    },
-    {
-      "time": "2026-07-08T15:45:00-10:00",
-      "paea_power": null,
-      "temana_power": null,
-      "paea_temp": null,
-      "temana_temp": null,
-      "total_power": null,
-      "total_temp": null,
-      "total_daily_kwh": null
-    },
-    {
-      "time": "2026-07-08T15:50:00-10:00",
-      "paea_power": 7.3,
-      "paea_temp": 43.6,
-      "temana_power": 19.1,
-      "temana_temp": 49.4,
-      "total_power": 26.4,
-      "total_temp": 46.5,
-      "total_daily_kwh": null
-    },
-    {
-      "time": "2026-07-08T15:55:00-10:00",
-      "paea_power": null,
-      "temana_power": null,
-      "paea_temp": null,
-      "temana_temp": null,
-      "total_power": null,
-      "total_temp": null,
-      "total_daily_kwh": null
-    },
-    {
-      "time": "2026-07-08T16:00:00-10:00",
-      "paea_power": null,
-      "temana_power": null,
-      "paea_temp": null,
-      "temana_temp": null,
-      "total_power": null,
-      "total_temp": null,
-      "total_daily_kwh": null
-    },
-    {
-      "time": "2026-07-08T16:05:00-10:00",
-      "paea_power": null,
-      "temana_power": null,
-      "paea_temp": null,
-      "temana_temp": null,
-      "total_power": null,
-      "total_temp": null,
-      "total_daily_kwh": null
-    },
-    {
-      "time": "2026-07-08T16:10:00-10:00",
-      "paea_power": null,
-      "temana_power": null,
-      "paea_temp": null,
-      "temana_temp": null,
-      "total_power": null,
-      "total_temp": null,
-      "total_daily_kwh": null
-    },
-    {
-      "time": "2026-07-08T16:15:00-10:00",
-      "paea_power": null,
-      "temana_power": null,
-      "paea_temp": null,
-      "temana_temp": null,
-      "total_power": null,
-      "total_temp": null,
-      "total_daily_kwh": null
-    },
-    {
-      "time": "2026-07-08T16:20:00-10:00",
-      "paea_power": null,
-      "temana_power": null,
-      "paea_temp": null,
-      "temana_temp": null,
-      "total_power": null,
-      "total_temp": null,
-      "total_daily_kwh": null
-    },
-    {
-      "time": "2026-07-08T16:25:00-10:00",
-      "paea_power": null,
-      "temana_power": null,
-      "paea_temp": null,
-      "temana_temp": null,
-      "total_power": null,
-      "total_temp": null,
-      "total_daily_kwh": null
-    },
-    {
-      "time": "2026-07-08T16:30:00-10:00",
-      "paea_power": null,
-      "temana_power": null,
-      "paea_temp": null,
-      "temana_temp": null,
-      "total_power": null,
-      "total_temp": null,
-      "total_daily_kwh": null
-    },
-    {
-      "time": "2026-07-08T16:35:00-10:00",
-      "paea_power": null,
-      "temana_power": null,
-      "paea_temp": null,
-      "temana_temp": null,
-      "total_power": null,
-      "total_temp": null,
-      "total_daily_kwh": null
-    },
-    {
-      "time": "2026-07-08T16:40:00-10:00",
-      "paea_power": null,
-      "temana_power": null,
-      "paea_temp": null,
-      "temana_temp": null,
-      "total_power": null,
-      "total_temp": null,
-      "total_daily_kwh": null
-    },
-    {
-      "time": "2026-07-08T16:45:00-10:00",
+      "time": "2026-07-09T15:30:00-10:00",
       "paea_power": null,
       "temana_power": null,
       "paea_temp": null,
@@ -1193,7 +1043,7 @@
       "total_daily_kwh": null
     },
     {
-      "time": "2026-07-08T16:50:00-10:00",
+      "time": "2026-07-09T15:35:00-10:00",
       "paea_power": null,
       "temana_power": null,
       "paea_temp": null,
@@ -1203,7 +1053,7 @@
       "total_daily_kwh": null
     },
     {
-      "time": "2026-07-08T16:55:00-10:00",
+      "time": "2026-07-09T15:40:00-10:00",
       "paea_power": null,
       "temana_power": null,
       "paea_temp": null,
@@ -1213,7 +1063,7 @@
       "total_daily_kwh": null
     },
     {
-      "time": "2026-07-08T17:00:00-10:00",
+      "time": "2026-07-09T15:45:00-10:00",
       "paea_power": null,
       "temana_power": null,
       "paea_temp": null,
@@ -1223,7 +1073,7 @@
       "total_daily_kwh": null
     },
     {
-      "time": "2026-07-08T17:05:00-10:00",
+      "time": "2026-07-09T15:50:00-10:00",
       "paea_power": null,
       "temana_power": null,
       "paea_temp": null,
@@ -1233,7 +1083,7 @@
       "total_daily_kwh": null
     },
     {
-      "time": "2026-07-08T17:10:00-10:00",
+      "time": "2026-07-09T15:55:00-10:00",
       "paea_power": null,
       "temana_power": null,
       "paea_temp": null,
@@ -1243,7 +1093,7 @@
       "total_daily_kwh": null
     },
     {
-      "time": "2026-07-08T17:15:00-10:00",
+      "time": "2026-07-09T16:00:00-10:00",
       "paea_power": null,
       "temana_power": null,
       "paea_temp": null,
@@ -1253,7 +1103,7 @@
       "total_daily_kwh": null
     },
     {
-      "time": "2026-07-08T17:20:00-10:00",
+      "time": "2026-07-09T16:05:00-10:00",
       "paea_power": null,
       "temana_power": null,
       "paea_temp": null,
@@ -1263,7 +1113,7 @@
       "total_daily_kwh": null
     },
     {
-      "time": "2026-07-08T17:25:00-10:00",
+      "time": "2026-07-09T16:10:00-10:00",
       "paea_power": null,
       "temana_power": null,
       "paea_temp": null,
@@ -1273,57 +1123,27 @@
       "total_daily_kwh": null
     },
     {
-      "time": "2026-07-08T17:30:00-10:00",
+      "time": "2026-07-09T16:15:00-10:00",
       "paea_power": null,
       "temana_power": null,
       "paea_temp": null,
       "temana_temp": null,
       "total_power": null,
       "total_temp": null,
-      "total_daily_kwh": null
-    },
-    {
-      "time": "2026-07-08T17:35:00-10:00",
-      "paea_power": 0.3,
-      "paea_temp": 37.4,
-      "temana_power": 0.4,
-      "temana_temp": 38.9,
-      "total_power": 0.7,
-      "total_temp": 38.1,
-      "total_daily_kwh": null
-    },
-    {
-      "time": "2026-07-08T17:40:00-10:00",
-      "paea_power": 0.3,
-      "paea_temp": 37.4,
-      "temana_power": 0.4,
-      "temana_temp": 38.9,
-      "total_power": 0.7,
-      "total_temp": 38.1,
-      "total_daily_kwh": null
-    },
-    {
-      "time": "2026-07-08T17:45:00-10:00",
-      "paea_power": 0.1,
-      "paea_temp": 37,
-      "temana_power": 0.1,
-      "temana_temp": 38.5,
-      "total_power": 0.2,
-      "total_temp": 37.8,
       "total_daily_kwh": null
     },
     {
-      "time": "2026-07-08T17:50:00-10:00",
+      "time": "2026-07-09T16:20:00-10:00",
       "paea_power": 0,
-      "paea_temp": 37,
+      "paea_temp": 0,
       "temana_power": 0,
-      "temana_temp": 38.2,
-      "total_power": 0.1,
-      "total_temp": 37.6,
+      "temana_temp": 0,
+      "total_power": 0,
+      "total_temp": 0,
       "total_daily_kwh": null
     },
     {
-      "time": "2026-07-08T17:55:00-10:00",
+      "time": "2026-07-09T16:25:00-10:00",
       "paea_power": null,
       "temana_power": null,
       "paea_temp": null,
@@ -1333,7 +1153,7 @@
       "total_daily_kwh": null
     },
     {
-      "time": "2026-07-08T18:00:00-10:00",
+      "time": "2026-07-09T16:30:00-10:00",
       "paea_power": null,
       "temana_power": null,
       "paea_temp": null,
@@ -1343,7 +1163,7 @@
       "total_daily_kwh": null
     },
     {
-      "time": "2026-07-08T18:05:00-10:00",
+      "time": "2026-07-09T16:35:00-10:00",
       "paea_power": null,
       "temana_power": null,
       "paea_temp": null,
@@ -1353,7 +1173,7 @@
       "total_daily_kwh": null
     },
     {
-      "time": "2026-07-08T18:10:00-10:00",
+      "time": "2026-07-09T16:40:00-10:00",
       "paea_power": null,
       "temana_power": null,
       "paea_temp": null,
@@ -1363,7 +1183,7 @@
       "total_daily_kwh": null
     },
     {
-      "time": "2026-07-08T18:15:00-10:00",
+      "time": "2026-07-09T16:45:00-10:00",
       "paea_power": null,
       "temana_power": null,
       "paea_temp": null,
@@ -1373,7 +1193,7 @@
       "total_daily_kwh": null
     },
     {
-      "time": "2026-07-08T18:20:00-10:00",
+      "time": "2026-07-09T16:50:00-10:00",
       "paea_power": null,
       "temana_power": null,
       "paea_temp": null,
@@ -1383,7 +1203,7 @@
       "total_daily_kwh": null
     },
     {
-      "time": "2026-07-08T18:25:00-10:00",
+      "time": "2026-07-09T16:55:00-10:00",
       "paea_power": null,
       "temana_power": null,
       "paea_temp": null,
@@ -1393,7 +1213,7 @@
       "total_daily_kwh": null
     },
     {
-      "time": "2026-07-08T18:30:00-10:00",
+      "time": "2026-07-09T17:00:00-10:00",
       "paea_power": null,
       "temana_power": null,
       "paea_temp": null,
@@ -1403,7 +1223,7 @@
       "total_daily_kwh": null
     },
     {
-      "time": "2026-07-08T18:35:00-10:00",
+      "time": "2026-07-09T17:05:00-10:00",
       "paea_power": null,
       "temana_power": null,
       "paea_temp": null,
@@ -1413,7 +1233,7 @@
       "total_daily_kwh": null
     },
     {
-      "time": "2026-07-08T18:40:00-10:00",
+      "time": "2026-07-09T17:10:00-10:00",
       "paea_power": null,
       "temana_power": null,
       "paea_temp": null,
@@ -1423,7 +1243,7 @@
       "total_daily_kwh": null
     },
     {
-      "time": "2026-07-08T18:45:00-10:00",
+      "time": "2026-07-09T17:15:00-10:00",
       "paea_power": null,
       "temana_power": null,
       "paea_temp": null,
@@ -1433,7 +1253,7 @@
       "total_daily_kwh": null
     },
     {
-      "time": "2026-07-08T18:50:00-10:00",
+      "time": "2026-07-09T17:20:00-10:00",
       "paea_power": null,
       "temana_power": null,
       "paea_temp": null,
@@ -1443,7 +1263,187 @@
       "total_daily_kwh": null
     },
     {
-      "time": "2026-07-08T18:55:00-10:00",
+      "time": "2026-07-09T17:25:00-10:00",
+      "paea_power": null,
+      "temana_power": null,
+      "paea_temp": null,
+      "temana_temp": null,
+      "total_power": null,
+      "total_temp": null,
+      "total_daily_kwh": null
+    },
+    {
+      "time": "2026-07-09T17:30:00-10:00",
+      "paea_power": null,
+      "temana_power": null,
+      "paea_temp": null,
+      "temana_temp": null,
+      "total_power": null,
+      "total_temp": null,
+      "total_daily_kwh": null
+    },
+    {
+      "time": "2026-07-09T17:35:00-10:00",
+      "paea_power": null,
+      "temana_power": null,
+      "paea_temp": null,
+      "temana_temp": null,
+      "total_power": null,
+      "total_temp": null,
+      "total_daily_kwh": null
+    },
+    {
+      "time": "2026-07-09T17:40:00-10:00",
+      "paea_power": null,
+      "temana_power": null,
+      "paea_temp": null,
+      "temana_temp": null,
+      "total_power": null,
+      "total_temp": null,
+      "total_daily_kwh": null
+    },
+    {
+      "time": "2026-07-09T17:45:00-10:00",
+      "paea_power": null,
+      "temana_power": null,
+      "paea_temp": null,
+      "temana_temp": null,
+      "total_power": null,
+      "total_temp": null,
+      "total_daily_kwh": null
+    },
+    {
+      "time": "2026-07-09T17:50:00-10:00",
+      "paea_power": null,
+      "temana_power": null,
+      "paea_temp": null,
+      "temana_temp": null,
+      "total_power": null,
+      "total_temp": null,
+      "total_daily_kwh": null
+    },
+    {
+      "time": "2026-07-09T17:55:00-10:00",
+      "paea_power": null,
+      "temana_power": null,
+      "paea_temp": null,
+      "temana_temp": null,
+      "total_power": null,
+      "total_temp": null,
+      "total_daily_kwh": null
+    },
+    {
+      "time": "2026-07-09T18:00:00-10:00",
+      "paea_power": null,
+      "temana_power": null,
+      "paea_temp": null,
+      "temana_temp": null,
+      "total_power": null,
+      "total_temp": null,
+      "total_daily_kwh": null
+    },
+    {
+      "time": "2026-07-09T18:05:00-10:00",
+      "paea_power": null,
+      "temana_power": null,
+      "paea_temp": null,
+      "temana_temp": null,
+      "total_power": null,
+      "total_temp": null,
+      "total_daily_kwh": null
+    },
+    {
+      "time": "2026-07-09T18:10:00-10:00",
+      "paea_power": null,
+      "temana_power": null,
+      "paea_temp": null,
+      "temana_temp": null,
+      "total_power": null,
+      "total_temp": null,
+      "total_daily_kwh": null
+    },
+    {
+      "time": "2026-07-09T18:15:00-10:00",
+      "paea_power": null,
+      "temana_power": null,
+      "paea_temp": null,
+      "temana_temp": null,
+      "total_power": null,
+      "total_temp": null,
+      "total_daily_kwh": null
+    },
+    {
+      "time": "2026-07-09T18:20:00-10:00",
+      "paea_power": null,
+      "temana_power": null,
+      "paea_temp": null,
+      "temana_temp": null,
+      "total_power": null,
+      "total_temp": null,
+      "total_daily_kwh": null
+    },
+    {
+      "time": "2026-07-09T18:25:00-10:00",
+      "paea_power": null,
+      "temana_power": null,
+      "paea_temp": null,
+      "temana_temp": null,
+      "total_power": null,
+      "total_temp": null,
+      "total_daily_kwh": null
+    },
+    {
+      "time": "2026-07-09T18:30:00-10:00",
+      "paea_power": null,
+      "temana_power": null,
+      "paea_temp": null,
+      "temana_temp": null,
+      "total_power": null,
+      "total_temp": null,
+      "total_daily_kwh": null
+    },
+    {
+      "time": "2026-07-09T18:35:00-10:00",
+      "paea_power": null,
+      "temana_power": null,
+      "paea_temp": null,
+      "temana_temp": null,
+      "total_power": null,
+      "total_temp": null,
+      "total_daily_kwh": null
+    },
+    {
+      "time": "2026-07-09T18:40:00-10:00",
+      "paea_power": null,
+      "temana_power": null,
+      "paea_temp": null,
+      "temana_temp": null,
+      "total_power": null,
+      "total_temp": null,
+      "total_daily_kwh": null
+    },
+    {
+      "time": "2026-07-09T18:45:00-10:00",
+      "paea_power": null,
+      "temana_power": null,
+      "paea_temp": null,
+      "temana_temp": null,
+      "total_power": null,
+      "total_temp": null,
+      "total_daily_kwh": null
+    },
+    {
+      "time": "2026-07-09T18:50:00-10:00",
+      "paea_power": null,
+      "temana_power": null,
+      "paea_temp": null,
+      "temana_temp": null,
+      "total_power": null,
+      "total_temp": null,
+      "total_daily_kwh": null
+    },
+    {
+      "time": "2026-07-09T18:55:00-10:00",
       "paea_power": null,
       "temana_power": null,
       "paea_temp": null,
@@ -1459,12 +1459,12 @@
       "slug": "paea",
       "name": "Collège de Paea",
       "capacity_kwp": 50.5,
-      "daily_kwh": 2.5,
-      "daily_pending": false,
+      "daily_kwh": null,
+      "daily_pending": true,
       "live_power_kva": 0,
-      "temperature": 37,
+      "temperature": 0,
       "total_mwh": 59.78,
-      "load_ratio": 0.001,
+      "load_ratio": 0,
       "model": "SG50CX-P2",
       "install_date": "2024-09-26 11:15:46"
     },
@@ -1473,10 +1473,10 @@
       "slug": "temana",
       "name": "Temana import",
       "capacity_kwp": 58,
-      "daily_kwh": 3.7,
-      "daily_pending": false,
+      "daily_kwh": null,
+      "daily_pending": true,
       "live_power_kva": 0,
-      "temperature": 38.2,
+      "temperature": 0,
       "total_mwh": 140.99,
       "load_ratio": 0,
       "model": "SG50CX-P2",
