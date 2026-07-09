@@ -46,6 +46,7 @@ jobs:
           cp dashboard/dashboard.html docs/
           cp dashboard/paea.html docs/
           cp dashboard/temana.html docs/
+          cp dashboard/isolar-data.json docs/
 
       - name: Commit and push changes
         run: |
