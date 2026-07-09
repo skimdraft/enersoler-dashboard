@@ -2,8 +2,8 @@ name: Update Dashboard
 
 on:
   schedule:
-    # Every 5 min — testing cron activation
-    - cron: '*/5 * * * *'
+    # Every 5 min during daylight (7h-18h Tahiti = 17h-04h UTC)
+    - cron: '*/5 17-23,0-4 * * *'
   workflow_dispatch:
   push:
     paths:
