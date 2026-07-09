@@ -2,9 +2,13 @@ name: Update Dashboard
 
 on:
   schedule:
-    # Every 5 min, 7h-18h Tahiti (UTC-10) = 17h-04h UTC — GitHub min interval
+    # Every 5 min, 7h-18h Tahiti (UTC-10) = 17h-04h UTC
     - cron: '*/5 17-23,0-4 * * *'
   workflow_dispatch:
+  push:
+    paths:
+      - 'dashboard/**'
+      - '.github/workflows/update-dashboard.yml'
 
 concurrency:
   group: dashboard-update
@@ -58,6 +62,6 @@ jobs:
           git add dashboard/dashboard.html dashboard/paea.html dashboard/temana.html
           git add docs/dashboard.html docs/paea.html docs/temana.html docs/index.html
           git diff --staged --quiet || (
-            git commit -m "🔄 $(TZ='Pacific/Tahiti' date +'%d/%m %H:%M') — data refresh" &&
+            git commit -m "data: $(TZ='Pacific/Tahiti' date +'%d/%m %H:%M') -- refresh" &&
             git push
           )
