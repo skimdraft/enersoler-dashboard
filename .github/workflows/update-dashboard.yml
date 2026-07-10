@@ -2,14 +2,11 @@ name: Update Dashboard
 
 on:
   schedule:
-    # Every 5 min during daylight (7h-18h Tahiti = 17h-04h UTC)
-    # Fast extract only — real-time data, no history
-    - cron: '*/5 17-23,0-4 * * *'
+    # Every 5 min during daylight Tahiti (7h-18h = UTC 17h-04h)
+    # Split into two ranges to avoid midnight-wrap cron issues
+    - cron: '*/5 17-23 * * *'   # 17h-23h UTC = 7h-13h Tahiti
+    - cron: '*/5 0-4 * * *'     # 0h-4h UTC = 14h-18h Tahiti
   workflow_dispatch:
-  push:
-    paths:
-      - 'dashboard/**'
-      - '.github/workflows/update-dashboard.yml'
 
 concurrency:
   group: dashboard-update
@@ -19,7 +16,6 @@ permissions:
   contents: write
 
 jobs:
-  # ⚡ Fast: every 5 min — real-time data only (~20 sec)
   update:
     runs-on: ubuntu-latest
     timeout-minutes: 2
@@ -35,10 +31,10 @@ jobs:
 
       - name: Create .env from secrets
         run: |
-          echo "ISOLAR_APP_KEY=${{ secrets.ISOLAR_APP_KEY }}" >> .env
-          echo "ISOLAR_APP_SECRET=${{ secrets.ISOLAR_APP_SECRET }}" >> .env
+          echo "ISOLAR_APP_KEY=*** secrets.ISOLAR_APP_KEY }}" >> .env
+          echo "ISOLAR_APP_SECRET=*** secrets.ISOLAR_APP_SECRET }}" >> .env
 
-      - name: ⚡ Fast Extract (real-time only)
+      - name: Fast Extract (real-time only)
         working-directory: dashboard
         run: node extract-fast.js
         timeout-minutes: 1
