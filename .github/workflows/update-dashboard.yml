@@ -5,10 +5,6 @@ on:
     - cron: '*/5 * * * *'
   workflow_dispatch:
   push:
-    paths:
-      - 'dashboard/**'
-      - '.github/workflows/**'
-
 concurrency:
   group: dashboard-update
   cancel-in-progress: true
