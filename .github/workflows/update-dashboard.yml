@@ -31,9 +31,6 @@ jobs:
           echo "Daylight (${HOUR}h Tahiti), proceeding"
 
       - uses: actions/checkout@v4
-        with:
-          ssh-key: "${{ secrets.DEPLOY_KEY }}"
-          ssh-known-hosts: 'github.com ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIOMqqnkVzrm0SdG6UOoqKLsabgH5C9okWi0dh2l9GKJl'
       - uses: actions/setup-node@v4
         with:
           node-version: '20'
@@ -56,6 +53,14 @@ jobs:
           cp dashboard/temana.html docs/
           cp dashboard/isolar-data.json docs/
 
+      - name: Setup SSH deploy key
+        run: |
+          mkdir -p ~/.ssh
+          echo "${{ secrets.DEPLOY_KEY }}" > ~/.ssh/deploy_key
+          chmod 600 ~/.ssh/deploy_key
+          git remote set-url origin git@github.com:skimdraft/enersoler-dashboard.git
+          git config core.sshCommand "ssh -i ~/.ssh/deploy_key -o StrictHostKeyChecking=accept-new"
+
       - name: Commit & Push
         run: |
           git config user.name "Enersoler Bot"
@@ -66,4 +71,3 @@ jobs:
           git add docs/dashboard.html docs/paea.html docs/temana.html
           git add docs/index.html docs/isolar-data.json
           git diff --staged --quiet || (git commit -m "data: $(TZ='Pacific/Tahiti' date +'%d/%m %H:%M') -- refresh" && git push)
-
