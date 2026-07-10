@@ -31,6 +31,8 @@ jobs:
           echo "Daylight (${HOUR}h Tahiti), proceeding"
 
       - uses: actions/checkout@v4
+          with:
+          ssh-key: ${{ secrets.DEPLOY_KEY }}
       - uses: actions/setup-node@v4
         with:
           node-version: '20'
