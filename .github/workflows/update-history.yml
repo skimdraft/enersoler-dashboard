@@ -2,9 +2,9 @@ name: Update History
 
 on:
   schedule:
-    # Every hour during daylight + once overnight to capture final day totals
-    # Hourly: 7h-18h Tahiti = 17h-04h UTC
-    - cron: '5 17-23,0-4 * * *'
+    # 2x per day: mid-morning + evening (Tahiti time)
+    # 10h Tahiti = 20h UTC, 18h Tahiti = 04h UTC
+    - cron: '30 20,4 * * *'
   workflow_dispatch:
 
 concurrency:
@@ -30,8 +30,8 @@ jobs:
 
       - name: Create .env from secrets
         run: |
-          echo "ISOLAR_APP_KEY=${{ secrets.ISOLAR_APP_KEY }}" >> .env
-          echo "ISOLAR_APP_SECRET=${{ secrets.ISOLAR_APP_SECRET }}" >> .env
+          echo "ISOLAR_APP_KEY=*** secrets.ISOLAR_APP_KEY }}" >> .env
+          echo "ISOLAR_APP_SECRET=*** secrets.ISOLAR_APP_SECRET }}" >> .env
 
       - name: Fetch history + real-time data
         working-directory: dashboard
