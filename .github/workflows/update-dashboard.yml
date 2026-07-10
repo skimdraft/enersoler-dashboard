@@ -31,6 +31,9 @@ jobs:
           echo "Daylight (${HOUR}h Tahiti), proceeding"
 
       - uses: actions/checkout@v4
+        with:
+          ssh-key: "${{ secrets.DEPLOY_KEY }}"
+          ssh-known-hosts: 'github.com ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIOMqqnkVzrm0SdG6UOoqKLsabgH5C9okWi0dh2l9GKJl'
       - uses: actions/setup-node@v4
         with:
           node-version: '20'
