@@ -31,6 +31,8 @@ jobs:
           echo "Daylight (${HOUR}h Tahiti), proceeding"
 
       - uses: actions/checkout@v4
+        with:
+          ssh-key: ${{ secrets.DEPLOY_KEY }}
       - uses: actions/setup-node@v4
         with:
           node-version: '20'
@@ -53,15 +55,10 @@ jobs:
           cp dashboard/temana.html docs/
           cp dashboard/isolar-data.json docs/
 
-      - uses: webfactory/ssh-agent@v0.9.1
-        with:
-          ssh-private-key: ${{ secrets.DEPLOY_KEY }}
-
       - name: Commit & Push
         run: |
           git config user.name "Enersoler Bot"
           git config user.email "bot@enersoler.com"
-          git remote set-url origin git@github.com:skimdraft/enersoler-dashboard.git
           git add dashboard/isolar-data.json dashboard/isolar-tokens.json
           git add dashboard/history.json dashboard/daily-baseline.json
           git add dashboard/dashboard.html dashboard/paea.html dashboard/temana.html
