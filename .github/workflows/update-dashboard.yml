@@ -16,14 +16,18 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 2
     steps:
-      - name: Check daylight hours
+      - name: Check schedule
         run: |
           HOUR=$(TZ='Pacific/Tahiti' date +%H)
-          if [ "$HOUR" -lt 7 ] || [ "$HOUR" -ge 18 ]; then
-            echo "Night (${HOUR}h Tahiti), exiting"
+          MIN=$(TZ='Pacific/Tahiti' date +%M)
+          if [ "$HOUR" -ge 7 ] && [ "$HOUR" -lt 18 ]; then
+            echo "Day (${HOUR}h${MIN}), run"
+          elif [ "$MIN" = "00" ]; then
+            echo "Night (${HOUR}h00), token refresh only"
+          else
+            echo "Night (${HOUR}h${MIN}), skip"
             exit 0
           fi
-          echo "Daylight (${HOUR}h Tahiti), proceeding"
 
       - uses: actions/checkout@v4
         with:
