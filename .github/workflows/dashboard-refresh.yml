@@ -1,14 +1,14 @@
-name: Update Dashboard
+name: Dashboard Refresh
 
 on:
   schedule:
-    # Every 5 min during daylight (7h-18h Tahiti = 17h-04h UTC)
-    - cron: '*/5 17-23,0-4 * * *'
+    - cron: '*/5 17-23 * * *'
+    - cron: '*/5 0-4 * * *'
   workflow_dispatch:
   push:
     paths:
       - 'dashboard/**'
-      - '.github/workflows/update-dashboard.yml'
+      - '.github/workflows/**'
 
 concurrency:
   group: dashboard-update
@@ -18,49 +18,34 @@ permissions:
   contents: write
 
 jobs:
-  update:
+  refresh:
     runs-on: ubuntu-latest
-    timeout-minutes: 2
-
+    timeout-minutes: 3
     steps:
-      - name: Checkout repo
-        uses: actions/checkout@v4
-
-      - name: Setup Node.js
-        uses: actions/setup-node@v4
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
         with:
           node-version: '20'
-
-      - name: Create .env from secrets
+      - name: Create .env
         run: |
           echo "ISOLAR_APP_KEY=*** secrets.ISOLAR_APP_KEY }}" >> .env
           echo "ISOLAR_APP_SECRET=*** secrets.ISOLAR_APP_SECRET }}" >> .env
-
-      - name: Fast Extract
+      - name: Extract & Build
         working-directory: dashboard
-        run: node extract-fast.js
-        timeout-minutes: 1
-
-      - name: Build HTML pages
-        working-directory: dashboard
-        run: node build.js
-
-      - name: Copy HTML to docs/
+        run: |
+          node extract-fast.js
+          node build.js
+      - name: Copy to docs
         run: |
           cp dashboard/dashboard.html docs/
           cp dashboard/paea.html docs/
           cp dashboard/temana.html docs/
           cp dashboard/isolar-data.json docs/
-
-      - name: Commit and push changes
+      - name: Commit & Push
         run: |
           git config user.name "Enersoler Bot"
           git config user.email "bot@enersoler.com"
-          git add dashboard/isolar-data.json dashboard/isolar-tokens.json
-          git add dashboard/history.json dashboard/daily-baseline.json
+          git add dashboard/isolar-data.json dashboard/isolar-tokens.json dashboard/history.json dashboard/daily-baseline.json
           git add dashboard/dashboard.html dashboard/paea.html dashboard/temana.html
           git add docs/dashboard.html docs/paea.html docs/temana.html docs/index.html docs/isolar-data.json
-          git diff --staged --quiet || (
-            git commit -m "data: $(TZ='Pacific/Tahiti' date +'%d/%m %H:%M') -- refresh" &&
-            git push
-          )
+          git diff --staged --quiet || (git commit -m "data: $(TZ='Pacific/Tahiti' date +'%d/%m %H:%M') -- refresh" && git push)
