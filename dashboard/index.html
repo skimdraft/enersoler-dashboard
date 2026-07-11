@@ -240,7 +240,7 @@ function render(data){
 
   const p1=data.plants[0],p2=data.plants[1];
   const totalYield=p1.total_mwh+p2.total_mwh;
-  const expectedDaily=data.totalKWp*4.5;
+  const expectedDaily=data.totalKWp*3.5;
   const yieldPct=data.dailyKWh?Math.min(100,Math.round(data.dailyKWh/expectedDaily*100)):0;
   const yieldAngle=yieldPct*360/100;
 
