@@ -1,59 +1,61 @@
 name: Update Dashboard
 
+# Declenche UNIQUEMENT de l'exterieur (cron-job.org toutes les 5 min)
+# et manuellement. Plus de cron GitHub (throttle ~3h) ni d'auto-dispatch.
 on:
-  schedule:
-    - cron: '0,5,10,15,20,25,30,35,40,45,50,55 * * * *'
   workflow_dispatch:
+
+# Empeche deux runs de se marcher dessus (evite les conflits de push)
+concurrency:
+  group: dashboard-update
+  cancel-in-progress: false
 
 permissions:
   contents: write
-  actions: write
 
 jobs:
   update:
     runs-on: ubuntu-latest
-    timeout-minutes: 2
+    timeout-minutes: 3
     steps:
-      - name: Schedule next run
-        run: |
-          curl -s -X POST \
-            -H "Authorization: Bearer ${{ secrets.PAT }}" \
-            -H "Accept: application/vnd.github+json" \
-            "https://api.github.com/repos/${{ github.repository }}/actions/workflows/update-dashboard.yml/dispatches" \
-            -d '{"ref":"${{ github.ref_name }}"}'
-
       - name: Check schedule
+        id: guard
         run: |
           HOUR=$(TZ='Pacific/Tahiti' date +%H)
           MIN=$(TZ='Pacific/Tahiti' date +%M)
-          if [ "$HOUR" -ge 7 ] && [ "$HOUR" -lt 18 ]; then
+          if [ "$HOUR" -ge 5 ] && [ "$HOUR" -lt 19 ]; then
             echo "Day (${HOUR}h${MIN}), run"
-          elif [ "$MIN" = "00" ]; then
-            echo "Night (${HOUR}h00), token refresh only"
+            echo "run=yes" >> "$GITHUB_OUTPUT"
           else
             echo "Night (${HOUR}h${MIN}), skip"
-            exit 0
+            echo "run=no" >> "$GITHUB_OUTPUT"
           fi
 
       - uses: actions/checkout@v4
+        if: steps.guard.outputs.run == 'yes'
         with:
           ssh-key: ${{ secrets.DEPLOY_KEY }}
+
       - uses: actions/setup-node@v4
+        if: steps.guard.outputs.run == 'yes'
         with:
           node-version: '20'
 
       - name: Create .env
+        if: steps.guard.outputs.run == 'yes'
         run: |
           echo "ISOLAR_APP_KEY=${{ secrets.ISOLAR_APP_KEY }}" >> .env
           echo "ISOLAR_APP_SECRET=${{ secrets.ISOLAR_APP_SECRET }}" >> .env
 
       - name: Extract & Build
+        if: steps.guard.outputs.run == 'yes'
         working-directory: dashboard
         run: |
           node extract-fast.js
           node build.js
 
       - name: Copy to docs
+        if: steps.guard.outputs.run == 'yes'
         run: |
           cp dashboard/dashboard.html docs/
           cp dashboard/paea.html docs/
@@ -61,6 +63,7 @@ jobs:
           cp dashboard/isolar-data.json docs/
 
       - name: Commit & Push
+        if: steps.guard.outputs.run == 'yes'
         run: |
           git config user.name "Enersoler Bot"
           git config user.email "bot@enersoler.com"
@@ -69,4 +72,6 @@ jobs:
           git add dashboard/dashboard.html dashboard/paea.html dashboard/temana.html
           git add docs/dashboard.html docs/paea.html docs/temana.html
           git add docs/index.html docs/isolar-data.json
-          git diff --staged --quiet || (git commit -m "data: $(TZ='Pacific/Tahiti' date +'%d/%m %H:%M') -- refresh" && git push)
+          git diff --staged --quiet && echo "Rien de nouveau" && exit 0
+          git commit -m "data: $(TZ='Pacific/Tahiti' date +'%d/%m %H:%M') -- refresh"
+          git push || (git pull --rebase -X ours && git push)
