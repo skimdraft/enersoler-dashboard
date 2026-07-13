@@ -292,9 +292,9 @@ async function fetchAll() {
         entry[info.slug + '_temp'] = pp.temp || null;
     }
 
-    // Only record data during daylight hours (7h-19h Tahiti)
+    // Only record data during daylight hours (5h-19h Tahiti)
     const slotHour = slotTime.getHours();
-    if (slotHour >= 7 && slotHour < 19) {
+    if (slotHour >= 5 && slotHour < 19) {
         // Don't duplicate same slot
         if (history.length && history[history.length - 1].time === localTime) {
             history[history.length - 1] = entry;

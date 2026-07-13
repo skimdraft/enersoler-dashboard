@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Collège de Paea — Enersoler Tahiti</title>
+<title>Collège de Paea - Enersoler Tahiti</title>
 <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
 <style>
   @import url('https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;700;800;900&family=JetBrains+Mono:wght@400;600;700&display=swap');
@@ -115,7 +115,7 @@
   <div style="grid-column:1/7;display:flex;gap:1.5vh">
     <div class="card glow" style="flex:7;min-width:0">
       <div class="card-inner">
-        <div class="clabel">⚡ Puissance live — aujourd'hui 7h-19h</div>
+        <div class="clabel">⚡ Puissance live - aujourd'hui 5h-19h</div>
         <div style="display:flex;flex-direction:column;align-items:center;gap:0.2vh;position:absolute;top:clamp(4px,0.8vh,12px);right:clamp(10px,1.3vw,18px);z-index:5">
           <span class="icon-bolt"><svg viewBox="0 0 24 24" fill="none"><path d="M13 2L3 14h6l-1 8 10-12h-6l1-8z" stroke="rgba(195,205,34,0.9)" stroke-width="2" fill="rgba(195,205,34,0.12)" stroke-linejoin="round"/></svg></span>
           <span style="font-size:clamp(1em,min(4.5vw,8vh),3.5em);font-weight:900;color:var(--gold);line-height:1;" class="live-glow" id="liveKva">--</span>
@@ -147,7 +147,7 @@
     </div>
   </div>
 
-  <!-- 📋 INFOS (55%) + TEMP (15%) + CO₂ (15%) + GAUGE (15%) -->
+  <!-- 📋 INFOS (55%) + TEMP (15%) + CO2 (15%) + GAUGE (15%) -->
   <div style="grid-column:1/7;display:flex;gap:1.5vh">
     <div class="card green" style="flex:55;min-width:0">
     <div class="card-inner">
@@ -170,13 +170,13 @@
     </div>
   </div>
 
-  <!-- 🌱 CO₂ (15%) -->
+  <!-- 🌱 CO2 (15%) -->
     <div class="card" style="flex:15;min-width:0">
     <div class="card-inner">
       <div class="mini-card">
         <div class="mini-icon">🌱</div>
         <div class="mini-val" id="co2">--</div>
-        <div class="mini-lbl">t CO₂ évitées</div>
+        <div class="mini-lbl">t CO2 évitées</div>
       </div>
     </div>
   </div>
@@ -220,7 +220,7 @@ async function loadWeather() {
         '<span>Humidité</span><span style="color:var(--gold);text-align:right;font-weight:600">'+c.relative_humidity_2m+'%</span>'+
         '<span>Vent</span><span style="color:var(--gold);text-align:right;font-weight:600">'+fmt(c.wind_speed_10m,1)+' km/h</span>'+
       '</div>';
-  } catch(e){ document.getElementById('wxContent').innerHTML='<div style="color:rgba(255,255,255,0.3);font-size:0.5em;text-align:center;padding-top:4vh">—</div>'; }
+  } catch(e){ document.getElementById('wxContent').innerHTML='<div style="color:rgba(255,255,255,0.3);font-size:0.5em;text-align:center;padding-top:4vh">-</div>'; }
 }
 
 // ── Bar chart (sommets arrondis) ──
@@ -311,7 +311,7 @@ function render(data) {
 
   const raw = dailyLookup(data.history_daily || [], plant.slug);
 
-  // Power chart (5-min data) — interpolate gaps
+  // Power chart (5-min data) - interpolate gaps
   const todayHist=histLive.filter(p=>{if(!p.time||!p.time.startsWith(todayDate))return false;const h=new Date(p.time).getHours();return h>=7&&h<19;});
   const labels=todayHist.map(p=>{const t=new Date(p.time);return String(t.getHours()).padStart(2,'0')+':'+String(t.getMinutes()).padStart(2,'0');});
   let power=todayHist.map(p=>p[plant.slug+'_power']);

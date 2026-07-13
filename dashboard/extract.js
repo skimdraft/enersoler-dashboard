@@ -91,9 +91,9 @@ function getTodayPacificDate() {
 }
 
 function generateTimeline(todayISO) {
-    // Generate all 5-min slots from 07:00 to 19:00 Tahiti time
+    // Generate all 5-min slots from 05:00 to 19:00 Tahiti time
     const points = [];
-    for (let h = 7; h < 19; h++) {
+    for (let h = 5; h < 19; h++) {
         for (let m = 0; m < 60; m += 5) {
             const time = `${todayISO}T${String(h).padStart(2,'0')}:${String(m).padStart(2,'0')}:00-10:00`;
             points.push({

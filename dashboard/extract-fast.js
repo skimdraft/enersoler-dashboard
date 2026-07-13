@@ -65,7 +65,7 @@ async function getToken() {
 // ─── Timeline ─────────────────────────────────────────────────
 function generateTimeline(todayISO) {
     const pts = [];
-    for (let h = 7; h < 19; h++) for (let m = 0; m < 60; m += 5) pts.push({ time: todayISO + 'T' + String(h).padStart(2,'0') + ':' + String(m).padStart(2,'0') + ':00-10:00', paea_power: null, temana_power: null, paea_temp: null, temana_temp: null, total_power: null, total_temp: null, total_daily_kwh: null });
+    for (let h = 5; h < 19; h++) for (let m = 0; m < 60; m += 5) pts.push({ time: todayISO + 'T' + String(h).padStart(2,'0') + ':' + String(m).padStart(2,'0') + ':00-10:00', paea_power: null, temana_power: null, paea_temp: null, temana_temp: null, total_power: null, total_temp: null, total_daily_kwh: null });
     return pts;
 }
 function pointToKey(p) { try { const d = new Date(p.time); let h = d.getUTCHours() - 10; if (h < 0) h += 24; return String(h).padStart(2,'0') + ':' + String(Math.floor(d.getUTCMinutes() / 5) * 5).padStart(2,'0'); } catch(e) { return null; } }
