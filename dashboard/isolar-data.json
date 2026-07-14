@@ -1,6 +1,6 @@
 {
-  "updateTime": "14/07/2026 06:35:22",
-  "timestamp": "2026-07-14T16:35:26.818Z",
+  "updateTime": "14/07/2026 06:40:53",
+  "timestamp": "2026-07-14T16:41:00.278Z",
   "activePlants": 2,
   "totalPlants": 2,
   "totalKVA": 0,
@@ -8,7 +8,7 @@
   "totalMWh": 202.61,
   "dailyKWh": null,
   "dailyPending": true,
-  "avgTemp": 29.1,
+  "avgTemp": 29.3,
   "co2Tonnes": 141.8,
   "authWarning": null,
   "history": [
@@ -214,12 +214,12 @@
     },
     {
       "time": "2026-07-14T06:40:00-10:00",
-      "paea_power": null,
-      "temana_power": null,
-      "paea_temp": null,
-      "temana_temp": null,
-      "total_power": null,
-      "total_temp": null,
+      "paea_power": 0,
+      "paea_temp": 28.3,
+      "temana_power": 0,
+      "temana_temp": 30.3,
+      "total_power": 0,
+      "total_temp": 29.3,
       "total_daily_kwh": null
     },
     {
@@ -1702,7 +1702,7 @@
       "daily_kwh": null,
       "daily_pending": true,
       "live_power_kva": 0,
-      "temperature": 27.9,
+      "temperature": 28.3,
       "total_mwh": 60.68,
       "load_ratio": 0,
       "model": "SG50CX-P2",
