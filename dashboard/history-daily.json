@@ -668,5 +668,17 @@
     "temana_kwh": 237,
     "paea_peak_kw": 38.46,
     "temana_peak_kw": 40.32
+  },
+  {
+    "date": "2026-07-13",
+    "paea_kwh": 205.9,
+    "paea_peak_kw": 36.61,
+    "temana_kwh": 222.7,
+    "temana_peak_kw": 43.33
+  },
+  {
+    "date": "2026-07-14",
+    "paea_kwh": 114.9,
+    "temana_kwh": 152.8
   }
 ]
