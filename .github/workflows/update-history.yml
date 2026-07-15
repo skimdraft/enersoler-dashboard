@@ -2,9 +2,8 @@ name: Update History
 
 on:
   schedule:
-    # 2x per day: mid-morning + evening (Tahiti time)
-    # 10h Tahiti = 20h UTC, 18h Tahiti = 04h UTC
-    - cron: '30 20,4 * * *'
+    # 1x per day at midnight Tahiti = 10:00 UTC
+    - cron: '0 10 * * *'
   workflow_dispatch:
 
 concurrency:
