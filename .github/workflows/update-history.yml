@@ -2,8 +2,12 @@ name: Update History
 
 on:
   schedule:
-    # 1x per day at midnight Tahiti = 10:00 UTC
-    - cron: '0 10 * * *'
+    # 1x/jour, vise minuit Tahiti (10:23 UTC). Minute decalee car GitHub jette
+    # plus souvent les crons "pile" (:00). NB: le cron GitHub est best effort,
+    # il part parfois avec des heures de retard (observe: +5h) et peut donc
+    # tomber dans la fenetre live 5h-19h ou update-dashboard pousse toutes les
+    # ~5 min -> le push ci-dessous est protege contre ces courses (rebase+retry).
+    - cron: '23 10 * * *'
   workflow_dispatch:
 
 concurrency:
@@ -20,12 +24,12 @@ jobs:
 
     steps:
       - name: Checkout repo
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
         with:
           ssh-key: ${{ secrets.DEPLOY_KEY }}
 
       - name: Setup Node.js
-        uses: actions/setup-node@v4
+        uses: actions/setup-node@v5
         with:
           node-version: '20'
 
@@ -61,7 +65,15 @@ jobs:
           git add dashboard/history.json dashboard/daily-baseline.json
           git add dashboard/dashboard.html dashboard/paea.html dashboard/temana.html
           git add docs/dashboard.html docs/paea.html docs/temana.html docs/index.html docs/isolar-data.json docs/history-daily.json docs/history-monthly.json
-          git diff --staged --quiet || (
-            git commit -m "history: $(TZ='Pacific/Tahiti' date +'%d/%m %H:%M') -- daily+monthly refresh" &&
-            git push
-          )
+          git diff --staged --quiet && echo "Rien de nouveau" && exit 0
+          git commit -m "history: $(TZ='Pacific/Tahiti' date +'%d/%m %H:%M') -- daily+monthly refresh"
+          # Push protege : si un run live pousse entre notre checkout et notre push,
+          # on rebase (-X theirs = nos fichiers history fraichement calcules gagnent
+          # les conflits ; le prochain run live <5 min rafraichit le temps reel).
+          for i in 1 2 3; do
+            git push && exit 0
+            echo "Push rejete (tentative $i), rebase sur origin/master..."
+            git pull --rebase -X theirs
+            sleep 5
+          done
+          git push
