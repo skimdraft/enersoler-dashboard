@@ -2,12 +2,13 @@ name: Update History
 
 on:
   schedule:
-    # 1x/jour, vise minuit Tahiti (10:23 UTC). Minute decalee car GitHub jette
-    # plus souvent les crons "pile" (:00). NB: le cron GitHub est best effort,
-    # il part parfois avec des heures de retard (observe: +5h) et peut donc
-    # tomber dans la fenetre live 5h-19h ou update-dashboard pousse toutes les
-    # ~5 min -> le push ci-dessous est protege contre ces courses (rebase+retry).
-    - cron: '23 10 * * *'
+    # Cible ~21h17 Tahiti (07:17 UTC), tot dans la fenetre calme 19h-5h.
+    # POURQUOI si tot: le cron GitHub est best effort et part AVEC du retard
+    # (observe: +5h). En visant 21h, un retard typique tombe vers ~2h du matin,
+    # et meme un gros retard reste avant 5h (ouverture de la fenetre live).
+    # Minute off-peak (:17) car GitHub jette plus les crons "pile" (:00).
+    # Filet de securite: le push est protege (rebase+retry) si course avec un run live.
+    - cron: '17 7 * * *'
   workflow_dispatch:
 
 concurrency:
