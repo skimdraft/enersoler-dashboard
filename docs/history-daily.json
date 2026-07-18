@@ -275,419 +275,552 @@
     "paea_kwh": 171.3,
     "paea_peak_kw": 47.36,
     "temana_kwh": 108.5,
-    "temana_peak_kw": 32.16
+    "temana_peak_kw": 32.16,
+    "upf_kwh": 0
   },
   {
     "date": "2026-05-18",
     "paea_kwh": 138.9,
     "paea_peak_kw": 42.3,
     "temana_kwh": 145.1,
-    "temana_peak_kw": 43.52
+    "temana_peak_kw": 43.52,
+    "upf_kwh": 11.4,
+    "upf_peak_kw": 37.5
   },
   {
     "date": "2026-05-19",
     "paea_kwh": 160.7,
     "paea_peak_kw": 36.7,
     "temana_kwh": 179.1,
-    "temana_peak_kw": 47.61
+    "temana_peak_kw": 47.61,
+    "upf_kwh": 0
   },
   {
     "date": "2026-05-20",
     "paea_kwh": 212,
     "paea_peak_kw": 33.55,
     "temana_kwh": 195.1,
-    "temana_peak_kw": 46.47
+    "temana_peak_kw": 46.47,
+    "upf_kwh": 822.7,
+    "upf_peak_kw": 96.67
   },
   {
     "date": "2026-05-21",
     "paea_kwh": 176.6,
     "paea_peak_kw": 41.66,
     "temana_kwh": 194.4,
-    "temana_peak_kw": 51.97
+    "temana_peak_kw": 51.97,
+    "upf_kwh": 941.6,
+    "upf_peak_kw": 83.54
   },
   {
     "date": "2026-05-22",
     "paea_kwh": 196.3,
     "paea_peak_kw": 35.62,
     "temana_kwh": 225.1,
-    "temana_peak_kw": 42.18
+    "temana_peak_kw": 42.18,
+    "upf_kwh": 915,
+    "upf_peak_kw": 78.15
   },
   {
     "date": "2026-05-23",
     "paea_kwh": 205.9,
     "paea_peak_kw": 37.61,
     "temana_kwh": 223.1,
-    "temana_peak_kw": 45.19
+    "temana_peak_kw": 45.19,
+    "upf_kwh": 886.5,
+    "upf_peak_kw": 85.37
   },
   {
     "date": "2026-05-24",
     "paea_kwh": 117.9,
     "paea_peak_kw": 36.33,
     "temana_kwh": 170.1,
-    "temana_peak_kw": 53.35
+    "temana_peak_kw": 53.35,
+    "upf_kwh": 702.1,
+    "upf_peak_kw": 99.43
   },
   {
     "date": "2026-05-25",
     "paea_kwh": 172.5,
     "paea_peak_kw": 44.13,
     "temana_kwh": 131.7,
-    "temana_peak_kw": 45.76
+    "temana_peak_kw": 45.76,
+    "upf_kwh": 753.1,
+    "upf_peak_kw": 84.06
   },
   {
     "date": "2026-05-26",
     "paea_kwh": 154.7,
     "paea_peak_kw": 40.02,
     "temana_kwh": 154.4,
-    "temana_peak_kw": 52.61
+    "temana_peak_kw": 52.61,
+    "upf_kwh": 645.5,
+    "upf_peak_kw": 102.15
   },
   {
     "date": "2026-05-27",
     "paea_kwh": 208.2,
     "paea_peak_kw": 33.89,
     "temana_kwh": 237,
-    "temana_peak_kw": 40.19
+    "temana_peak_kw": 40.19,
+    "upf_kwh": 945.4,
+    "upf_peak_kw": 76.38
   },
   {
     "date": "2026-05-28",
     "paea_kwh": 179.6,
     "paea_peak_kw": 38.41,
     "temana_kwh": 207.4,
-    "temana_peak_kw": 49.29
+    "temana_peak_kw": 49.29,
+    "upf_kwh": 794.2,
+    "upf_peak_kw": 87
   },
   {
     "date": "2026-05-29",
     "paea_kwh": 139.7,
     "paea_peak_kw": 38.76,
     "temana_kwh": 138.1,
-    "temana_peak_kw": 41.52
+    "temana_peak_kw": 41.52,
+    "upf_kwh": 678.7,
+    "upf_peak_kw": 93.82
   },
   {
     "date": "2026-05-30",
     "paea_kwh": 194.6,
     "paea_peak_kw": 31.84,
     "temana_kwh": 232.4,
-    "temana_peak_kw": 40.34
+    "temana_peak_kw": 40.34,
+    "upf_kwh": 928.2,
+    "upf_peak_kw": 72.96
   },
   {
     "date": "2026-05-31",
     "paea_kwh": 186.5,
     "paea_peak_kw": 34.75,
     "temana_kwh": 220.5,
-    "temana_peak_kw": 40.07
+    "temana_peak_kw": 40.07,
+    "upf_kwh": 801.4,
+    "upf_peak_kw": 85.54
   },
   {
     "date": "2026-06-01",
     "paea_kwh": 145.8,
     "paea_peak_kw": 33.06,
     "temana_kwh": 176.9,
-    "temana_peak_kw": 51.54
+    "temana_peak_kw": 51.54,
+    "upf_kwh": 606.3,
+    "upf_peak_kw": 69.71
   },
   {
     "date": "2026-06-02",
     "paea_kwh": 89.3,
     "paea_peak_kw": 21.72,
     "temana_kwh": 103.5,
-    "temana_peak_kw": 28.69
+    "temana_peak_kw": 28.69,
+    "upf_kwh": 594.7,
+    "upf_peak_kw": 67.36
   },
   {
     "date": "2026-06-03",
     "paea_kwh": 177.7,
     "paea_peak_kw": 46.1,
     "temana_kwh": 236.4,
-    "temana_peak_kw": 42.12
+    "temana_peak_kw": 42.12,
+    "upf_kwh": 913.3,
+    "upf_peak_kw": 92.49
   },
   {
     "date": "2026-06-04",
     "paea_kwh": 200.1,
     "paea_peak_kw": 42.83,
     "temana_kwh": 167.5,
-    "temana_peak_kw": 51.33
+    "temana_peak_kw": 51.33,
+    "upf_kwh": 891.3,
+    "upf_peak_kw": 101.94
   },
   {
     "date": "2026-06-05",
     "paea_kwh": 155.5,
     "paea_peak_kw": 41.67,
     "temana_kwh": 220.5,
-    "temana_peak_kw": 48.22
+    "temana_peak_kw": 48.22,
+    "upf_kwh": 874.5,
+    "upf_peak_kw": 81.07
   },
   {
     "date": "2026-06-06",
     "paea_kwh": 210.9,
     "paea_peak_kw": 33.65,
     "temana_kwh": 208.5,
-    "temana_peak_kw": 45.79
+    "temana_peak_kw": 45.79,
+    "upf_kwh": 947.3,
+    "upf_peak_kw": 75.34
   },
   {
     "date": "2026-06-07",
     "paea_kwh": 174.9,
     "paea_peak_kw": 41.89,
     "temana_kwh": 146,
-    "temana_peak_kw": 51.02
+    "temana_peak_kw": 51.02,
+    "upf_kwh": 761.2,
+    "upf_peak_kw": 98.44
   },
   {
     "date": "2026-06-08",
     "paea_kwh": 133.3,
     "paea_peak_kw": 40.5,
     "temana_kwh": 223.8,
-    "temana_peak_kw": 44.75
+    "temana_peak_kw": 44.75,
+    "upf_kwh": 921.6,
+    "upf_peak_kw": 81.03
   },
   {
     "date": "2026-06-09",
     "paea_kwh": 156.3,
     "paea_peak_kw": 46.56,
     "temana_kwh": 212.9,
-    "temana_peak_kw": 46.23
+    "temana_peak_kw": 46.23,
+    "upf_kwh": 856.7,
+    "upf_peak_kw": 97.48
   },
   {
     "date": "2026-06-10",
     "paea_kwh": 203.7,
     "paea_peak_kw": 32.62,
     "temana_kwh": 226.8,
-    "temana_peak_kw": 38.75
+    "temana_peak_kw": 38.75,
+    "upf_kwh": 753.6,
+    "upf_peak_kw": 73.29
   },
   {
     "date": "2026-06-11",
     "paea_kwh": 129.7,
     "paea_peak_kw": 33.5,
     "temana_kwh": 98.4,
-    "temana_peak_kw": 41.73
+    "temana_peak_kw": 41.73,
+    "upf_kwh": 680.7,
+    "upf_peak_kw": 90.92
   },
   {
     "date": "2026-06-12",
     "paea_kwh": 91.2,
     "paea_peak_kw": 22.66,
     "temana_kwh": 87.3,
-    "temana_peak_kw": 31.71
+    "temana_peak_kw": 31.71,
+    "upf_kwh": 418.1,
+    "upf_peak_kw": 75.92
   },
   {
     "date": "2026-06-13",
     "paea_kwh": 161.3,
     "paea_peak_kw": 38.99,
     "temana_kwh": 149.2,
-    "temana_peak_kw": 49.53
+    "temana_peak_kw": 49.53,
+    "upf_kwh": 686.2,
+    "upf_peak_kw": 100.01
   },
   {
     "date": "2026-06-14",
     "paea_kwh": 107.3,
     "paea_peak_kw": 24.65,
     "temana_kwh": 113.5,
-    "temana_peak_kw": 44.8
+    "temana_peak_kw": 44.8,
+    "upf_kwh": 545.2,
+    "upf_peak_kw": 83.27
   },
   {
     "date": "2026-06-15",
     "paea_kwh": 204.2,
     "paea_peak_kw": 34.64,
     "temana_kwh": 230.8,
-    "temana_peak_kw": 47.71
+    "temana_peak_kw": 47.71,
+    "upf_kwh": 898.5,
+    "upf_peak_kw": 88.21
   },
   {
     "date": "2026-06-16",
     "paea_kwh": 196.6,
     "paea_peak_kw": 31.75,
     "temana_kwh": 220.1,
-    "temana_peak_kw": 38.33
+    "temana_peak_kw": 38.33,
+    "upf_kwh": 855,
+    "upf_peak_kw": 71.71
   },
   {
     "date": "2026-06-17",
     "paea_kwh": 202.1,
     "paea_peak_kw": 33.48,
     "temana_kwh": 213.7,
-    "temana_peak_kw": 37.68
+    "temana_peak_kw": 37.68,
+    "upf_kwh": 866.9,
+    "upf_peak_kw": 70.93
   },
   {
     "date": "2026-06-18",
     "paea_kwh": 176.5,
     "paea_peak_kw": 33.3,
     "temana_kwh": 210.3,
-    "temana_peak_kw": 43.27
+    "temana_peak_kw": 43.27,
+    "upf_kwh": 812.3,
+    "upf_peak_kw": 70.14
   },
   {
     "date": "2026-06-19",
     "paea_kwh": 165.3,
     "paea_peak_kw": 38,
     "temana_kwh": 196.3,
-    "temana_peak_kw": 46.95
+    "temana_peak_kw": 46.95,
+    "upf_kwh": 777.2,
+    "upf_peak_kw": 94.27
   },
   {
     "date": "2026-06-20",
     "paea_kwh": 135.8,
     "paea_peak_kw": 47.46,
     "temana_kwh": 155.9,
-    "temana_peak_kw": 49.33
+    "temana_peak_kw": 49.33,
+    "upf_kwh": 641.3,
+    "upf_peak_kw": 94.63
   },
   {
     "date": "2026-06-21",
     "paea_kwh": 185.7,
     "paea_peak_kw": 30.91,
     "temana_kwh": 214.3,
-    "temana_peak_kw": 37.92
+    "temana_peak_kw": 37.92,
+    "upf_kwh": 801.8,
+    "upf_peak_kw": 77.52
   },
   {
     "date": "2026-06-22",
     "paea_kwh": 188,
     "paea_peak_kw": 30.96,
     "temana_kwh": 214.3,
-    "temana_peak_kw": 43.9
+    "temana_peak_kw": 43.9,
+    "upf_kwh": 890,
+    "upf_peak_kw": 75.1
   },
   {
     "date": "2026-06-23",
     "paea_kwh": 172,
     "paea_peak_kw": 38.86,
     "temana_kwh": 211.2,
-    "temana_peak_kw": 42.75
+    "temana_peak_kw": 42.75,
+    "upf_kwh": 830.6,
+    "upf_peak_kw": 87.06
   },
   {
     "date": "2026-06-24",
     "paea_kwh": 158.5,
     "paea_peak_kw": 38.34,
     "temana_kwh": 194.4,
-    "temana_peak_kw": 48.63
+    "temana_peak_kw": 48.63,
+    "upf_kwh": 498,
+    "upf_peak_kw": 85.63
   },
   {
     "date": "2026-06-25",
     "paea_kwh": 159,
     "paea_peak_kw": 38.76,
     "temana_kwh": 113.8,
-    "temana_peak_kw": 47.16
+    "temana_peak_kw": 47.16,
+    "upf_kwh": 623,
+    "upf_peak_kw": 86.07
   },
   {
     "date": "2026-06-26",
     "paea_kwh": 162.6,
     "paea_peak_kw": 38.58,
     "temana_kwh": 191.7,
-    "temana_peak_kw": 49.81
+    "temana_peak_kw": 49.81,
+    "upf_kwh": 821.9,
+    "upf_peak_kw": 91.24
   },
   {
     "date": "2026-06-27",
     "paea_kwh": 166.4,
     "paea_peak_kw": 38.94,
     "temana_kwh": 194.1,
-    "temana_peak_kw": 47.6
+    "temana_peak_kw": 47.6,
+    "upf_kwh": 822.5,
+    "upf_peak_kw": 91.26
   },
   {
     "date": "2026-06-28",
     "paea_kwh": 198.3,
     "paea_peak_kw": 32.01,
     "temana_kwh": 223.3,
-    "temana_peak_kw": 37.99
+    "temana_peak_kw": 37.99,
+    "upf_kwh": 904.1,
+    "upf_peak_kw": 71.83
   },
   {
     "date": "2026-06-29",
     "paea_kwh": 167.9,
     "paea_peak_kw": 43.96,
     "temana_kwh": 153,
-    "temana_peak_kw": 49.54
+    "temana_peak_kw": 49.54,
+    "upf_kwh": 793.4,
+    "upf_peak_kw": 93.9
   },
   {
     "date": "2026-06-30",
     "paea_kwh": 197.6,
     "paea_peak_kw": 31.51,
     "temana_kwh": 227.4,
-    "temana_peak_kw": 38.97
+    "temana_peak_kw": 38.97,
+    "upf_kwh": 906.6,
+    "upf_peak_kw": 73.47
   },
   {
     "date": "2026-07-01",
     "paea_kwh": 199.6,
     "paea_peak_kw": 32.05,
     "temana_kwh": 225.3,
-    "temana_peak_kw": 39.14
+    "temana_peak_kw": 39.14,
+    "upf_kwh": 932.1,
+    "upf_peak_kw": 74.65
   },
   {
     "date": "2026-07-02",
     "paea_kwh": 195.5,
     "paea_peak_kw": 31.82,
     "temana_kwh": 222.4,
-    "temana_peak_kw": 37.99
+    "temana_peak_kw": 37.99,
+    "upf_kwh": 889.4,
+    "upf_peak_kw": 70.94
   },
   {
     "date": "2026-07-03",
     "paea_kwh": 131.4,
     "paea_peak_kw": 34.97,
     "temana_kwh": 161.8,
-    "temana_peak_kw": 48.05
+    "temana_peak_kw": 48.05,
+    "upf_kwh": 545.9,
+    "upf_peak_kw": 85.77
   },
   {
     "date": "2026-07-04",
     "paea_kwh": 106.6,
     "paea_peak_kw": 41.01,
     "temana_kwh": 51.3,
-    "temana_peak_kw": 18.3
+    "temana_peak_kw": 18.3,
+    "upf_kwh": 272.8,
+    "upf_peak_kw": 58.02
   },
   {
     "date": "2026-07-05",
     "paea_kwh": 90.8,
     "paea_peak_kw": 34.93,
     "temana_kwh": 111.2,
-    "temana_peak_kw": 47.78
+    "temana_peak_kw": 47.78,
+    "upf_kwh": 466,
+    "upf_peak_kw": 84.04
   },
   {
     "date": "2026-07-06",
     "paea_kwh": 147.3,
     "paea_peak_kw": 39.33,
     "temana_kwh": 174.6,
-    "temana_peak_kw": 48.72
+    "temana_peak_kw": 48.72,
+    "upf_kwh": 741.9,
+    "upf_peak_kw": 91.99
   },
   {
     "date": "2026-07-07",
     "paea_kwh": 174.4,
     "temana_kwh": 137.2,
     "paea_peak_kw": 46.67,
-    "temana_peak_kw": 49.82
+    "temana_peak_kw": 49.82,
+    "upf_kwh": 710,
+    "upf_peak_kw": 91.96
   },
   {
     "date": "2026-07-08",
     "paea_kwh": 187.5,
     "temana_kwh": 235.2,
     "paea_peak_kw": 36.5,
-    "temana_peak_kw": 51.5
+    "temana_peak_kw": 51.5,
+    "upf_kwh": 892.1,
+    "upf_peak_kw": 89.46
   },
   {
     "date": "2026-07-09",
     "paea_kwh": 206.8,
     "temana_kwh": 229.4,
     "paea_peak_kw": 34.13,
-    "temana_peak_kw": 40.55
+    "temana_peak_kw": 40.55,
+    "upf_kwh": 890.8,
+    "upf_peak_kw": 73.13
   },
   {
     "date": "2026-07-10",
     "paea_kwh": 201.5,
     "temana_kwh": 141.1,
     "paea_peak_kw": 33.47,
-    "temana_peak_kw": 45.18
+    "temana_peak_kw": 45.18,
+    "upf_kwh": 740.1,
+    "upf_peak_kw": 79.91
   },
   {
     "date": "2026-07-11",
     "paea_kwh": 75.8,
     "temana_kwh": 107.3,
     "paea_peak_kw": 41.2,
-    "temana_peak_kw": 38.73
+    "temana_peak_kw": 38.73,
+    "upf_kwh": 428.1,
+    "upf_peak_kw": 66.47
   },
   {
     "date": "2026-07-12",
     "paea_kwh": 206.8,
     "temana_kwh": 237,
     "paea_peak_kw": 38.46,
-    "temana_peak_kw": 40.32
+    "temana_peak_kw": 40.32,
+    "upf_kwh": 962.8,
+    "upf_peak_kw": 75.08
   },
   {
     "date": "2026-07-13",
     "paea_kwh": 205.9,
     "paea_peak_kw": 36.61,
     "temana_kwh": 222.7,
-    "temana_peak_kw": 43.33
+    "temana_peak_kw": 43.33,
+    "upf_kwh": 951.1,
+    "upf_peak_kw": 76.86
   },
   {
     "date": "2026-07-14",
     "paea_kwh": 173.7,
     "temana_kwh": 229.4,
     "paea_peak_kw": 39.27,
-    "temana_peak_kw": 40.28
+    "temana_peak_kw": 40.28,
+    "upf_kwh": 943.4,
+    "upf_peak_kw": 91.74
   },
   {
     "date": "2026-07-15",
     "paea_kwh": 128.7,
     "temana_kwh": 119.7,
     "paea_peak_kw": 38.97,
-    "temana_peak_kw": 40.08
+    "temana_peak_kw": 40.08,
+    "upf_kwh": 590.6,
+    "upf_peak_kw": 90.9
+  },
+  {
+    "date": "2026-07-16",
+    "paea_kwh": 178,
+    "paea_peak_kw": 45.7,
+    "temana_kwh": 153.9,
+    "temana_peak_kw": 39.81,
+    "upf_kwh": 727,
+    "upf_peak_kw": 100.87
+  },
+  {
+    "date": "2026-07-17",
+    "upf_kwh": 14.3,
+    "paea_kwh": 175.5,
+    "temana_kwh": 196
   }
 ]
