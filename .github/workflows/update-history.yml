@@ -53,6 +53,7 @@ jobs:
           cp dashboard/dashboard.html docs/
           cp dashboard/paea.html docs/
           cp dashboard/temana.html docs/
+          cp dashboard/upf.html docs/
           cp dashboard/isolar-data.json docs/
           cp dashboard/history-daily.json docs/
           cp dashboard/history-monthly.json docs/
@@ -64,8 +65,8 @@ jobs:
           git add dashboard/history-daily.json dashboard/history-monthly.json
           git add dashboard/isolar-data.json dashboard/isolar-tokens.json
           git add dashboard/history.json dashboard/daily-baseline.json
-          git add dashboard/dashboard.html dashboard/paea.html dashboard/temana.html
-          git add docs/dashboard.html docs/paea.html docs/temana.html docs/index.html docs/isolar-data.json docs/history-daily.json docs/history-monthly.json
+          git add dashboard/dashboard.html dashboard/paea.html dashboard/temana.html dashboard/upf.html
+          git add docs/dashboard.html docs/paea.html docs/temana.html docs/upf.html docs/index.html docs/isolar-data.json docs/history-daily.json docs/history-monthly.json
           git diff --staged --quiet && echo "Rien de nouveau" && exit 0
           git commit -m "history: $(TZ='Pacific/Tahiti' date +'%d/%m %H:%M') -- daily+monthly refresh"
           # Push protege : si un run live pousse entre notre checkout et notre push,

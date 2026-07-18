@@ -240,7 +240,7 @@ async function fetchAndSaveHistory(token, liveData) {
             const iso = getTahitiISO(d);
             const existing = dailyHistory.find(e => e.date === iso);
             if (!existing) { needsFetch = true; break; }
-            for (const slug of ['paea','temana']) {
+            for (const slug of ['paea','temana','upf']) {
                 if (existing[slug + '_kwh'] === undefined) { needsFetch = true; break; }
             }
             if (needsFetch) break;
@@ -410,7 +410,8 @@ async function main() {
             newBaselineP2[psId] = inv.total_energy_wh;
         }
 
-        const slug = psId === '1437035' ? 'paea' : 'temana';
+        const SLUG_MAP = { '1437035': 'paea', '1425869': 'temana', '1847942': 'upf' };
+        const slug = SLUG_MAP[psId] || 'unknown';
         if (inv) {
             nowPoint[slug + '_power'] = +(inv.apparent_power_va / 1000).toFixed(1);
             nowPoint[slug + '_temp'] = +inv.temperature_c.toFixed(1);

@@ -42,6 +42,7 @@ const CONFIG = {
 const PLANTS = {
     '1437035': { slug: 'paea', name: "Collège de Paea" },
     '1425869': { slug: 'temana', name: "Temana import" },
+    '1847942': { slug: 'upf', name: "UPF BAT A" },
 };
 
 // ─── HTTP ──────────────────────────────────────────────────────

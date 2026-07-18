@@ -20,6 +20,7 @@ const HISTORY_MONTHLY = path.join(DASHBOARD_DIR, 'history-monthly.json');
 const PLANT_OUTPUTS = {
     '1437035': path.join(DASHBOARD_DIR, 'paea.html'),
     '1425869': path.join(DASHBOARD_DIR, 'temana.html'),
+    '1847942': path.join(DASHBOARD_DIR, 'upf.html'),
 };
 
 const json = fs.existsSync(DATA_FILE) ? fs.readFileSync(DATA_FILE, 'utf8') : '{}';

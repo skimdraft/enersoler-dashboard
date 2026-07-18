@@ -65,7 +65,7 @@ async function getToken() {
 // ─── Timeline ─────────────────────────────────────────────────
 function generateTimeline(todayISO) {
     const pts = [];
-    for (let h = 5; h < 19; h++) for (let m = 0; m < 60; m += 5) pts.push({ time: todayISO + 'T' + String(h).padStart(2,'0') + ':' + String(m).padStart(2,'0') + ':00-10:00', paea_power: null, temana_power: null, paea_temp: null, temana_temp: null, total_power: null, total_temp: null, total_daily_kwh: null });
+    for (let h = 5; h < 19; h++) for (let m = 0; m < 60; m += 5) pts.push({ time: todayISO + 'T' + String(h).padStart(2,'0') + ':' + String(m).padStart(2,'0') + ':00-10:00', paea_power: null, temana_power: null, upf_power: null, paea_temp: null, temana_temp: null, upf_temp: null, total_power: null, total_temp: null, total_daily_kwh: null });
     return pts;
 }
 function pointToKey(p) { try { const d = new Date(p.time); let h = d.getUTCHours() - 10; if (h < 0) h += 24; return String(h).padStart(2,'0') + ':' + String(Math.floor(d.getUTCMinutes() / 5) * 5).padStart(2,'0'); } catch(e) { return null; } }
@@ -79,14 +79,14 @@ function mergeTimeline(timeline, realPoints) {
 async function getPlants(token) { try { const r = await apiCall('/openapi/platform/queryPowerStationList', { page: 1, size: 20 }, token); return (r.result_code === '1') ? (r.result_data?.pageList || []) : []; } catch(e) { return []; } }
 async function getDetail(psId, token) { try { const r = await apiCall('/openapi/platform/getPowerStationDetail', { ps_ids: psId }, token); return (r.result_code === '1') ? (r.result_data?.data_list?.[0] || null) : null; } catch(e) { return null; } }
 async function getDevices(psId, token) { try { const r = await apiCall('/openapi/platform/getDeviceListByPsId', { ps_id: psId, page: 1, size: 50 }, token); return (r.result_code === '1') ? (r.result_data?.pageList || []) : []; } catch(e) { return []; } }
-async function getInverter(psKey, token) {
-    try { const r = await apiCall('/openapi/platform/getDeviceRealTimeData', { ps_key_list: [psKey], point_id_list: ['2','4','14','24','26','27','86'], device_type: 1 }, token); if (r.result_code !== '1' || !r.result_data?.device_point_list?.length) return null; const dp = r.result_data.device_point_list[0].device_point; if (!dp) return null; const p = k => parseFloat(dp[k] || 0); return { total_energy_wh: p('p2'), apparent_power_va: p('p24'), dc_power_w: p('p14'), temperature_c: p('p4'), load_ratio: p('p86'), power_factor: p('p26'), frequency_hz: p('p27') }; } catch(e) { return null; }
+async function getInverter(psKeys, token) {
+    try { const keys = Array.isArray(psKeys) ? psKeys : [psKeys]; const r = await apiCall('/openapi/platform/getDeviceRealTimeData', { ps_key_list: keys, point_id_list: ['2','4','14','24','26','27','86'], device_type: 1 }, token); if (r.result_code !== '1' || !r.result_data?.device_point_list?.length) return null; let te=0,apv=0,dc=0,lr=0,ts=0,tc=0; for (const dev of r.result_data.device_point_list) { const dp=dev.device_point; if(!dp) continue; const p=k=>parseFloat(dp[k]||0); te+=p('p2'); apv+=p('p24'); dc+=p('p14'); lr+=p('p86'); const t=p('p4'); if(t>0){ts+=t;tc++;} } const n=Math.max(1,r.result_data.device_point_list.length); return { total_energy_wh:te, apparent_power_va:apv, dc_power_w:dc, temperature_c:tc>0?+(ts/tc).toFixed(1):0, load_ratio:+(lr/n).toFixed(3), power_factor:0, frequency_hz:0 }; } catch(e) { return null; }
 }
 
 // ─── Daily kWh from API (may return empty for today — iSolarCloud delays daily totals) ──
 async function fetchTodayDailyKWh(token) {
-    const PS_KEYS = ['1437035_1_1_2', '1425869_1_1_1'];
-    const psToSlug = { '1437035_1_1_2': 'paea', '1425869_1_1_1': 'temana' };
+    const PS_KEYS = ['1437035_1_1_2', '1425869_1_1_1', '1847942_1_1_3', '1847942_1_1_4'];
+    const psToSlug = { '1437035_1_1_2': 'paea', '1425869_1_1_1': 'temana', '1847942_1_1_3': 'upf', '1847942_1_1_4': 'upf' };
     const today = getTodayCompact();
     try {
         const r = await apiCall('/openapi/platform/getDevicePointDayMonthYearDataList', { query_type: 'day', data_type: '2', ps_key_list: PS_KEYS, data_point: 'p1', start_time: today, end_time: today, order: 0 }, token, 20000);
@@ -127,7 +127,8 @@ async function main() {
 
     for (const plant of plants) {
         const psId = String(plant.ps_id);
-        const slug = psId === '1437035' ? 'paea' : 'temana';
+        const SLUG_MAP = { '1437035': 'paea', '1425869': 'temana', '1847942': 'upf' };
+        const slug = SLUG_MAP[psId] || 'unknown';
 
         const detail = await getDetail(psId, token);
         const capW = detail?.install_power || 0;
@@ -135,8 +136,8 @@ async function main() {
         if (plant.online_status === 1) activeCount++;
 
         const devices = await getDevices(psId, token);
-        const invDev = devices.find(d => d.device_type === 1);
-        const inv = invDev ? await getInverter(invDev.ps_key, token) : null;
+        const invDevs = devices.filter(d => d.device_type === 1);
+        const inv = invDevs.length > 0 ? await getInverter(invDevs.map(d => d.ps_key), token) : null;
 
         if (inv) {
             totalKVA += inv.apparent_power_va / 1000;
@@ -153,7 +154,7 @@ async function main() {
             if (mv !== undefined) dailyKWh = Math.max(0, (inv.total_energy_wh - mv) / 1000);
         }
 
-        plantDetails.push({ id: psId, slug, name: plant.ps_name, capacity_kwp: +(capW / 1000).toFixed(1), daily_kwh: dailyKWh !== null ? +dailyKWh.toFixed(1) : null, daily_pending: dailyKWh === null, live_power_kva: inv ? +(inv.apparent_power_va / 1000).toFixed(1) : 0, temperature: inv ? +inv.temperature_c.toFixed(1) : 0, total_mwh: inv ? +(inv.total_energy_wh / 1000000).toFixed(2) : 0, load_ratio: inv ? +inv.load_ratio.toFixed(3) : 0, model: invDev?.device_model_code || '?', install_date: plant.install_date || detail?.install_date || '' });
+        plantDetails.push({ id: psId, slug, name: plant.ps_name, capacity_kwp: +(capW / 1000).toFixed(1), daily_kwh: dailyKWh !== null ? +dailyKWh.toFixed(1) : null, daily_pending: dailyKWh === null, live_power_kva: inv ? +(inv.apparent_power_va / 1000).toFixed(1) : 0, temperature: inv ? +inv.temperature_c.toFixed(1) : 0, total_mwh: inv ? +(inv.total_energy_wh / 1000000).toFixed(2) : 0, load_ratio: inv ? +inv.load_ratio.toFixed(3) : 0, model: invDevs[0]?.device_model_code || '?', install_date: plant.install_date || detail?.install_date || '' });
     }
 
     avgTemp = activeCount > 0 ? +(avgTemp / activeCount).toFixed(1) : 0;
@@ -165,7 +166,7 @@ async function main() {
 
     // Daily total kWh
     let totalDailyKWh = null;
-    if (apiDailyKWh) { const sum = (apiDailyKWh.paea || 0) + (apiDailyKWh.temana || 0); if (sum > 0) totalDailyKWh = +sum.toFixed(1); }
+    if (apiDailyKWh) { const sum = (apiDailyKWh.paea || 0) + (apiDailyKWh.temana || 0) + (apiDailyKWh.upf || 0); if (sum > 0) totalDailyKWh = +sum.toFixed(1); }
     if (totalDailyKWh === null && !firstBaselineRun && baseline?.isMidnight && baseline.date === today) {
         totalDailyKWh = plantDetails.reduce((sum, pd) => { const mv = baseline.p2[pd.id]; return mv !== undefined ? sum + Math.max(0, (pd.total_mwh * 1000000 - mv) / 1000) : sum; }, 0);
     }
@@ -177,7 +178,7 @@ async function main() {
     // ─── Merge live point into history timeline ─────────────
     const history = loadHistory();
     // Keep today's stored points + add current live point
-    const todayStored = (history.points || []).filter(p => { try { return p.time.startsWith(todayISO); } catch(e) { return false; } }).filter(p => p.paea_power !== null || p.temana_power !== null);
+    const todayStored = (history.points || []).filter(p => { try { return p.time.startsWith(todayISO); } catch(e) { return false; } }).filter(p => p.paea_power !== null || p.temana_power !== null || p.upf_power !== null);
     todayStored.push(nowPoint);
 
     const timeline = generateTimeline(todayISO);
@@ -185,7 +186,7 @@ async function main() {
 
     // Update daily kWh across all filled points
     if (totalDailyKWh !== null) {
-        for (const p of merged) { if (p.paea_power !== null || p.temana_power !== null) p.total_daily_kwh = totalDailyKWh; }
+        for (const p of merged) { if (p.paea_power !== null || p.temana_power !== null || p.upf_power !== null) p.total_daily_kwh = totalDailyKWh; }
     }
 
     history.points = (history.points || []).filter(p => { try { return new Date(p.time).getTime() > Date.now() - 90 * 86400000; } catch(e) { return false; } }).filter(p => !p.time.startsWith(todayISO));
@@ -226,7 +227,7 @@ async function main() {
 
     fs.writeFileSync(DATA_FILE, JSON.stringify(output, null, 2));
 
-    const realCount = merged.filter(p => p.paea_power !== null || p.temana_power !== null).length;
+    const realCount = merged.filter(p => p.paea_power !== null || p.temana_power !== null || p.upf_power !== null).length;
     console.log('═══ Saved ═══');
     console.log('  ⚡ ' + output.totalKVA + ' kVA  |  ☀ ' + (output.dailyKWh !== null ? output.dailyKWh + ' kWh' : '⏳'));
     console.log('  📊 ' + realCount + '/' + merged.length + ' points  |  🌡 ' + output.avgTemp + '°C\n');
