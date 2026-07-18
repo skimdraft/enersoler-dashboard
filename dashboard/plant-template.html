@@ -338,13 +338,17 @@ function render(data) {
     _charts.push(Chart.getChart('chPwr'));
   }
 
+  // Chart caps adaptatifs par rapport a la capacite (kWp * soleil ~5h/jour pour daily, ~0.15 MWh/kWp/mois pour monthly)
+  const dailyCap = Math.max(400, Math.ceil(plant.capacity_kwp * 5));
+  const monthlyCap = Math.max(2, Math.ceil(plant.capacity_kwp * 0.15));
+
   // Weekly
   const wDays=getLast7Days();let wMax=1;wDays.forEach(d=>{if(raw[d.iso]){d.v=Math.round(raw[d.iso].kwh*10)/10;if(d.v>wMax)wMax=d.v;}});
-  barChart('chWeek',wDays,Math.min(Math.ceil(wMax*1.2),400),{r:8,bp:0.65,cp:0.85,fs:9,mt:7,as:true});
+  barChart('chWeek',wDays,Math.min(Math.ceil(wMax*1.2),dailyCap),{r:8,bp:0.65,cp:0.85,fs:9,mt:7,as:true});
 
   // Monthly (affiche uniquement le numéro du jour)
   const mDays=getLast30Days();let mMax=1;mDays.forEach(d=>{if(raw[d.iso]){d.v=Math.round(raw[d.iso].kwh*10)/10;if(d.v>mMax)mMax=d.v;}});
-  barChart('chMonth',mDays,Math.min(Math.ceil(mMax*1.2),400),{r:5,bp:0.92,cp:0.96,fs:7,mr:70,as:false,mt:10});
+  barChart('chMonth',mDays,Math.min(Math.ceil(mMax*1.2),dailyCap),{r:5,bp:0.92,cp:0.96,fs:7,mr:70,as:false,mt:10});
 
   // Annual (prefer API monthly data, fall back to daily aggregation)
   const mAgg = {};
@@ -356,7 +360,7 @@ function render(data) {
     Object.assign(mAgg, monthlyFromDaily(data.history_daily || [], plant.slug));
   }
   const yearMonths=getLast12Months();let yMax=1;yearMonths.forEach(m=>{if(mAgg[m.key]){m.v=Math.round(mAgg[m.key].kwh/100)/10;if(m.v>yMax)yMax=m.v;}});
-  barChart('chYear',yearMonths,yMax>0?Math.ceil(yMax*1.2):10,{r:8,bp:0.65,cp:0.85,fs:10,mt:12,as:false,unit:'MWh'});
+  barChart('chYear',yearMonths,yMax>0?Math.ceil(yMax*1.2):monthlyCap,{r:8,bp:0.65,cp:0.85,fs:10,mt:12,as:false,unit:'MWh'});
 
   loadWeather();
 }
