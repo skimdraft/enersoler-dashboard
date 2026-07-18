@@ -1,6 +1,6 @@
 {
-  "updateTime": "18/07/2026 06:31:45",
-  "timestamp": "2026-07-18T16:31:55.391Z",
+  "updateTime": "18/07/2026 06:35:19",
+  "timestamp": "2026-07-18T16:35:24.311Z",
   "activePlants": 3,
   "totalPlants": 3,
   "totalKVA": 0,
@@ -242,12 +242,14 @@
     },
     {
       "time": "2026-07-18T06:35:00-10:00",
-      "paea_power": null,
-      "temana_power": null,
-      "paea_temp": null,
-      "temana_temp": null,
-      "total_power": null,
-      "total_temp": null,
+      "upf_power": 0,
+      "upf_temp": 24.8,
+      "paea_power": 0,
+      "paea_temp": 27.3,
+      "temana_power": 0,
+      "temana_temp": 29.7,
+      "total_power": 0,
+      "total_temp": 27.3,
       "total_daily_kwh": null
     },
     {
