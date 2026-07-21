@@ -98,6 +98,7 @@ function generateTimeline(todayISO) {
             const time = `${todayISO}T${String(h).padStart(2,'0')}:${String(m).padStart(2,'0')}:00-10:00`;
             points.push({
                 time,
+                upf_power: null, upf_temp: null,
                 paea_power: null, temana_power: null,
                 paea_temp: null, temana_temp: null,
                 total_power: null, total_temp: null,
@@ -208,8 +209,8 @@ function getTahitiISO(dayOffset) {
 }
 
 async function fetchAndSaveHistory(token, liveData) {
-    const PS_KEYS = ['1437035_1_1_2', '1425869_1_1_1'];
-    const psToSlug = { '1437035_1_1_2': 'paea', '1425869_1_1_1': 'temana' };
+    const PS_KEYS = ['1437035_1_1_2', '1425869_1_1_1', '1847942_1_1_3', '1847942_1_1_4'];
+    const psToSlug = { '1437035_1_1_2': 'paea', '1425869_1_1_1': 'temana', '1847942_1_1_3': 'upf', '1847942_1_1_4': 'upf' };
 
     console.log('[HIST] Fetching daily history...');
 
@@ -278,8 +279,8 @@ async function fetchAndSaveHistory(token, liveData) {
                             if (!dateMap.has(isoDate)) dateMap.set(isoDate, {});
                             const row = dateMap.get(isoDate);
                             const val = parseFloat(entry['2'] || '0');
-                            if (ptId === '1') row[slug + '_kwh'] = Math.round(val / 10) / 100;
-                            if (ptId === '24') row[slug + '_peak_kw'] = Math.round(val / 10) / 100;
+                            if (ptId === '1') row[slug + '_kwh'] = (row[slug + '_kwh'] || 0) + Math.round(val / 10) / 100;
+                            if (ptId === '24') row[slug + '_peak_kw'] = Math.max(row[slug + '_peak_kw'] || 0, Math.round(val / 10) / 100);
                         }
                     }
                 }
@@ -359,7 +360,8 @@ async function fetchAndSaveHistory(token, liveData) {
                         const key = stamp.substring(0, 4) + '-' + stamp.substring(4, 6);
                         if (!monthMap.has(key)) monthMap.set(key, { month: key });
                         const val = parseFloat(entry['4'] || '0');
-                        monthMap.get(key)[slug + '_kwh'] = Math.round(val / 10) / 100;
+                        const row = monthMap.get(key);
+                        row[slug + '_kwh'] = (row[slug + '_kwh'] || 0) + Math.round(val / 10) / 100;
                     }
                 }
                 monthlyHistory = [...monthMap.values()].sort((a, b) => a.month.localeCompare(b.month));
@@ -466,7 +468,7 @@ async function main() {
     // Filter to keep only today's real points
     const todayReal = history.points.filter(p => {
         try { return p.time.startsWith(todayISO); } catch(e) { return false; }
-    }).filter(p => p.paea_power !== null || p.temana_power !== null);
+    }).filter(p => p.paea_power !== null || p.temana_power !== null || p.upf_power !== null);
 
     // Add current point
     todayReal.push(nowPoint);
@@ -533,7 +535,7 @@ async function main() {
 
     fs.writeFileSync(DATA_FILE, JSON.stringify(output, null, 2));
 
-    const realCount = merged.filter(p => p.paea_power !== null).length;
+    const realCount = merged.filter(p => p.paea_power !== null || p.temana_power !== null || p.upf_power !== null).length;
     const totalSlots = merged.length;
     console.log('[SAVE] ' + DATA_FILE);
     console.log('═══ Summary ═══');
