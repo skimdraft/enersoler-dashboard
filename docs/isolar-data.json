@@ -1,6 +1,6 @@
 {
-  "updateTime": "22/07/2026 18:05:20",
-  "timestamp": "2026-07-23T04:05:24.984Z",
+  "updateTime": "22/07/2026 18:10:29",
+  "timestamp": "2026-07-23T04:10:33.773Z",
   "activePlants": 3,
   "totalPlants": 3,
   "totalKVA": 0.1,
@@ -8,7 +8,7 @@
   "totalMWh": 256.34,
   "dailyKWh": 1223.2,
   "dailyPending": false,
-  "avgTemp": 37.6,
+  "avgTemp": 37.4,
   "co2Tonnes": 179.4,
   "authWarning": null,
   "history": [
@@ -1910,14 +1910,14 @@
     },
     {
       "time": "2026-07-22T18:10:00-10:00",
-      "paea_power": null,
-      "temana_power": null,
-      "upf_power": null,
-      "paea_temp": null,
-      "temana_temp": null,
-      "upf_temp": null,
-      "total_power": null,
-      "total_temp": null,
+      "upf_power": 0,
+      "upf_temp": 39,
+      "paea_power": 0.1,
+      "paea_temp": 36.6,
+      "temana_power": 0.1,
+      "temana_temp": 36.5,
+      "total_power": 0.1,
+      "total_temp": 37.4,
       "total_daily_kwh": null
     },
     {
@@ -2051,10 +2051,10 @@
       "capacity_kwp": 50.5,
       "daily_kwh": 197.4,
       "daily_pending": true,
-      "live_power_kva": 0,
-      "temperature": 36.9,
+      "live_power_kva": 0.1,
+      "temperature": 36.6,
       "total_mwh": 62.38,
-      "load_ratio": 0,
+      "load_ratio": 0.002,
       "model": "SG50CX-P2",
       "install_date": "2024-09-26 11:15:46"
     },
@@ -2066,9 +2066,9 @@
       "daily_kwh": 199.7,
       "daily_pending": true,
       "live_power_kva": 0.1,
-      "temperature": 36.8,
+      "temperature": 36.5,
       "total_mwh": 143.77,
-      "load_ratio": 0.002,
+      "load_ratio": 0.001,
       "model": "SG50CX-P2",
       "install_date": "2024-09-09 14:48:39"
     }
