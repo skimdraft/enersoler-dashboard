@@ -2027,6 +2027,18 @@
       "total_power": 0,
       "total_temp": 0,
       "total_daily_kwh": null
+    },
+    {
+      "time": "2026-08-01T18:55:00-10:00",
+      "upf_power": 0,
+      "upf_temp": 0,
+      "paea_power": 0,
+      "paea_temp": 0,
+      "temana_power": 0,
+      "temana_temp": 0,
+      "total_power": 0,
+      "total_temp": 0,
+      "total_daily_kwh": null
     }
   ],
   "plants": [
