@@ -1190,8 +1190,17 @@
   },
   {
     "date": "2026-08-27",
-    "upf_kwh": 26.7,
-    "paea_kwh": 6.2,
-    "temana_kwh": 6.7
+    "upf_kwh": 610.5,
+    "paea_kwh": 133.9,
+    "temana_kwh": 129.6,
+    "paea_peak_kw": 37.28,
+    "temana_peak_kw": 42.3,
+    "upf_peak_kw": 79.03
+  },
+  {
+    "date": "2026-08-28",
+    "upf_kwh": 77.3,
+    "paea_kwh": 20.1,
+    "temana_kwh": 19.5
   }
 ]
