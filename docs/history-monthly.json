@@ -1,10 +1,5 @@
 [
   {
-    "month": "2025-09",
-    "paea_kwh": 2810.4,
-    "temana_kwh": 6794.2
-  },
-  {
     "month": "2025-10",
     "paea_kwh": 6979.9,
     "temana_kwh": 6620.2
@@ -56,5 +51,11 @@
     "paea_kwh": 5410.7,
     "temana_kwh": 5761.6,
     "upf_kwh": 23805
+  },
+  {
+    "month": "2026-08",
+    "paea_kwh": 6249.6,
+    "temana_kwh": 6241.3,
+    "upf_kwh": 27138.1
   }
 ]
