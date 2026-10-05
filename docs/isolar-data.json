@@ -674,14 +674,14 @@
     },
     {
       "time": "2026-10-05T09:35:00-10:00",
-      "paea_power": null,
-      "temana_power": null,
-      "upf_power": null,
-      "paea_temp": null,
-      "temana_temp": null,
-      "upf_temp": null,
-      "total_power": null,
-      "total_temp": null,
+      "upf_power": 0,
+      "upf_temp": 37.5,
+      "paea_power": 35,
+      "paea_temp": 58.2,
+      "temana_power": 40.1,
+      "temana_temp": 51.2,
+      "total_power": 75.1,
+      "total_temp": 73.5,
       "total_daily_kwh": null
     },
     {
