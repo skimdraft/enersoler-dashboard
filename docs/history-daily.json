@@ -1741,7 +1741,7 @@
     "date": "2026-10-27",
     "paea_kwh": 310.9,
     "paea_peak_kw": 44.48,
-    "temana_kwh": 314.7,
+    "temana_kwh": 315.4,
     "temana_peak_kw": 50.62,
     "upf_kwh": 1277,
     "upf_peak_kw": 99.63
@@ -1750,9 +1750,18 @@
     "date": "2026-10-28",
     "paea_kwh": 265.3,
     "paea_peak_kw": 47.5,
-    "temana_kwh": 0.5,
-    "temana_peak_kw": 1.49,
+    "temana_kwh": 283.7,
+    "temana_peak_kw": 50.66,
     "upf_kwh": 1154.3,
     "upf_peak_kw": 107.53
+  },
+  {
+    "date": "2026-10-29",
+    "paea_kwh": 171.2,
+    "paea_peak_kw": 51.67,
+    "temana_kwh": 229,
+    "temana_peak_kw": 50.62,
+    "upf_kwh": 516.5,
+    "upf_peak_kw": 112.56
   }
 ]
